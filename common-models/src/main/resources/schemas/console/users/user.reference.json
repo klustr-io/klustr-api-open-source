@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserReference",
+  "description": "Reference to a particular user.",
+  "properties": {
+    "identity": {
+      "type": "object",
+      "description": "The identity and its reference",
+      "$ref": "../identity/identity.user.profile.json"
+    },
+    "org_id": {
+      "type": "string",
+      "description": "The organization that this user was referenced under."
+    },
+    "acls": {
+      "type": "array",
+      "description": "The acls related to this user",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "type": "string",
+      "description": "The status of the user account.",
+      "existingJavaType": "io.klustr.schemas.console.Status"
+    },
+    "creation_date": {
+      "description": "The date this account was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "effective_date": {
+      "description": "The date this account is effective.",
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

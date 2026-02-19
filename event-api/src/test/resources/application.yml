@@ -1,0 +1,12 @@
+kafka.webhook.retry.broker=kafka.dev.klustr.io:9092
+kafka.webhook.retry.topic=webhook_retry
+kafka.webhook.retry.groupId=webhook_retry
+
+kafka.webhook.failure.broker=kafka.dev.klustr.io:9092
+kafka.webhook.failure.topic=webhook_failures
+
+kafka.webhook.consent.url=http://localhost:7777/internal/consent
+kafka.webhook.refresh.duration=30
+
+rethinkdb.hostname=rethinkdb.dev.klustr.io
+rethinkdb.port=28015

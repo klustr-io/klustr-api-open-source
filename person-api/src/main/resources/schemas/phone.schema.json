@@ -1,0 +1,25 @@
+{
+  "title": "Phone",
+  "description": "A phone number",
+  "type": "object",
+  "properties": {
+    "phone": {
+      "description": "The canonical text of this address",
+      "type": "string"
+    },
+    "country_code": {
+      "description": "The country code for this phone",
+      "type": "string"
+    },
+    "phone_type": {
+      "description": "The type of phone number",
+      "type": "string",
+      "enum": [
+        "MOBILE",
+        "LANDLINE",
+        "OFFICE",
+        "HOME"
+      ]
+    }
+  }
+}

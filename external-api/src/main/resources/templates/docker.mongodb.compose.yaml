@@ -1,0 +1,92 @@
+version: "3.7"
+services:
+
+  mongo:
+    image: "mongo:latest"
+    container_name: ${PROJECT}
+    deploy:
+      resources:
+        limits:
+          cpus: "${CPU_LIMIT:-1.0}"
+          memory: "${MEMORY_LIMIT:-512M}"
+        reservations:
+          cpus: "${CPU_RESERVE:-0.25}"
+          memory: "${MEMORY_RESERVE:-128M}"
+    environment:
+      ORG_ID: ${ORG}
+      PROJECT_ID: ${PROJECT}
+      MACHINE_TYPE: ${MACHINE_TYPE}
+      PERSISTENT_VOLUME_ID: ${PERSISTENT_VOLUME_ID}
+      ROOT_SERVER_URL: ${ROOT_SERVER_URL}
+      SERVER_DOMAIN: ${SERVER_DOMAIN}
+      OIDC_URL: ${OIDC_URL}
+      CLIENT_ID: ${OIDC_CLIENT}
+      CLIENT_SECRET: ${OIDC_SECRET}
+      CLIENT_SCOPES: ${OIDC_SCOPES}
+      OIDC_ISSUER: ${OIDC_ISSUER}
+      OIDC_CLIENT: ${OIDC_CLIENT}
+      OIDC_SECRET: ${OIDC_SECRET}
+      OIDC_SCOPES: "${OIDC_SCOPES}"
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    labels:
+      namespace: "${PROJECT}"
+      org_id: "${ORG}"
+      project: "${PROJECT}"
+      project_id: "${PROJECT}"
+      type: "TENANT"
+      machine_type: "${MACHINE_TYPE}"
+      workload: "mongodb"
+      machine_pid_limit: "${PID_LIMIT}"
+      machine_nano_cpus: "${NANO_CPUS}"
+      machine_cpu_shares: "${NANO_CPUS}"
+      machine_memory: "${NANO_CPUS}"
+      machine_memory_reservation: "${NANO_CPUS}"
+      machine_blkio_weight: "${NANO_CPUS}"
+      machine_memory_swap: "${NANO_CPUS}"
+#    ports:
+#      - "27017"
+    networks:
+      - ${ORG}
+      - ingress
+    dns:
+      - ${DNS_HOST}
+    volumes:
+      - mongo_data:/data/db
+
+  mongo-metrics:
+    image: bitnami/mongodb-exporter:latest
+    container_name: ${PROJECT}-mongo-metrics
+    command:
+      - --collect-all
+      - --collector.diagnosticdata=false   # <--- DROP the problematic metrics
+    environment:
+      MONGODB_URI: "mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${PROJECT}:27017/admin?ssl=false"
+    labels:
+      namespace: "${PROJECT}"
+      org_id: "${ORG}"
+      project: "${PROJECT}"
+      project_id: "${PROJECT}"
+      type: "TENANT"
+      workload: "mongodb-metrics"
+      machine_type: "${MACHINE_TYPE}"
+    ports:
+      - "9216"
+    depends_on:
+      - mongo
+    dns:
+      - ${DNS_HOST}
+    networks:
+      - ${ORG}
+      - ingress
+
+
+volumes:
+  mongo_data:
+    name: "${ORG}_${PROJECT}_mongo"
+
+networks:
+  ingress:
+    external: true
+  ${ORG}:
+    external: true

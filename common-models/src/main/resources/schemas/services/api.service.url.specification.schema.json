@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ApiServiceUrlSpecification",
+  "description": "Reference to a service.",
+  "type": "object",
+  "properties": {
+    "path": {
+      "description": "The path for this service",
+      "type": "string"
+    },
+    "port": {
+      "description": "The port for this service",
+      "type": "string"
+    },
+    "protocol": {
+      "description": "The protocol for this service",
+      "type": "string"
+    },
+    "host": {
+      "description": "The host for this service.",
+      "type": "string"
+    }
+  },
+  "required": []
+}

@@ -1,0 +1,45 @@
+{
+  "title": "LocationPayloadEvent",
+  "description": "https://developers.google.com/analytics/devguides/collection/protocol/v1/devguide#commonhits",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique event ID",
+      "type": "string"
+    },
+    "device_id": {
+      "type": "string",
+      "description": "The unique device ID"
+    },
+    "received_at": {
+      "description": "The date this client was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "lat": {
+      "type": "number",
+      "description": "The latitude"
+    },
+    "lng": {
+      "type": "number",
+      "description": "The longitude"
+    },
+    "accuracy": {
+      "type": "number",
+      "description": "The accuracy"
+    },
+    "time": {
+      "type": "number",
+      "description": "The device time of the measurement"
+    },
+    "altitude": {
+      "type": "number",
+      "description": "The altitude of the user"
+    },
+    "speed": {
+      "type": "number",
+      "description": "The speed calculated for the user"
+    }
+  },
+  "required": []
+}

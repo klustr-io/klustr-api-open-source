@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "GitPipelineStageReference",
+  "description": "Bundled information for a CI job which may have multiple stages",
+  "type": "object",
+  "properties": {
+    "stage": {
+      "type": "string",
+      "description": "The stage that is referenced."
+    },
+    "jobs": {
+      "type": "array",
+      "description": "The jobs made up of this stage.",
+      "items": {
+        "type": "object",
+        "$ref": "./GitPipelineJobReference.json"
+      }
+    }
+  },
+  "required": []
+}

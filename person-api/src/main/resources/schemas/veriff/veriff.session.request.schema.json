@@ -1,0 +1,41 @@
+{
+  "title": "VeriffSessionRequest",
+  "description": "A request for veriff to verify a session",
+  "type": "object",
+  "properties": {
+    "verification": {
+      "title": "VeriffSessionVerification",
+      "type": "object",
+      "description": "The request",
+      "properties": {
+        "person": {
+          "title": "VeriffPersonRequest",
+          "type": "object",
+          "description": "The person for this request.",
+          "properties": {
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "gender": {
+              "type": "string"
+            },
+            "dateOfBirth": {
+              "type": "string"
+            }
+          }
+        },
+        "callback": {
+          "type": "string",
+          "description": "The callbackUrl to where the end-user is redirected after the verification session is completed. "
+        },
+        "vendorData": {
+          "type": "string",
+          "description": "Data that will be used to link requests to local data and system."
+        }
+      }
+    }
+  }
+}

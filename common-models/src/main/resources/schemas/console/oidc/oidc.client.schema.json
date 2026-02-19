@@ -1,0 +1,108 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "OIDCClient",
+  "description": "A client that uses web to authenticate and consent to scopes.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "The name of your OAuth 2.0 client. This name is only used to identify the client in the console and will not be shown to end users.",
+      "type": "string"
+    },
+    "client_id": {
+      "description": "The unique ID for this webapp client.",
+      "type": "string"
+    },
+    "secret_key": {
+      "description": "The secret key for this web app client",
+      "type": "string"
+    },
+    "access_token_strategy": {
+      "$ref": "oidc.enums.json#/definitions/access_token_strategy"
+    },
+    "token_endpoint_auth_method": {
+      "$ref": "oidc.enums.json#/definitions/token_endpoint_auth_method"
+    },
+    "subject_type": {
+      "$ref": "oidc.enums.json#/definitions/subject_type"
+    },
+    "scopes": {
+      "description": "The scopes to apply and access for this client",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "audience": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "existingJavaType": "java.util.Set<String>",
+      "examples": [
+        "spiffe://staging.example.com/payments/web-fe",
+        "spiffe://example.com/9eebccd2-12bf-40a6-b262-65fe0487d453",
+        "my_service_xyz"
+      ]
+    },
+    "creation_date": {
+      "description": "The date this client was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "description": "The status of this client",
+      "title": "OidcStatus",
+      "enum": [
+        "enabled",
+        "disabled",
+        "deleted"
+      ],
+      "default": "enabled",
+      "javaType": "io.klustr.schemas.console.OidcStatus"
+    },
+    "authorized_origins": {
+      "description": "The HTTP origins that host your web application. This value can't contain wildcards or paths. If you use a port other than 80, you must specify it. For example: https://example.com:8080",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "../url.schema.json"
+      }
+    },
+    "authorized_redirect_uris": {
+      "description": "Users will be redirected to this path after they have authenticated with Google. The path will be appended with the authorization code for access, and must have a protocol. It can’t contain URL fragments, relative paths, or wildcards, and can’t be a public IP address.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "../url.schema.json"
+      }
+    },
+    "access_token_lifespan": {
+      "description": "Specify a time duration in milliseconds, seconds, minutes, hours.",
+      "pattern": "^([0-9]+(ns|us|ms|s|m|h))*$",
+      "type": "string"
+    },
+    "id_token_lifespan": {
+      "description": "Specify a time duration in milliseconds, seconds, minutes, hours.",
+      "pattern": "^([0-9]+(ns|us|ms|s|m|h))*$",
+      "type": "string"
+    },
+    "refresh_token_lifespan": {
+      "description": "Specify a time duration in milliseconds, seconds, minutes, hours.",
+      "pattern": "^([0-9]+(ns|us|ms|s|m|h))*$",
+      "type": "string"
+    },
+    "skip_consent": {
+      "type": "boolean",
+      "description": "Enables a client to skip consent if so trusted"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata related to the client to tag or otherwise manage it.",
+      "existingJavaType": "java.util.Map<String,String>"
+    }
+  },
+  "required": [
+    "client_id",
+    "secret_key"
+  ]
+}

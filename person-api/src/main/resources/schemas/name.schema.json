@@ -1,0 +1,38 @@
+{
+  "title": "Name",
+  "description": "A name for the person.",
+  "type": "object",
+  "properties": {
+    "given_name": {
+      "description": "Given name of the person.",
+      "type": "string"
+    },
+    "family_name": {
+      "description": "Family name of the person.",
+      "type": "string"
+    },
+    "middle_name": {
+      "description": "Middle name for the person.",
+      "type": "string"
+    },
+    "source": {
+      "description": "The source for this name.",
+      "type": "string",
+      "enum": ["user", "ekyc", "admin", "family_member"]
+    },
+    "locale": {
+      "description": "The locale for this username if applicable.",
+      "type": "string",
+      "examples": [
+        "ja",
+        "en",
+        "fr"
+      ]
+    }
+  },
+  "required": [
+    "given_name",
+    "family_name",
+    "locale"
+  ]
+}

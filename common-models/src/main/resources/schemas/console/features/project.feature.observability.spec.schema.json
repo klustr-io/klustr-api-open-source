@@ -1,0 +1,39 @@
+{
+  "title": "ObservabilitySpec",
+  "type": "object",
+  "description": "Observability configuration for metrics and health checks.",
+  "javaType": "io.klustr.schemas.console.features.core.ObservabilitySpec",
+  "properties": {
+    "endpoints": {
+      "type": "array",
+      "description": "Metrics or health endpoints.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "Endpoint URL.",
+            "examples": [
+              "/metrics"
+            ]
+          },
+          "labels": {
+            "type": "object",
+            "description": "Static labels for metrics.",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "examples": [
+              {
+                "workload": "mongodb"
+              }
+            ]
+          }
+        },
+        "required": [
+          "url"
+        ]
+      }
+    }
+  }
+}

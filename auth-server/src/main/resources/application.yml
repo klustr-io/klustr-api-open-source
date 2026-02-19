@@ -1,0 +1,120 @@
+web:
+  cors:
+    allowed-origins: "${WEB_CORS_ALLOWED_ORIGINS:http://localhost:3000}"
+    allowed-methods: "${WEB_CORS_ALLOWED_METHODS:GET, POST, PATCH, PUT, DELETE, OPTIONS, HEAD}"
+    max-age: "${WEB_CORS_MAX_AGE:3600}"
+
+hydra:
+  url: "${HYDRA_URL:https://hydra.dev.klustr.io}"
+  admin:
+    url: "${HYDRA_ADMIN_URL:https://hydra-admin.dev.klustr.io}"
+
+kratos:
+  admin:
+    url: "${KRATOS_ADMIN_URL:https://kratos-admin.dev.klustr.io}"
+  self-service:
+    url: "${KRATOS_SELF_SERVICE_URL:https://secure.dev.klustr.io/kratos/self-service/settings/browser?&prompt=profile}"
+
+keto:
+  write:
+    url: "${KETO_WRITE_URL:https://keto-admin.dev.klustr.io/admin}"
+  read:
+    url: "${KETO_READ_URL:https://keto.dev.klustr.io}"
+
+openapi:
+  tokenUrl: "${OPENAPI_TOKEN_URL:https://secure.dev.klustr.io/hydra/oauth2/token}"
+  authorizationUrl: "${OPENAPI_AUTHORIZATION_URL:https://secure.dev.klustr.io/hydra/oauth2/auth}"
+
+server:
+  port: "${SERVER_PORT:7878}"
+  address: "${SERVER_ADDRESS:0.0.0.0}"
+  error:
+    include-message: ALWAYS
+    include-stacktrace: NEVER
+
+management:
+  prometheus:
+    metrics:
+      export:
+        pushgateway:
+          enabled: "${PUSHGATEWAY_ENABLED:true}"
+          base-url: "${PUSHGATEWAY_BASE_URL:https://metrics-pushgateway.dev.klustr.io}"
+          job: "${PUSHGATEWAY_JOB:klustr.io}"   # name shown in Prometheus
+          push-rate: "${PUSHGATEWAY_PUSH_RATE:10s}"       # how often to push metrics
+          shutdown-operation: "${PUSHGATEWAY_SHUTDOWN_OPERATION:NONE}"  # push final metrics on shutdown
+          grouping-key:
+            version: "${APP_VERSION:1.0.0}"
+            env: "${APP_ENV:localhost}"
+            region: "${APP_REGION:tokyo/home}"
+            instance: "${HOSTNAME:localhost}"
+            workload: "${APP_WORKLOAD:auth-api}"
+
+  endpoint:
+    health:
+      show-components: always
+      show-details: always
+      cache:
+        time-to-live: "${HEALTH_CACHE_TTL:30s}"
+        enabled: "${HEALTH_CACHE_ENABLED:true}"
+
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+    export:
+      atlas:
+        enabled: false
+      datadog:
+        enabled: false
+
+  endpoints:
+    web:
+      exposure:
+        include: "${MANAGEMENT_EXPOSURE_INCLUDE:info,env,metrics,prometheus,health}"
+
+rethinkdb:
+  hostname: "${RETHINKDB_HOST:rethinkdb.dev.klustr.io}"
+  port: "${RETHINKDB_PORT:28015}"
+
+db-adapter:
+  kafka:
+    brokers: "${DB_ADAPTER_KAFKA_BROKERS:kafka.dev.klustr.io:9092}"
+
+kafka:
+  servers: "${KAFKA_SERVERS:kafka.dev.klustr.io:9092}"
+
+spring:
+  kafka:
+    bootstrap-servers: "${SPRING_KAFKA_BOOTSTRAP_SERVERS:kafka.dev.klustr.io:9092}"
+    consumer:
+      group-id: "${SPRING_KAFKA_CONSUMER_GROUP_ID:your-group-id}"
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+  security:
+    oauth2:
+      resourceserver:
+        opaque-token:
+          introspection-uri: "${OAUTH2_INTROSPECTION_URI:https://hydra-admin.dev.klustr.io/admin/oauth2/introspect}"
+          client-id: "${OAUTH2_INTROSPECTION_CLIENT_ID:}"
+          client-secret: "${OAUTH2_INTROSPECTION_CLIENT_SECRET:}"
+
+# For sorting endpoints alphabetically (keep springdoc top-level)
+springdoc:
+  api-docs:
+    groups:
+      enabled: "${SPRINGDOC_GROUPS_ENABLED:true}"
+  swagger-ui:
+    operationsSorter: "${SPRINGDOC_OPERATIONS_SORTER:alpha}"
+    tagsSorter: "${SPRINGDOC_TAGS_SORTER:alpha}"
+
+logging:
+  level:
+    root: "${LOG_LEVEL_ROOT:WARN}"
+    io.klustr: "${LOG_LEVEL_KLUSTR:DEBUG}"
+    org.springframework.security.oauth2.server.resource.authentication.OpaqueTokenAuthenticationProvider: "${LOG_LEVEL_OAUTH_PROVIDER:WARN}"
+    org.springframework.security.web.access.ExceptionTranslationFilter: "${LOG_LEVEL_EXCEPTION_TRANSLATION:WARN}"

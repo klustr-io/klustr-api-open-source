@@ -1,0 +1,111 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Experiment",
+  "description": "The generic information about an experiment such as labels and names.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique ID for this experiment",
+      "type": "string"
+    },
+    "name": {
+      "description": "The name for this experiment",
+      "type": "string"
+    },
+    "tags": {
+      "description": "The tags for this experiment",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "creation_date": {
+      "description": "The date this client was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "start_date": {
+      "description": "The date this experiment will go live.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "stop_date": {
+      "description": "The date this experiment will stop.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "description": {
+      "description": "The general description for this experiment",
+      "type": "string"
+    },
+    "media": {
+      "description": "The media associated with this experiment for display to a user.",
+      "type": "object",
+      "title": "ExperimentMedia",
+      "properties": {
+        "hero_image_url": {
+          "description": "The URL of the image used when displaying the hero of this experiment",
+          "type": "string"
+        }
+      }
+    },
+    "status": {
+      "description": "The status of this given experiment",
+      "type": "string",
+      "enum": [
+        "published",
+        "draft",
+        "deleted",
+        "running",
+        "paused"
+      ]
+    },
+    "owner": {
+      "type": "string",
+      "description": "The owner for this experiment"
+    },
+    "project_id": {
+      "type": "string",
+      "description": "The project that owns this experiment which can then map to an organization or billable entity."
+    },
+    "org_id": {
+      "type": "string",
+      "description": "The organization that owns this particular experiment."
+    },
+    "external_id": {
+      "type": "string",
+      "description": "The external ID of this experiment if the experiment is being run outside of the platform."
+    },
+    "external_source": {
+      "type": "string",
+      "description": "If running externally what is the source of this experiment (Growthbook, Mode, etc)"
+    },
+    "scopes": {
+      "type": "array",
+      "description": "The additional scopes that this experiment needs in order to run.",
+      "items": {
+        "type": "object",
+        "title": "ExperimentScope",
+        "properties": {
+          "id": {
+            "description": "The scope ID",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "privacy_url": {
+      "description": "Additional privacy disclaimers with links for this experiment.",
+      "type": "string"
+    },
+    "tos_url": {
+      "description": "Additional terms and conditions for this experiment.",
+      "type": "string"
+    },
+    "info_url": {
+      "description": "Additional information about this experiment.",
+      "type": "string"
+    }
+  },
+  "required": []
+}

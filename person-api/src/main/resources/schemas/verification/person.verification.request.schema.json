@@ -1,0 +1,15 @@
+{
+  "title": "PersonVerificationRequest",
+  "description": "Request to start a verification for a user.",
+  "type": "object",
+  "properties": {
+    "callback": {
+      "description": "The callbackUrl to where the end-user is redirected after the verification session is completed.",
+      "type": "string"
+    },
+    "org_id": {
+      "description": "The organization ID making this request for verification, if applicable.",
+      "type": "string"
+    }
+  }
+}

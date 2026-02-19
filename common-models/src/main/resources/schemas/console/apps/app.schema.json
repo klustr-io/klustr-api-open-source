@@ -1,0 +1,175 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "App",
+  "description": "A app that is defined for a project",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique ID for this application.",
+      "type": "string"
+    },
+    "brand": {
+      "description": "The brand information for this application.",
+      "type": "object",
+      "title": "AppBrand",
+      "javaType": "io.klustr.schemas.console.AppBrand",
+      "properties": {
+        "name": {
+          "description": "Name of this application which would be potentially used in consent screens.",
+          "type": "string"
+        },
+        "logo": {
+          "description": "The logo for this application as presented in the application",
+          "type": "object",
+          "javaType": "io.klustr.schemas.console.AppLogo",
+          "properties": {
+            "filename": {
+              "type": "string",
+              "description": "The name of this image for reference."
+            },
+            "url": {
+              "description": "Allowed image formats are JPG, PNG, and BMP. Logos should be square and 120px by 120px for the best results.",
+              "type": "string",
+              "format": "uri",
+              "pattern": "^http[s]*\\:[\\/]{2}"
+            }
+          }
+        },
+        "dark": {
+          "logo": {
+            "description": "The logo for this application for dark mode presentation if needed.",
+            "type": "object",
+            "javaType": "io.klustr.schemas.console.AppLogo",
+            "properties": {
+              "filename": {
+                "type": "string",
+                "description": "The name of this image for reference."
+              },
+              "url": {
+                "description": "Allowed image formats are JPG, PNG, and BMP. Logos should be square and 120px by 120px for the best results.",
+                "type": "string",
+                "format": "uri",
+                "pattern": "^http[s]*\\:[\\/]{2}"
+              }
+            }
+          }
+        }
+      }
+    },
+    "creation_date": {
+      "description": "The date this client was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "contact": {
+      "description": "Users who are invited to the app",
+      "type": "object",
+      "$ref": "./app.contact.schema.json"
+    },
+    "verification": {
+      "description": "The status of the application when it comes to reviews and approvals.",
+      "type": "object",
+      "$ref": "./app.verification.schema.json"
+    },
+    "trust": {
+      "description": "The status of the trust for this application.",
+      "type": "object",
+      "$ref": "./app.verification.schema.json"
+    },
+    "links": {
+      "description": "Links referenced by the author for linking to consent.",
+      "type": "object",
+      "title": "AppLinks",
+      "javaType": "io.klustr.schemas.console.AppLinks",
+      "properties": {
+        "home": {
+          "description": "The url for the home page of this application.",
+          "type": "string",
+          "format": "uri",
+          "pattern": "^http[s]*\\:[\\/]{2}"
+        },
+        "privacy": {
+          "description": "The url for the privacy policy of this application",
+          "type": "string",
+          "format": "uri",
+          "pattern": "^http[s]*\\:[\\/]{2}"
+        },
+        "tos": {
+          "description": "Link to the terms of service for this application.",
+          "type": "string",
+          "format": "uri",
+          "pattern": "^http[s]*\\:[\\/]{2}"
+        }
+      }
+    },
+    "domains": {
+      "description": "When a domain is used on the consent screen or in an OAuth client’s configuration, it must be pre-registered here.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "webhooks": {
+      "description": "Webhooks configured for this application to apply to events generated in the system.",
+      "type": "object",
+      "title": "AppWebhooks",
+      "properties": {
+        "endpoints": {
+          "type": "array",
+          "description": "The endpoints configured for this application",
+          "items": {
+            "type": "object",
+            "$ref": "../webhooks/webhook.endpoint.schema.json"
+          }
+        }
+      }
+    },
+    "request_uris": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "../url.schema.json"
+      }
+    },
+    "consent": {
+      "description": "The consent required and requested for this app.",
+      "type": "object",
+      "$ref": "./consent.group.schema.json"
+    },
+    "agreements": {
+      "description": "The agreements required to sign before using this app.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "access_mode": {
+      "description": "Configures if any authenticated user can access or if it is restricted access based on user.",
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["private", "public"]
+        },
+        "allow_roles": {
+          "description": "The roles that a user must have in order to continue.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "deny_roles": {
+          "description": "The roles that a user must not have in order to be denied access.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name"
+  ]
+}

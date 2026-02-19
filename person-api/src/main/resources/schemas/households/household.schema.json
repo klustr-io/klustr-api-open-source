@@ -1,0 +1,41 @@
+{
+  "title": "Household",
+  "description": "A household residence where one or more people reside.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique ID of this household.",
+      "type": "string"
+    },
+    "name": {
+      "description": "The display name for this household.",
+      "type": "string"
+    },
+    "contact": {
+      "description": "The contact for this household.",
+      "type": "object",
+      "$ref": "../person.contact.schema.json"
+    },
+    "members": {
+      "description": "The members of this household",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "./household.member.schema.json"
+      }
+    },
+    "creation_date": {
+      "description": "The date this household was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified_date": {
+      "description": "The date this household was created.",
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "id"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LoadBalancerAclResource",
+  "description": "An ACL resource that maps to a rule defining an access control path. Useful for matching connections, headers, etc. In this we are mapping to ACLs in haproxy where `acl is_dns hdr_sub(host) -m beg dns.` == { name: \"is_dns\", criterion: \"hdr_sub(host)\", \"value\": \"-m beg dns.\"  }",
+  "type": "object",
+  "properties": {
+    "acl_name": {
+      "type": "string",
+      "description": "The acl name use to define it"
+    },
+    "criterion": {
+      "type": "string",
+      "description": "The criteria",
+      "examples": [
+        "hdr_reg(Connection)",
+        "hdr(Upgrade)",
+        "hdr(host)",
+        "hdr_sub(host)",
+        "path_beg"
+      ]
+    },
+    "value": {
+      "type": "string",
+      "description": "The value to match against and logic. For example matching path beg etc.",
+      "examples": [
+        "-m beg kong-console.",
+        "/admin",
+        "-i upgrade",
+        "-i WebSocket"
+      ]
+    }
+  },
+  "required": []
+}

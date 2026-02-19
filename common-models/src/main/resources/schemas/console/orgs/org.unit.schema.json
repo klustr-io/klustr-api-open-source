@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "OrgUnit",
+  "description": "An organizational unit or bundle.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique ID of this entity",
+      "type": "string"
+    },
+    "children": {
+      "description": "The child departments for this org",
+      "type": "array",
+      "items": {
+        "$ref": "./org.unit.schema.json"
+      }
+    },
+    "name": {
+      "description": "A friendly description for this billing account.",
+      "type": "string"
+    },
+    "creation_date": {
+      "description": "The date this billing info was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified_date": {
+      "description": "The date this billing info was modified.",
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": []
+}

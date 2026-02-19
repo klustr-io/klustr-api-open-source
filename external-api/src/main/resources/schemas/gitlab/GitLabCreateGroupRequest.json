@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GitLabCreateGroupRequest",
+  "description": "Request made to gitlab to create a group.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name for this specific group."
+    },
+    "path": {
+      "type": "string",
+      "description": "The path for this specific group"
+    },
+    "auto_devops_enabled": {
+      "type": "boolean",
+      "description": "Default to Auto DevOps pipeline for all projects within this group."
+    },
+    "avatar": {
+      "type": "string",
+      "description": "The avatar for this group for display its logo."
+    },
+    "emails_enabled": {
+      "type": "boolean",
+      "description": "Enable email notifications."
+    },
+    "mentions_disabled": {
+      "type": "boolean",
+      "description": "Disable the capability of a group from getting mentioned."
+    },
+    "organization_id": {
+      "type": "integer",
+      "description": "The organization ID for the group."
+    },
+    "project_creation_level": {
+      "type": "string",
+      "enum": [
+        "administrator",
+        "noone",
+        "maintainer",
+        "developer"
+      ],
+      "description": "Determine if developers can create projects in the group. Can be administrator (users with Admin Mode enabled), noone (No one), maintainer (users with the Maintainer role), or developer (users with the Developer or Maintainer role)."
+    },
+    "share_with_group_lock": {
+      "type": "boolean",
+      "description": "Prevent sharing a project with another group within this group."
+    },
+    "visibility": {
+      "type": "string",
+      "enum": [
+        "private",
+        "internal",
+        "public"
+      ],
+      "description": "The group’s visibility. Can be private, internal, or public."
+    },
+    "shared_runners_minutes_limit": {
+      "type": "int",
+      "description": "Can be set by administrators only. Maximum number of monthly compute minutes for this group. Can be nil (default; inherit system default), 0 (unlimited), or > 0. GitLab Self-Managed, Premium and Ultimate only."
+    }
+  },
+  "required": []
+}

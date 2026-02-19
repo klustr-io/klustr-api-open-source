@@ -1,0 +1,321 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ProjectTemplate",
+  "description": "Enables a standardized library where a user can pick from a template and apply it to a project so that they can quickly get up and running.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique identifier for the project template",
+      "type": "string"
+    },
+    "name": {
+      "description": "Name of the project template",
+      "type": "string"
+    },
+    "scope": {
+      "description": "The scope of this project when released, it can be ORGanization level, which means only one instance per org. or project scoped.",
+      "type": "string",
+      "enum": ["org", "project"]
+    },
+    "image": {
+      "description": "The image to use when deploying.",
+      "type": "string"
+    },
+    "requires_image": {
+      "description": "Requires an image to deploy",
+      "type": "boolean"
+    },
+    "description": {
+      "description": "The description of this project template for a user to find and discover it.",
+      "type": "string"
+    },
+    "type": {
+      "description": "The type of project template used to indicate how to access and what to use",
+      "type": "string",
+      "enum": [
+        "website",
+        "api",
+        "data_storage",
+        "tool"
+      ]
+    },
+    "provisioner": {
+      "type": "string",
+      "enum": [
+        "portainer", "postgres"
+      ]
+    },
+    "port": {
+      "description": "The port exposed by this template when deployed",
+      "type": "integer"
+    },
+    "expose_port": {
+      "description": "When deployed this will claim an available public port. When active, during first deployment will claim a port that maps to the internal port.",
+      "type": "boolean"
+    },
+    "protocol": {
+      "description": "Specify how we might route traffic to the instance. This is useful for domain routing such as {projectId}.compute.dev.klustr.io",
+      "type": "string",
+      "enum": [
+        "http",
+        "tcp"
+      ]
+    },
+    "resolver": {
+      "description": "Specify how we resolve in a load balancer to get access to the service. If mode is HTTP we can safely assume to use http. For example `use_backend postgres_bar if { req.ssl_sni -m beg bar. }` is used with sni routing.",
+      "type": "string",
+      "enum": [
+        "http_hostname_header",
+        "ssl_fc_sni",
+        "req_ssl_sni"
+      ]
+    },
+    "endpoint_url": {
+      "description": "The URL template that is used that will drive how to access for example https://${projectId}.dev.klustr.io",
+      "type": "string",
+      "default": "https://${projectId}.dev.klustr.io"
+    },
+    "documentation_url": {
+      "description": "The full documentation for this project template for users to follow along",
+      "type": "string"
+    },
+    "o11y": {
+      "type": "object",
+      "description": "Observability endpoints for this by default added, for example if mongoDB we can expose default metric endpoints.",
+      "javaType": "io.klustr.schemas.console.projects.O11y",
+      "properties": {
+        "endpoints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "title": "O11yEndpoint",
+            "javaType": "io.klustr.schemas.console.projects.O11yEndpoint",
+            "properties": {
+              "url": {
+                "type": "string",
+                "description": "The endpoint url with replaceable symbols"
+              },
+              "labels": {
+                "type": "array",
+                "description": "Any custom labels to apply to this o11y for dimensions",
+                "items": {
+                  "type": "object",
+                  "javaType": "io.klustr.schemas.console.projects.O11yEndpointLabel",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "description": "The key for this label"
+                    },
+                    "value": {
+                      "type": "string",
+                      "description": "The value for this label"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "required_features": {
+      "type": "object",
+      "description": "The required features for this project template in order to function.",
+      "properties": {
+        "dns": {
+          "type": "object",
+          "description": "Requires that DNS be configured and setup for this. Assumes {project}.dev.klustr.io",
+          "properties": {
+            "zone": {
+              "type": "string",
+              "default": "dev.klustr.io.",
+              "description": "The zone that this DNS will provision under."
+            },
+            "name": {
+              "type": "string",
+              "default": "myproject.dev.klustr.io.",
+              "description": "The zone that this DNS will provision under."
+            }
+          }
+        },
+        "credentials": {
+          "type": "object",
+          "description": "Credentials are required for this project to leverage and connect. Can configure ",
+          "title": "TemplateCredentialsConfiguration",
+          "properties": {
+            "basic_credentials": {
+              "type": "object",
+              "title": "TemplateCredentialsBasicConfiguration",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of this credential stored alongside the project."
+                },
+                "label": {
+                  "type": "string",
+                  "description": "The label for a user to read and understand what this credential is for."
+                },
+                "env_var_username": {
+                  "type": "string",
+                  "description": "The environment variable name for username."
+                },
+                "env_var_password": {
+                  "type": "string",
+                  "description": "The environment variable name for username."
+                },
+                "username": {
+                  "type": "string",
+                  "description": "The default username for the credential"
+                },
+                "password_length": {
+                  "type": "integer",
+                  "description": "The minimum password length",
+                  "default": "12"
+                }
+              }
+            }
+          }
+        },
+        "git": {
+          "type": "object",
+          "description": "Requires that a git project be configured on this.",
+          "title": "TemplateGitConfiguration",
+          "properties": {
+            "git_url": {
+              "type": "string",
+              "description": "The git URL that this will clone from."
+            }
+          }
+        },
+        "oauth_client": {
+          "type": "object",
+          "description": "Requires that credentials are active for this project.",
+          "title": "TemplateOauthConfiguration",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "token_auth_method": {
+              "type": "string"
+            },
+            "authorized_domains": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "authorized_redirect_uris": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "app": {
+          "type": "object",
+          "description": "Requires a user to setup their application.",
+          "title": "TemplateAppConfiguration",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The application name to use."
+            },
+            "logo_url": {
+              "type": "string",
+              "description": "The application logo to use."
+            },
+            "app_links": {
+              "type": "object",
+              "title": "TemplateAppLinksConfiguration",
+              "properties": {
+                "home_page_url": {
+                  "type": "string",
+                  "description": "The home page url of the app."
+                },
+                "privacy_url": {
+                  "type": "string",
+                  "description": "The privacy url for users to view."
+                },
+                "terms_url": {
+                  "type": "string",
+                  "description": "The terms for the application."
+                }
+              }
+            },
+            "domains": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "developers": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "support_email": {
+              "type": "string"
+            },
+            "scopes": {
+              "type": "array",
+              "description": "The consent scopes that the credential is needed by this template.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "services": {
+          "type": "array",
+          "description": "The services that this project relies on for example Identity, Consent, etc",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "creation_date": {
+      "description": "The date this template was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "description": "The status of this template.",
+      "enum": [
+        "active",
+        "inactive"
+      ]
+    },
+    "manifest_filename": {
+      "type": "string",
+      "description": "The name of the file used when provisioning and templating the docker compose. Must be loaded into resources in order to resolve."
+    },
+    "default_machine_type": {
+      "type": "string",
+      "description": "The default machine type for this instance",
+      "default": "m1.small"
+    },
+    "autoscale": {
+      "type": "boolean",
+      "description": "This project type supports autoscaling features and given load will enable autoscaling isntances up when needed."
+    },
+    "restrictions": {
+      "type": "object",
+      "title": "ProjectTemplateRestrictions",
+      "description": "Any restrictions such as limiting the number of instances allowed to be provisioned. For example, an organization may only have 1 pushgateway or 1 IDP provider etc.",
+      "properties": {
+        "limit_one_per_org": {
+          "type": "boolean",
+          "description": "Indicates that this template can only be issued to one organization."
+        }
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name"
+  ]
+}

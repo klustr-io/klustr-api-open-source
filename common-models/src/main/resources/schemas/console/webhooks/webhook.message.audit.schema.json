@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "WebhookMessageAudit",
+  "description": "Attempts made to deliver webhook messages",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique id of the message."
+    },
+    "msgId": {
+      "type": "string",
+      "description": "The unique message id"
+    },
+    "url": {
+      "type": "string",
+      "description": "The url for this message"
+    },
+    "response": {
+      "type": "string",
+      "description": "The response code for the message"
+    },
+    "responseStatusCode": {
+      "type": "integer",
+      "description": "The response status code"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["success", "pending","fail", "sending"],
+      "description": "The response status code"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The unique timestamp of this message"
+    },
+    "trigger_type": {
+      "type": "string",
+      "enum": ["scheduled", "manual"],
+      "description": "The reason an attempt was made."
+    }
+  }
+}

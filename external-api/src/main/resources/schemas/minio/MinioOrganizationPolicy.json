@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "title": "MinioOrganizationPolicy",
+  "properties": {
+    "Version": {
+      "type": "string"
+    },
+    "Statement": {
+      "type": "array",
+      "items": {
+          "type": "object",
+          "title": "MinioOrganizationPolicyStatement",
+          "properties": {
+            "Effect": {
+              "type": "string"
+            },
+            "Action": {
+              "type": "array",
+              "items":
+                {
+                  "type": "string",
+                  "description": "s3:*"
+                }
+            },
+            "Resource": {
+              "type": "array",
+              "items":
+                {
+                  "type": "string",
+                  "description": "arn:aws:s3:::*"
+                }
+            },
+            "Condition": {
+              "type": "object",
+              "title": "MinioOrganizationPolicyCondition",
+              "properties": {
+                "StringEquals": {
+                  "type": "object",
+                  "title": "MinioPolicyStringEquals",
+                  "properties": {
+                    "jwt:sub": {
+                      "type": "array",
+                      "items":
+                        {
+                          "type": "string"
+                        }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": [
+            "Effect",
+            "Action",
+            "Resource",
+            "Condition"
+          ]
+      }
+    }
+  },
+  "required": [
+    "Version",
+    "Statement"
+  ]
+}

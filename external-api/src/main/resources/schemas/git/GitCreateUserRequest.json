@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GitCreateUserRequest",
+  "description": "The request used to create a new user",
+  "type": "object",
+  "properties": {
+    "extern_uid": {
+      "type": "string",
+      "description": "External UID used when linking to OIDC or federated logins"
+    },
+    "provider": {
+      "type": "string",
+      "description": "The provider that created this user, used to link your system to gitlab user."
+    },
+    "username": {
+      "type": "string",
+      "description": "The username of the user in the actual gitlab instance."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the user for displaying such as given name and family name."
+    },
+    "email": {
+      "type": "string",
+      "description": "The email address of the user."
+    },
+    "avatar": {
+      "type": "string",
+      "description": "The URL of the avatar for the user profile."
+    },
+    "organization": {
+      "type": "string",
+      "description": "The organization name that this user belongs to."
+    },
+    "force_random_password": {
+      "type": "boolean",
+      "description": "Will force the password of the user to a random password"
+    }
+  },
+  "required": []
+}

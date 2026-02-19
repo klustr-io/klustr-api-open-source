@@ -1,0 +1,56 @@
+{
+  "$id": "https://example.org/schemas/handling_practices_enum.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "string",
+  "title": "DataPurpose",
+  "javaType": "io.klustr.schemas.console.agreements.DataPurpose",
+  "description": "Specific actions and procedures applied to data to ensure compliance with data policies",
+  "enum": [
+    "COLLECTION"
+  ,
+    "STORAGE"
+  ,
+    "SHARING"
+  ,
+    "PERSONALIZATION"
+  ,
+    "PROCESSING"
+  ,
+    "TRANSFER"
+  ,
+    "AGGREGATION"
+  ],
+  "javaEnum":[
+    {
+      "name": "COLLECTION",
+      "description": "The process of gathering data from various sources and storing it for further use."
+    },
+    {
+      "name": "STORAGE",
+      "description": "The retention of data in a structured format for future access and use."
+    },
+    {
+      "name": "SHARING",
+      "description": "The transfer of data to third parties or other entities for specific purposes."
+    },
+    {
+      "name": "PERSONALIZATION",
+      "description": "The ability to use the data for personalization."
+    },
+    {
+      "name": "PROCESSING",
+      "description": "The manipulation or analysis of data to extract insights or perform specific tasks."
+    },
+    {
+      "name": "TRANSFER",
+      "description": "The movement of data between different systems or locations, ensuring its availability and integrity."
+    },
+    {
+      "name": "AGGREGATION",
+      "description": "The combination of multiple data sets into a single, unified set for analysis or reporting purposes."
+    }
+  ],
+  "required": [],
+  "definitions": {},
+  "additionalProperties": false
+}

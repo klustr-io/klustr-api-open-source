@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "AgreementContent",
+  "description": "The content related to an agreement.",
+  "type": "object",
+  "properties": {
+    "url": {
+      "type": "string",
+      "description": "The url for this content."
+    },
+    "title": {
+      "description": "The title of the agreement content.",
+      "type": "string"
+    },
+   "locale": {
+      "description": "The locale and language code for this agreement.",
+      "type": "string"
+    },
+    "mime_type": {
+      "description": "The mime type of this agreement content.",
+      "type": "string"
+    },
+    "date_created": {
+      "description": "The date the agreement was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "date_modified": {
+      "description": "The date the agreement was last modified.",
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

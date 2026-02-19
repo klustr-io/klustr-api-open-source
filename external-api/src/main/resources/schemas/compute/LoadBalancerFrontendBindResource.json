@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LoadBalancerFrontendBindResource",
+  "description": "A frontend for the loadbalancer for serving content",
+  "type": "object",
+  "properties": {
+    "crt_list": {
+      "type": "string",
+      "description": "The name of the front end."
+    },
+    "ssl": {
+      "type": "boolean",
+      "description": "SSL enabled"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name wiith *:<port> as convention",
+      "examples": ["*:27017", "*:80", "*:443"]
+    },
+    "address": {
+      "type": "string",
+      "description": "Name wiith *:<port> as convention",
+      "examples": ["*:27017", "*:80", "*:443"]
+    }
+  },
+  "required": []
+}

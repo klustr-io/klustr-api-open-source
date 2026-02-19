@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "BillingCustomer",
+  "description": "This object represents a customer of your business. It lets you create or update a customer, but also track usage and create invoices for the same customer.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique ID of the customer as managed by your system.",
+      "type": "string"
+    },
+    "name": {
+      "description": "The display name of the subscription on an invoice. This field allows for customization of the subscription's name for billing purposes, especially useful when a single customer has multiple subscriptions using the same plan.",
+      "type": "string"
+    },
+    "legal_name": {
+      "description": "The legal company name of the customer",
+      "type": "string"
+    },
+    "legal_number": {
+      "description": "The legal number of this customer.",
+      "type": "string"
+    },
+    "logo_url": {
+      "description": "The logo URL of the customer",
+      "type": "string"
+    },
+    "firstname": {
+      "description": "First name of the customer",
+      "type": "string"
+    },
+    "lastname": {
+      "description": "Last name of the customer",
+      "type": "string"
+    },
+    "customer_type": {
+      "description": "The type of the customer. It can have one of the following values:\n\ncompany: the customer is a company.\nindividual: the customer is an individual.",
+      "type": "string",
+      "title": "BillingCustomerType",
+      "enum": [
+        "company",
+        "individual"
+      ]
+    },
+    "address": {
+      "title": "Address",
+      "type": "object",
+      "description": "The main address information for this customer.",
+      "existingJavaType": "io.klustr.schemas.console.Address"
+    },
+    "currency": {
+      "description": "Currency of the customer. Format must be ISO 4217",
+      "type": "string"
+    },
+    "email": {
+      "description": "The email of the customer",
+      "type": "string"
+    },
+    "phone": {
+      "description": "The phone of this customer",
+      "type": "string"
+    },
+    "url": {
+      "description": "The url of this customer",
+      "type": "string"
+    },
+    "timezone": {
+      "description": "The timezone for  this customer",
+      "type": "string"
+    },
+    "external_id": {
+      "description": "The external ID of this customer in another system",
+      "type": "string"
+    },
+    "external_source": {
+      "description": "The source of the external resource",
+      "type": "string"
+    },
+    "external_sales_force_id": {
+      "description": "The external sales force identifier for this customer.",
+      "type": "string"
+    }
+  },
+  "required": []
+}

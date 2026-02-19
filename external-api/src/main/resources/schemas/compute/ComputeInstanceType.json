@@ -1,0 +1,105 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ComputeInstanceType",
+  "description": "Defines a reusable 'machine type' configuration — a preset that describes how much CPU, memory, and other system resources a container is allowed to use. Think of this like AWS EC2 instance classes (e.g. 'm1.small', 'c1.medium'). Each type defines performance characteristics and resource boundaries for workloads managed by Portainer or Docker Compose.",
+
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "A unique identifier for this machine type (e.g., 'm1.small', 'r1.large'). This name is used as a key when provisioning containers or stacks. Convention: 'm' = general purpose, 'c' = compute optimized, 'r' = memory optimized."
+    },
+
+    "description": {
+      "type": "string",
+      "description": "A short human-readable summary describing the purpose or target workload for this machine type — for example, 'Balanced general-purpose instance suitable for most web services.'"
+    },
+
+    "memoryBytes": {
+      "type": "integer",
+      "format": "int64",
+      "existingJavaType": "java.lang.Long",
+      "description": "The **maximum memory** (RAM) this container can use, expressed in bytes. This is a *hard limit* enforced by Docker's cgroup system — once reached, the container can be killed by the kernel to protect the host. Example: 1073741824 (1 GiB)."
+    },
+
+    "memorySwapBytes": {
+      "type": "integer",
+      "format": "int64",
+      "existingJavaType": "java.lang.Long",
+      "description": "The **combined memory + swap limit** in bytes. Must be ≥ memoryBytes, or Docker will throw an error. Typical best practice: set to 2× memoryBytes to allow equal swap space."
+    },
+
+    "memoryReservationBytes": {
+      "type": "integer",
+      "format": "int64",
+      "existingJavaType": "java.lang.Long",
+      "description": "The **minimum guaranteed memory** that this container will be given if resources are scarce. Unlike `memoryBytes`, this is a *soft reservation*, meaning the container can use more if available, but the system tries to keep at least this much free. Recommended: ~50% of `memoryBytes`."
+    },
+
+    "nanoCpus": {
+      "type": "integer",
+      "format": "int64",
+      "existingJavaType": "java.lang.Long",
+      "description": "The total CPU allocation for this container, expressed in nanoseconds of CPU time per second. 1e9 = one full CPU core. Example: 2000000000 = 2 CPUs. This acts as a **hard limit**, meaning the container cannot use more CPU than assigned even if others are idle."
+    },
+
+    "cpuReservation": {
+      "type": "number",
+      "description": "The **minimum guaranteed CPU fraction** for scheduling, expressed as a decimal number of cores (e.g., 0.25 = 25% of one core). This is a soft hint for the scheduler to allocate fair shares. Example: a container with 0.25 reservation and 1.0 limit will always get at least 25% CPU but can burst up to 100%."
+    },
+
+    "cpuShares": {
+      "type": "integer",
+      "description": "Relative weight used when multiple containers compete for CPU time. Higher values give proportionally more CPU cycles. Default is 1024. Example: if one container has 1024 and another has 512, the first gets twice as much CPU under contention."
+    },
+
+    "pidsLimit": {
+      "type": "integer",
+      "format": "int64",
+      "existingJavaType": "java.lang.Long",
+      "description": "The maximum number of processes or threads a container can spawn. This prevents runaway forks or thread exhaustion from crashing the host. Example: 512. Best practice: 256–1024 for most applications, depending on concurrency needs."
+    },
+
+    "blkioWeight": {
+      "type": "integer",
+      "description": "Optional: relative weight (10–1000) controlling this container's disk I/O priority compared to others. Higher means more bandwidth when multiple containers share the same disk. Defaults to 500."
+    },
+
+    "ioBandwidthLimit": {
+      "type": "integer",
+      "format": "int64",
+      "existingJavaType": "java.lang.Long",
+      "description": "Optional: maximum allowed I/O bandwidth in bytes per second. Example: 104857600 = 100 MB/s. Use this to prevent one container from monopolizing disk or network throughput."
+    },
+
+    "networkBandwidthLimit": {
+      "type": "integer",
+      "format": "int64",
+      "existingJavaType": "java.lang.Long",
+      "description": "Optional: suggested cap on outbound network bandwidth in bytes per second. This can be implemented via Docker network QoS or sidecar rate-limiting. Useful for tiered plans or noisy-neighbor isolation."
+    }
+  },
+
+  "required": ["name", "memoryBytes", "nanoCpus"],
+
+  "examples": [
+    {
+      "name": "m1.medium",
+      "description": "Balanced general-purpose instance suitable for small APIs or staging environments.",
+      "memoryBytes": 1073741824,
+      "memoryReservationBytes": 536870912,
+      "nanoCpus": 2000000000,
+      "cpuReservation": 0.5,
+      "cpuShares": 1024,
+      "pidsLimit": 512
+    }
+  ],
+
+  "notes": [
+    "**Best Practice:** Always reserve about 50% of your memory and 25–50% of your CPU allocation to maintain stable performance under load.",
+    "**Tip:** Keep PIDs under 1024 unless running thread-heavy servers (e.g., Java, Node.js with workers).",
+    "**Pro Tip:** Use the 'm', 'c', and 'r' prefixes consistently — this makes scaling and analytics easier across dashboards and billing systems.",
+    "**Dev Hint:** These values are directly translated into Docker `HostConfig` fields or Compose `deploy.resources` limits and reservations.",
+    "**Infra Tip:** If you use Prometheus or Grafana, tag containers with `machine_type=${name}` — this will automatically surface usage data by plan."
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ProjectUserReference",
+  "description": "A reference to a user of a project",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique ID of the user"
+    },
+    "total_visits": {
+      "type": "number",
+      "description": "The total number of times a user visited."
+    },
+    "first_access": {
+      "type": "string",
+      "description": "The date the user first accessed.",
+      "format": "date-time"
+    },
+    "last_access": {
+      "type": "string",
+      "description": "The date the user last accessed.",
+      "format": "date-time"
+    },
+    "traits": {
+      "type": "object",
+      "description": "Traits and meta data related to the user",
+      "existingJavaType": "io.klustr.schemas.console.identity.IdentityTraits"
+    },
+    "metadata_public": {
+      "type": "object",
+      "description": "Traits and meta data related to the user",
+      "existingJavaType": "io.klustr.schemas.console.identity.IdentityMetadataPublic"
+    }
+  },
+  "required": []
+}

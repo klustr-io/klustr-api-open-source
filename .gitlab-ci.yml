@@ -1,0 +1,111 @@
+image: maven:3.9.9-eclipse-temurin-21
+
+stages:
+  - security
+  - build
+
+variables:
+  MAVEN_CLI_OPTS: "-B -V"
+  _JAVA_OPTIONS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+
+cache:
+  key: maven
+  policy: pull-push
+  paths:
+    - .m2/repository
+
+# -----------------------------
+# Secrets scanning (gitleaks)
+# -----------------------------
+gitleaks:
+  stage: security
+  image:
+    name: zricethezav/gitleaks:latest
+    entrypoint: [""]
+  variables:
+    GIT_STRATEGY: clone
+    GIT_DEPTH: "0"
+    GITLEAKS_REDACT: "true"
+    REPORT: "gitleaks.report.json"
+    BAD_COMMIT: "f55ef78de67b97506e305e99ea17929a39e0b746"
+  cache: {}   # disable cache for this job (prevents stale files creeping in)
+  script:
+    - set -euo pipefail
+    - gitleaks version
+
+    # Ensure we're not reading yesterday's report
+    - rm -f "${REPORT}"
+
+    # (Optional) show whether the bad commit even exists in this checkout
+    - |
+      if git cat-file -e "${BAD_COMMIT}^{commit}" 2>/dev/null; then
+        echo "BAD_COMMIT exists in this checkout: ${BAD_COMMIT}"
+      else
+        echo "BAD_COMMIT not present in this checkout (good): ${BAD_COMMIT}"
+      fi
+
+    - |
+      if [[ "${CI_PIPELINE_SOURCE}" == "merge_request_event" ]]; then
+        echo "Scanning MR range: ${CI_MERGE_REQUEST_TARGET_BRANCH_SHA}..${CI_COMMIT_SHA}"
+        gitleaks detect \
+          --no-banner \
+          --redact \
+          --log-level warn \
+          --report-format json \
+          --report-path "${REPORT}" \
+          --log-opts="${CI_MERGE_REQUEST_TARGET_BRANCH_SHA}..${CI_COMMIT_SHA}" \
+          || true
+      else
+        echo "Scanning branch ref: ${CI_COMMIT_REF_NAME} @ ${CI_COMMIT_SHA}"
+        gitleaks detect \
+          --no-banner \
+          --redact \
+          --log-level warn \
+          --report-format json \
+          --report-path "${REPORT}" \
+          || true
+      fi
+
+    # Prove the report was created THIS run
+    - ls -lah "${REPORT}"
+
+    # Fail the job if leaks exist, but print a useful summary
+    - |
+      COUNT="$(jq 'length' "${REPORT}" 2>/dev/null || echo 0)"
+      echo "Findings count: ${COUNT}"
+      if [[ "${COUNT}" != "0" ]]; then
+        echo "=== First 80 findings (RuleID | File | Commit | Match preview) ==="
+        jq -r '.[:80][] | "\(.RuleID // "-") | \(.File // "-") | \(.Commit // "-") | \(.Match // "-" | tostring | gsub("[\r\n\t]+";" "))"' "${REPORT}"
+        exit 1
+      fi
+  artifacts:
+    when: always
+    expire_in: 7 days
+    paths:
+      - gitleaks.report.json
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "main"
+
+
+
+
+build-and-push:
+  stage: build
+  script:
+    - |
+      if [ -z "${CI_REGISTRY_USER:-}" ] || [ -z "${CI_REGISTRY_PASSWORD:-}" ]; then
+        echo "❌ Registry credentials missing."
+        echo "Ensure CI_REGISTRY_USER and CI_REGISTRY_PASSWORD are set in GitLab CI/CD variables."
+        exit 1
+      fi
+    - echo "🏗️ Running top-level install..."
+    - mvn $MAVEN_CLI_OPTS install -DskipTests
+
+    - echo "🚀 Building and pushing Jib images..."
+    - mvn $MAVEN_CLI_OPTS -f auth-server/pom.xml clean compile install jib:build -DskipTests
+    - mvn $MAVEN_CLI_OPTS -f server/pom.xml clean compile jib:build -DskipTests
+    - mvn $MAVEN_CLI_OPTS -f sync-server/pom.xml clean compile jib:build -DskipTests
+
+  only:
+    - main

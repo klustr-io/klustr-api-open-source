@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "title": "PdnsZoneCreateRequest",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name for this zone for example example.org"
+    },
+    "kind": {
+      "type": "string",
+      "description": "Kind of zone file to create.",
+      "default": "Master"
+    }
+  }
+}

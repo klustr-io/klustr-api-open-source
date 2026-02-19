@@ -1,0 +1,44 @@
+{
+  "title": "UserLocationHistory",
+  "description": "https://developers.google.com/analytics/devguides/collection/protocol/v1/devguide#commonhits",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique event ID",
+      "type": "string"
+    },
+    "recent": {
+      "description": "The list of locations seen for this user truncated to the past day.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "./location.event.schema.json"
+      }
+    },
+    "day": {
+      "description": "A summarized version for the past day for the user.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "./location.event.schema.json"
+      }
+    },
+    "week": {
+      "description": "A summarized version of history for the past week for the user.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "./location.event.schema.json"
+      }
+    },
+    "month": {
+      "description": "A summarized version of history for the past month for the user.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "./location.event.schema.json"
+      }
+    }
+  },
+  "required": []
+}

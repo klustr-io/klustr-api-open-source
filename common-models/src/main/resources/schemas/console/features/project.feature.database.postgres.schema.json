@@ -1,0 +1,13 @@
+{
+  "title": "ProjectPostgresFeature",
+  "type": "object",
+  "description": "PostgreSQL database feature definition.",
+  "javaType": "io.klustr.schemas.console.features.database.postgres.ProjectPostgresFeature",
+  "x-type-name": "postgres",
+  "extends": {
+    "$ref": "project.feature.database.schema.json"
+  },
+  "properties": {
+
+  }
+}

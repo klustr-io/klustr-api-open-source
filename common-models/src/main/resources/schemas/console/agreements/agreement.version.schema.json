@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "AgreementVersion",
+  "description": "A packaged version of an agreement indicating that any future version should be approved.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique ID of this agreement version."
+    },
+    "version_number": {
+      "type": "string",
+      "description": "Semantic version number of the agreement."
+    },
+    "version_type": {
+      "description": "The type of change made.",
+      "type": "string",
+      "title": "AgreementVersionType",
+      "javaType": "io.klustr.schemas.console.agreements.AgreementVersionType",
+      "enum": [
+        "minor",
+        "major"
+      ]
+    },
+    "modified_date": {
+      "description": "The date the agreement was modified",
+      "type": "string",
+      "format": "date-time"
+    },
+    "effective_date": {
+      "description": "The date the agreement is effective",
+      "type": "string",
+      "format": "date-time"
+    },
+    "scopes": {
+      "type": "array",
+      "description": "The consent associated with this agreement",
+      "items": {
+        "existingJavaType": "io.klustr.schemas.console.apps.ConsentScope"
+      }
+    },
+    "content": {
+      "type": "array",
+      "description": "The content for this agreement linked to this version",
+      "items": {
+        "$ref": "./agreement.content.schema.json"
+      }
+    },
+    "status": {
+      "description": "The current status of this agreement version",
+      "type": "string",
+      "enum": [
+        "draft",
+        "published",
+        "deleted"
+      ]
+    }
+  }
+}

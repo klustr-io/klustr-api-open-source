@@ -1,0 +1,161 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserAccountType",
+  "description": "What is required for when a user creates an acocunt.",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "The unique identifier for this type of account.",
+        "examples": ["<uuid>"]
+      },
+      "code": {
+        "type": "string",
+        "description": "The unique identifier for this type of account must be lowercase.",
+        "examples": ["visitor", "worker", "inventor", "resident", "gold", "premium", "partner"]
+      },
+      "name": {
+        "type": "string",
+        "description": "The display name for this"
+      },
+      "description": {
+        "type": "string",
+        "description": "The description of this account type"
+      },
+      "org_id": {
+        "type": "string",
+        "description": "The organization that owns this type of account"
+      },
+      "status": {
+        "type": "string",
+        "description": "The status of this account type in the organization which allows for removal of an account type.",
+        "enum": ["draft", "test", "inactive", "published", "deleted"]
+      },
+      "creation_date": {
+        "description": "The date this account was created.",
+        "type": "string",
+        "format": "date-time"
+      },
+      "modified_date": {
+        "description": "The date this account was modified.",
+        "type": "string",
+        "format": "date-time"
+      },
+      "requirements": {
+        "type": "object",
+        "properties": {
+          "ekyc_required": {
+            "description": "If ekyc is required in order to create an account",
+            "type": "boolean"
+          },
+          "totp_required": {
+            "description": "If a one-time password is required to be setup.",
+            "type": "boolean"
+          },
+          "email_required": {
+            "description": "If email verification is required.",
+            "type": "boolean"
+          },
+          "payment_required": {
+            "description": "If the account should have payment information setup.",
+            "type": "boolean"
+          },
+          "employer_required": {
+            "description": "If the account should have employer information setup.",
+            "type": "boolean"
+          }
+        }
+      },
+      "specifications": {
+        "type": "object",
+        "properties": {
+          "expiry_period": {
+            "description": "The default time it takes to expire the account expressed in NOW/DAY+3DAYS",
+            "type": "string"
+          },
+          "validity_period": {
+            "description": "The time it takes that the user account is available before being expired",
+            "type": "string"
+          }
+        }
+      },
+      "agreements": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "title": "UserAccountTypeAgreement",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The agreement that is linked to this."
+            },
+            "name": {
+              "description": "The name for this agreement at the time of saving",
+              "type": "string"
+            },
+            "description": {
+              "description": "The description for this agreement at the time of saving",
+              "type": "string"
+            },
+            "status": {
+              "description": "The status of this agreement at the time of saving.",
+              "type": "string"
+            },
+            "type": {
+              "description": "The type of this agreement.",
+              "type": "string"
+            }
+          }
+        },
+        "description": "The agreements a user must have signed in order to have an account. Different accounts can share common agreements. Ordering matters in terms of presentation to a person."
+      },
+      "subscriptions": {
+        "type": "array",
+        "description": "The subscriptions this account can have access to.",
+        "items": {
+          "type": "string",
+          "description": "The unique ID of the subscriptions available to this account."
+        }
+      },
+      "permissions": {
+        "type": "array",
+        "description": "The permissions to always grant this specific account type",
+        "items": {
+          "type": "string",
+          "description": "The permissions to always grant this client"
+        }
+      },
+      "roles": {
+        "type": "array",
+        "description": "The roles to always grant this specific account type",
+        "items": {
+          "type": "object",
+          "description": "The role names that will be expanded to include required permissions",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "namespace": {
+              "type": "string"
+            },
+            "permissions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "scope": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+}

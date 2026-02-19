@@ -1,0 +1,26 @@
+{
+  "title": "DatabaseSpec",
+  "type": "object",
+  "description": "Generic database engine specification.",
+  "javaType": "io.klustr.schemas.console.features.database.DatabaseSpec",
+  "properties": {
+    "engine": {
+      "type": "string",
+      "description": "Database engine identifier.",
+      "examples": [
+        "mongodb",
+        "postgres"
+      ]
+    },
+    "version": {
+      "type": "string",
+      "description": "Engine version.",
+      "examples": [
+        "7.0"
+      ]
+    }
+  },
+  "required": [
+    "engine"
+  ]
+}

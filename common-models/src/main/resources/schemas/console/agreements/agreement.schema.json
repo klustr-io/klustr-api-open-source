@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Agreement",
+  "description": "A specified agreement made for a user.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique ID of this agreement."
+    },
+    "name": {
+      "description": "The names for this agreement as presented to users.",
+      "type": "string"
+    },
+    "org_id": {
+      "description": "The organization which owns this agreement.",
+      "type": "string"
+    },
+    "namespace": {
+      "type": "string",
+      "description": "The scope that this agreement is applied to.",
+      "title": "AgreementScope",
+      "enum": [
+        "org",
+        "app",
+        "experiment",
+        "account"
+      ]
+    },
+    "object_id": {
+      "type": "string",
+      "description": "The mapping of this agreement to a specific object.",
+      "title": "AgreementScope",
+      "enum": [
+        "org",
+        "app",
+        "experiment",
+        "account"
+      ]
+    },
+    "description": {
+      "description": "The description for this agreement, used internally.",
+      "type": "string"
+    },
+    "versions": {
+      "type": "array",
+      "description": "The content for this agreement",
+      "items": {
+        "$ref": "./agreement.version.schema.json"
+      }
+    },
+    "status": {
+      "type": "string",
+      "description": "The status of this agreement.",
+      "enum": [
+        "test",
+        "draft",
+        "published",
+        "deleted",
+        "deprecated"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of the agreement",
+      "enum": [
+        "privacy_policy",
+        "terms_of_service",
+        "cookie_policy",
+        "third_party",
+        "eula"
+      ]
+    },
+    "date_created": {
+      "description": "The date the agreement was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "date_modified": {
+      "description": "The date the agreement was last modified.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "owner": {
+      "description": "The owners of this agreement and their contact information.",
+      "type": "object",
+      "title": "AgreementOwner",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "The email of the owner."
+        }
+      }
+    }
+  }
+}

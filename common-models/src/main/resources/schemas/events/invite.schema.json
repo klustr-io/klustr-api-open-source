@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "EventInviteUserRequest",
+  "description": "Publish an event that indicates a person would like to invite a user to an organization.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique ID for this event.",
+      "type": "string"
+    },
+    "invite_id": {
+      "description": "The unique identifier for this specific invite to correlate messages against.",
+      "type": "string"
+    },
+    "scope": {
+      "type": "string",
+      "enum": ["organization", "project"]
+    },
+    "entity": {
+      "type": "object",
+      "description": "The entity that the invite is sent to.",
+      "javaType": "io.klustr.schemas.console.EntityReference"
+    },
+    "requesting_user_id": {
+      "description": "The user who originally requested this invite.",
+      "type": "string"
+    },
+    "requesting_user_email": {
+      "description": "The user who originally requested this invite.",
+      "type": "string"
+    },
+    "email": {
+      "description": "The email address of the user to invite.",
+      "type": "string"
+    },
+    "creation_date": {
+      "description": "The date of birth for this person",
+      "type": "string",
+      "format": "date-time"
+    },
+    "expires_date": {
+      "description": "The date this invitation expires.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "description": "The status of this invite.",
+      "type": "string",
+      "enum": [
+        "pending",
+        "expired",
+        "claimed",
+        "revoked"
+      ]
+    },
+    "roles": {
+      "description": "The roles that this user will be given when invited.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": []
+}

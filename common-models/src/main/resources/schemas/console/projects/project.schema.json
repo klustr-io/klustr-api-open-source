@@ -1,0 +1,182 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Project",
+  "description": "The project owned by one or more people",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique identifier for the project",
+      "type": "string",
+      "examples": [
+        "my_example_123",
+        "foo_bar"
+      ]
+    },
+    "name": {
+      "description": "Name of the project",
+      "type": "string"
+    },
+    "customer_id": {
+      "description": "Customer who owns this project, used for billing and directory management.",
+      "type": "string"
+    },
+    "org_id": {
+      "description": "The optional organization that owns this project. Used for project management and sharing.",
+      "type": "string"
+    },
+    "description": {
+      "description": "The description for this project",
+      "type": "string"
+    },
+    "creation_date": {
+      "description": "The date this client was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "owner": {
+      "type": "object",
+      "description": "The owner for this project",
+      "title": "ProjectOwner",
+      "properties": {
+        "id": {
+          "description": "The unique identifier for the owner",
+          "type": "string"
+        }
+      }
+    },
+    "app": {
+      "description": "The application details for this project",
+      "type": "object",
+      "$ref": "../apps/app.schema.json"
+    },
+    "clients": {
+      "description": "The API clients registered with this project.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "../oidc/oidc.client.schema.json"
+      }
+    },
+    "credentials": {
+      "description": "The API credentials registered with this project.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "../oidc/oidc.credential.schema.json"
+      }
+    },
+    "api_keys": {
+      "description": "API keys available for this client to use to authenticate to services.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "../apis/apikey.schema.json"
+      }
+    },
+    "services": {
+      "description": "The enabled services for this project",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "./project.service.schema.json"
+      }
+    },
+    "metadata": {
+      "existingJavaType": "java.util.Map<String,String>",
+      "type": "object"
+    },
+    "status": {
+      "type": "string",
+      "description": "The status of this organization.",
+      "enum": [
+        "active",
+        "inactive"
+      ]
+    },
+    "plan": {
+      "description": "The billing plan that this project is using, these map to external billing providers.",
+      "type": "string",
+      "default": "basic-plan"
+    },
+    "template_id": {
+      "description": "The template ID bound to this project if applicable.",
+      "type": "string"
+    },
+    "secrets": {
+      "type": "array",
+      "description": "Secrets linked to this project",
+      "items": {
+        "type": "object",
+        "title": "ProjectSecret",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique ID for this credential."
+          },
+          "label": {
+            "type": "string",
+            "description": "Friendly display name for these credentials"
+          },
+          "basic_credentials": {
+            "type": "object",
+            "description": "Basic credentials issued for this project for a specific product or services",
+            "title": "ProjectSecretBasicCredential",
+            "properties": {
+              "username": {
+                "type": "string",
+                "description": "The username to use for this credential"
+              },
+              "password": {
+                "type": "string",
+                "description": "The password to use or leverage for this credential."
+              }
+            }
+          }
+        }
+      }
+    },
+    "o11y": {
+      "type": "object",
+      "description": "Observability endpoints for this by default added, for example if mongoDB we can expose default metric endpoints.",
+      "javaType": "io.klustr.schemas.console.projects.O11y",
+      "properties": {
+        "endpoints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "title": "O11yEndpoint",
+            "javaType": "io.klustr.schemas.console.projects.O11yEndpoint",
+            "properties": {
+              "url": {
+                "type": "string",
+                "description": "The endpoint url with replaceable symbols"
+              },
+              "labels": {
+                "type": "array",
+                "description": "Any custom labels to apply to this o11y for dimensions",
+                "items": {
+                  "type": "object",
+                  "javaType": "io.klustr.schemas.console.projects.O11yEndpointLabel",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "description": "The key for this label"
+                    },
+                    "value": {
+                      "type": "string",
+                      "description": "The value for this label"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "title": "ProvisioningSpec",
+  "type": "object",
+  "description": "Provisioning hints for deploying the feature.",
+  "javaType": "io.klustr.schemas.console.features.core.ProvisioningSpec",
+  "properties": {
+    "image": {
+      "type": "string",
+      "description": "Container image.",
+      "examples": [
+        "mongo:7"
+      ]
+    },
+    "manifest_filename": {
+      "type": "string",
+      "description": "Compose/manifest template filename.",
+      "examples": [
+        "docker.mongodb.compose.yaml"
+      ]
+    },
+    "default_machine_type": {
+      "type": "string",
+      "description": "Default machine type.",
+      "examples": [
+        "m1.small"
+      ]
+    },
+    "volumes": {
+      "type": "array",
+      "description": "Volume mounts attached to the container.",
+      "items": {
+        "type": "object",
+        "title": "ProvisioningVolumeSpec",
+        "description": "A single volume mount definition.",
+        "properties": {
+          "source": {
+            "type": "string",
+            "description": "Source volume name or host path.",
+            "examples": ["mongo-data", "/var/lib/data"]
+          },
+          "target": {
+            "type": "string",
+            "description": "Target path inside the container.",
+            "examples": ["/data/db"]
+          },
+          "read_only": {
+            "type": "boolean",
+            "description": "Whether the volume should be mounted read-only.",
+            "examples": [false]
+          }
+        },
+        "required": ["source", "target"]
+      }
+    }
+  }
+}

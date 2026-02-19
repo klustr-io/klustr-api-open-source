@@ -1,0 +1,9 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Targeting",
+  "description": "Targeting conditions for various content, media, and delivery.",
+  "type": "object",
+  "properties": {
+
+  }
+}

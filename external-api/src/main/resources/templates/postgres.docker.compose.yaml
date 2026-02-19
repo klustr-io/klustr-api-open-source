@@ -1,0 +1,103 @@
+
+version: "3.8"
+
+services:
+  ${PROJECT}:
+    image: postgres:latest
+    container_name: ${PROJECT}
+    restart: always
+    ports:
+      - "5432"
+    deploy:
+      resources:
+        limits:
+          cpus: "${CPU_LIMIT:-1.0}"
+          memory: "${MEMORY_LIMIT:-512M}"
+        reservations:
+          cpus: "${CPU_RESERVE:-0.25}"
+          memory: "${MEMORY_RESERVE:-128M}"
+    environment:
+      ORG_ID: ${ORG}
+      PROJECT_ID: ${PROJECT}
+      MACHINE_TYPE: ${MACHINE_TYPE}
+      SERVER_DOMAIN: ${SERVER_DOMAIN}
+      # pg specific
+      POSTGRES_DB: ${PROJECT}
+      POSTGRES_USER: ${POSTGRES_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PGDATA: /data/postgres
+      PGPORT: 5432
+      POSTGRES_SCHEMA: public
+    labels:
+      namespace: "${PROJECT}"
+      org_id: "${ORG}"
+      project: "${PROJECT}"
+      project_id: "${PROJECT}"
+      type: "TENANT"
+      machine_type: "${MACHINE_TYPE}"
+      workload: "postgres"
+      # Traefik labels for automatic PostgreSQL routing
+      traefik.enable: true
+      traefik.tcp.routers.${PROJECT}.rule: HostSNI(`${SERVER_DOMAIN}`)
+      traefik.tcp.routers.${PROJECT}.entrypoints: postgres
+      traefik.tcp.routers.${PROJECT}.tls.passthrough: true
+      traefik.tcp.routers.${PROJECT}.service: ${PROJECT}
+      traefik.tcp.services.${PROJECT}.loadbalancer.server.port: 5432
+    volumes:
+      - postgre_data:/data/postgres
+      - /code/data-platform/docker/postgres/postgres-initdb:/docker-entrypoint-initdb.d/
+      - /code/data-platform/certs/dev.klustr.io/certbot/fullchain.pem:/certs/fullchain.pem:ro
+      - /code/data-platform/certs/dev.klustr.io/certbot/privkey.pem:/certs/privkey.pem:ro
+    networks:
+      - ingress
+      - ${ORG}
+    dns:
+      - ${DNS_HOST}
+    command: >
+      bash -c "
+      cp /certs/fullchain.pem /tmp/server.crt &&
+      cp /certs/privkey.pem /tmp/server.key &&
+      chown postgres:postgres /tmp/server.key &&
+      chown postgres:postgres /tmp/server.key &&
+      chmod 600 /tmp/server.key &&
+      chmod 644 /tmp/server.crt &&
+      exec docker-entrypoint.sh postgres
+      -c ssl=on
+      -c ssl_cert_file=/tmp/server.crt
+      -c ssl_key_file=/tmp/server.key
+      -c ssl_min_protocol_version=TLSv1.2
+      "
+
+  ${PROJECT}-metrics:
+    image: quay.io/prometheuscommunity/postgres-exporter:latest
+    container_name: ${PROJECT}-metrics
+    restart: always
+    environment:
+      DATA_SOURCE_NAME: "postgresql://${POSTGRES_USERNAME}:password@${PROJECT}:5432/${PROJECT}?sslmode=require"
+    labels:
+      namespace: "${PROJECT}"
+      org_id: "${ORG}"
+      project: "${PROJECT}"
+      project_id: "${PROJECT}"
+      type: "TENANT"
+      workload: "postgres-exporter"
+      machine_type: "${MACHINE_TYPE}"
+    ports:
+      - "9187"
+    networks:
+      - ingress
+      - ${ORG}
+    depends_on:
+      - ${PROJECT}
+    dns:
+      - ${DNS_HOST}
+
+volumes:
+  postgre_data:
+    name: "${ORG}_${PROJECT}_postgre_uuid_xyz"
+
+networks:
+  ingress:
+    external: true
+  ${ORG}:
+    external: true

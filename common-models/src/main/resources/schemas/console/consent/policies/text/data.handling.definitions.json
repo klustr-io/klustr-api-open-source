@@ -1,0 +1,14 @@
+{
+  "COLLECTION": "The process of gathering data from various sources and storing it for further use.",
+  "STORAGE": "The retention of data in a structured format for future access and use.",
+  "SHARING": "The transfer of data to third parties or other entities for specific purposes.",
+  "DELETION": "The permanent removal of data from the system, rendering it inaccessible and unrecoverable.",
+  "PROCESSING": "The manipulation or analysis of data to extract insights or perform specific tasks.",
+  "ANONYMIZATION": "The process of removing identifying information from data, ensuring individual anonymity.",
+  "TRANSFER": "The movement of data between different systems or locations, ensuring its availability and integrity.",
+  "AGGREGATION": "The combination of multiple data sets into a single, unified set for analysis or reporting purposes.",
+  "ENCRYPTION": "The conversion of data into a secure format using cryptographic techniques, preventing unauthorized access.",
+  "RETENTION": "The defined period for which data is retained in the system before being deleted or archived.",
+  "ACCESS": "The ability of authorized users to view, modify, or interact with data as per defined permissions.",
+  "MINIMIZATION": "The practice of limiting the collection and storage of data to only what is necessary for a specific purpose."
+}

@@ -1,0 +1,174 @@
+{
+  "components": [
+    {
+      "text": "# Trusted App Verification\nThis process will approve an application or service as a trusted application.",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_1pnm1wv",
+        "columns": null
+      },
+      "id": "Field_1d19khh"
+    },
+    {
+      "text": "Logo",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_1w2fnhh",
+        "columns": 3
+      },
+      "id": "Field_07c8o9d"
+    },
+    {
+      "label": "Image view",
+      "type": "image",
+      "layout": {
+        "row": "Row_1w2fnhh",
+        "columns": null
+      },
+      "id": "Field_1yrixdr",
+      "source": "=brand_logo"
+    },
+    {
+      "text": "Project",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_0bw6b13",
+        "columns": null
+      },
+      "id": "Field_0iv0dpi"
+    },
+    {
+      "text": "=project_id",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_0bw6b13",
+        "columns": 13
+      },
+      "id": "Field_08h8qrf"
+    },
+    {
+      "text": "Project Name",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_053qj0y",
+        "columns": 3
+      },
+      "id": "Field_1eo9es8"
+    },
+    {
+      "text": "=project_name",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_053qj0y",
+        "columns": null
+      },
+      "id": "Field_1w0rppo"
+    },
+    {
+      "text": "Requestor",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_1x6ed4z",
+        "columns": 3
+      },
+      "id": "Field_1l6xzlo"
+    },
+    {
+      "text": "=requestor.givenName + \" \" + requestor.familyName",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_1x6ed4z",
+        "columns": null
+      },
+      "id": "Field_06ptkcg"
+    },
+    {
+      "values": [
+        {
+          "label": "Missing Terms of Service",
+          "value": "Missing Terms of Service"
+        },
+        {
+          "label": "Missing Privacy Policy",
+          "value": "Missing Privacy Policy"
+        },
+        {
+          "label": "Invalid Branding",
+          "value": "Invalid Branding"
+        },
+        {
+          "label": "Logo Incorrect",
+          "value": "Logo Incorrect"
+        },
+        {
+          "label": "Access to Sensitive Information",
+          "value": "Access to Sensitive Information"
+        }
+      ],
+      "label": "Which Failed Verification?",
+      "type": "checklist",
+      "layout": {
+        "row": "Row_1fb2ygb",
+        "columns": null
+      },
+      "id": "Field_0k1rg6p",
+      "key": "rejection_reasons",
+      "description": "Please indicate one or more reasons why this app failed verification."
+    },
+    {
+      "values": [
+        {
+          "label": "Approved",
+          "value": "Approved"
+        },
+        {
+          "label": "Denied",
+          "value": "Denied"
+        },
+        {
+          "label": "Pending",
+          "value": "Pending"
+        },
+        {
+          "label": "None",
+          "value": "None"
+        }
+      ],
+      "label": "Approval Status",
+      "type": "select",
+      "layout": {
+        "row": "Row_084svat",
+        "columns": null
+      },
+      "id": "Field_1q2im0x",
+      "key": "status"
+    },
+    {
+      "action": "submit",
+      "label": "Submit",
+      "type": "button",
+      "layout": {
+        "row": "Row_0swfmlf",
+        "columns": null
+      },
+      "id": "Field_1mz9wzt"
+    }
+  ],
+  "type": "default",
+  "id": "trust_verification_form",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.3.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.18.0"
+  },
+  "schemaVersion": 13
+}

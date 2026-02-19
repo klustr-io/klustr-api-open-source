@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "RoleAssignment",
+  "description": "Defines an assignment of a role.",
+  "type": "object",
+  "$id": "role.assignment.schema.json",
+  "properties": {
+    "id": {
+      "description": "The unique ID of this organization",
+      "type": "string",
+      "readOnly": true
+    },
+    "role_id": {
+      "description": "A reference the the role",
+      "type": "string",
+      "key": true
+    },
+    "assigned_to": {
+      "description": "The unique ID of the entity this role is assigned to—either the userId of a user, the groupId of a group, or the uniqueId of a service account as defined in Identity and Access Management (IAM).",
+      "type": "string",
+      "key": true
+    },
+    "assignee_type": {
+      "description": "Output only. The type of the assignee (USER or GROUP).",
+      "type": "string",
+      "enum": [
+        "user",
+        "group"
+      ],
+      "key": true
+    },
+    "org_id": {
+      "description": "A reference the org that owns this role assignment.",
+      "type": "string",
+      "key": true
+    }
+  },
+  "required": []
+}

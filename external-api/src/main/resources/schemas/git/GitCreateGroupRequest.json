@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GitCreateGroupRequest",
+  "description": "The request to create a new group.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name for this specific group."
+    },
+    "path": {
+      "type": "string",
+      "description": "The path for this specific group"
+    },
+    "avatar": {
+      "type": "string",
+      "description": "The avatar for this group for display its logo."
+    }
+  },
+  "required": []
+}

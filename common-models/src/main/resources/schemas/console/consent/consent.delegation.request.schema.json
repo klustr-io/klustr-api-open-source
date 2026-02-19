@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ConsentDelegationRequest",
+  "description": "Enables a person to delegate consent to another party.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique ID of this delegation request.",
+      "type": "string"
+    },
+    "challenge_id": {
+      "description": "The unique ID of this consent request.",
+      "type": "string"
+    },
+    "household_id": {
+      "description": "The household that this consent delegation is targeted against.",
+      "type": "string"
+    },
+    "subject_id": {
+      "description": "The person in the household that is requesting consent.",
+      "type": "string"
+    },
+    "act": {
+      "description": "The delegated person who has approved the consent request.",
+      "type": "string"
+    },
+    "client_id": {
+      "description": "The client that is targeted for this delegation.",
+      "type": "string"
+    },
+    "scopes": {
+      "description": "The scopes to apply and access for this client",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "app_id": {
+      "description": "The application that is targeted for this delegation.",
+      "type": "string"
+    },
+    "project_id": {
+      "description": "The project that is targetd for this delegation.",
+      "type": "string"
+    },
+    "org_id": {
+      "description": "The organization that this consent delegation was performed on.",
+      "type": "string"
+    },
+    "status": {
+      "description": "The status of this consent attribute.",
+      "type": "string",
+      "enum": ["pending", "rejected", "completed", "expired"]
+    },
+    "creation_date": {
+      "description": "The date this request was made in UTC time.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "approved_date": {
+      "description": "The date that this delegation request was approved.",
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+
+  ]
+}

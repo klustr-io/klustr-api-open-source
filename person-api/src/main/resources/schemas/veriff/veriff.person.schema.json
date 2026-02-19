@@ -1,0 +1,43 @@
+{
+  "title": "VeriffPerson",
+  "description": "A object representing a person in Veriff.",
+  "type": "object",
+  "properties": {
+    "firstName": {
+      "type": "object",
+      "existingJavaType": "io.klustr.schemas.persons.veriff.VeriffValue"
+    },
+    "lastName": {
+      "type": "object",
+      "existingJavaType": "io.klustr.schemas.persons.veriff.VeriffValue"
+    },
+    "gender": {
+      "type": "object",
+      "existingJavaType": "io.klustr.schemas.persons.veriff.VeriffValue"
+    },
+    "dateOfBirth": {
+      "type": "object",
+      "existingJavaType": "io.klustr.schemas.persons.veriff.VeriffValue"
+    },
+    "citizenship": {
+      "type": "object",
+      "existingJavaType": "io.klustr.schemas.persons.veriff.VeriffValue"
+    },
+    "nationality": {
+      "type": "object",
+      "existingJavaType": "io.klustr.schemas.persons.veriff.VeriffValue"
+    },
+    "placeOfBirth": {
+      "type": "object",
+      "existingJavaType": "io.klustr.schemas.persons.veriff.VeriffValue"
+    },
+    "idNumber": {
+      "type": "object",
+      "existingJavaType": "io.klustr.schemas.persons.veriff.VeriffValue"
+    },
+    "address": {
+      "type": "object",
+      "existingJavaType": "io.klustr.schemas.persons.veriff.VeriffValue"
+    }
+  }
+}

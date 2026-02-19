@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "title": "PdnsZone",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "kind": {
+      "type": "string",
+      "default": "Master"
+    },
+    "name": {
+      "type": "string"
+    },
+    "rrsets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "javaType": "io.klustr.schemas.integrations.compute.ComputeDnsZone"
+      }
+    }
+  }
+}

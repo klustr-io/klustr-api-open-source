@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "title": "PrometheusMetricResponse",
+  "properties": {
+    "status": {
+      "type": "string"
+    },
+    "data": {
+      "type": "object",
+      "title": "PrometheusMetricData",
+      "description": "The type of metrics you want",
+      "properties": {
+        "resultType": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items":  {
+              "type": "object",
+              "title": "PrometheusMetric",
+              "$ref": "./PrometheusMetric.json"
+          }
+        }
+      }
+    }
+  }
+}

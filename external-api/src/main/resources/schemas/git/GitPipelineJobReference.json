@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "GitPipelineJobReference",
+  "description": "A specific step in the pipeline that executed or failed to execute. Includes trace and log level information.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "status": {
+      "type": "string"
+    },
+    "stage": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "started_at": {
+      "type": "string"
+    },
+    "finished_at": {
+      "type": "string"
+    },
+    "duration": {
+      "type": "number"
+    },
+    "queued_duration": {
+      "type": "number"
+    },
+    "web_url": {
+      "type": "string"
+    }
+  },
+  "required": []
+}

@@ -1,0 +1,14 @@
+# Base image with JDK + curl (for healthchecks)
+FROM eclipse-temurin:21-jdk-jammy
+
+# Install curl (slim down apt cache afterwards)
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory for Jib layers
+WORKDIR /app
+
+# Jib will place its layers under /app (resources, classes, libs)
+# and inject the ENTRYPOINT automatically:
+#   java -cp /app/resources:/app/classes:/app/libs/* <mainClass>

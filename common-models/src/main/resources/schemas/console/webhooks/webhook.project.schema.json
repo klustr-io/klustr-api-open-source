@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "WebhookProject",
+  "description": "The project that enables a person to setup various endpoints to collect events",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique ID of this application."
+    },
+    "name": {
+      "type": "string",
+      "description": "The friendly display name for this application"
+    },
+    "uid": {
+      "type": "string",
+      "description": "Mapping to the external ID of the endpoint."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata related to the address",
+      "existingJavaType": "java.util.Map<String,String>"
+    },
+    "date_created": {
+      "description": "The time and date that this application was created",
+      "type": "string",
+      "format": "date-time"
+    },
+    "rate_limit": {
+      "description": "The rate limits for this project",
+      "type": "integer"
+    },
+    "external_id": {
+      "type": "object",
+      "description": "The ID of this webhook from the external system.",
+      "existingJavaType": "io.klustr.schemas.console.webhooks.WebhookExternalId"
+    }
+  }
+}

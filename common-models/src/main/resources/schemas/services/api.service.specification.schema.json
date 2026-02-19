@@ -1,0 +1,158 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ApiServiceSpecification",
+  "description": "Reference to a service.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique ID for this service",
+      "type": "string"
+    },
+    "name": {
+      "description": "The name of the service.",
+      "type": "string"
+    },
+    "code": {
+      "description": "The code of this service for registration and tagging.",
+      "type": "string"
+    },
+    "summary": {
+      "description": "The simple summary of this service.",
+      "type": "string"
+    },
+    "org_id": {
+      "description": "The organization that owns this specific API.",
+      "type": "string"
+    },
+    "project_id": {
+      "description": "The project that manages this API specification.",
+      "type": "string"
+    },
+    "icon": {
+      "description": "A reference icon for this service",
+      "type": "string"
+    },
+    "creation_date": {
+      "description": "The date this client was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "external_id": {
+      "description": "A link to an external definition of this service",
+      "type": "string"
+    },
+    "url": {
+      "description": "A link to an external definition of this service",
+      "type": "string"
+    },
+    "documentation_url": {
+      "description": "The url containing additional documentation about this service.",
+      "type": "string"
+    },
+    "terms_url": {
+      "description": "The url containing additional terms that users must agree for this service.",
+      "type": "string"
+    },
+    "health_check_url": {
+      "description": "The health check API endpoint for this to determine if alive or up.",
+      "type": "string"
+    },
+    "open_api_url": {
+      "description": "The open API json url",
+      "type": "string"
+    },
+    "mock_api_url": {
+      "description": "If the service has a mock API endpoint that can help users integrate or test.",
+      "type": "string"
+    },
+    "ping_route": {
+      "description": "The route to use to check and ping the service.",
+      "type": "string"
+    },
+    "price_url": {
+      "description": "The url containing additional documentation about the pricing of this service.",
+      "type": "string"
+    },
+    "support_url": {
+      "description": "The url containing additional documentation about how to get support for this service.",
+      "type": "string"
+    },
+    "webhook_url": {
+      "description": "The url you will be called when a person subscribes or unsubscribes from this service.",
+      "type": "string"
+    },
+    "status": {
+      "description": "The status of the service",
+      "type": "string",
+      "title": "ServiceEntryStatus",
+      "javaType": "io.klustr.schemas.console.services.ServiceEntryStatus",
+      "enum": [
+        "disabled",
+        "deprecated",
+        "deleted",
+        "alpha",
+        "beta",
+        "general_availability"
+      ]
+    },
+    "consent_scopes": {
+      "description": "The scopes that this service needs permissions for in order to be used.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "routes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "./api.service.routes.specification.schema.json"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "permissions": {
+      "type": "object",
+      "title": "ServicePermissions",
+      "description": "The permissions required to be able to access this API catalog and to see it",
+      "properties": {
+        "viewers": {
+          "type": "array",
+          "description": "The viewers of this API and who can see that it exists",
+          "items": {
+            "type": "string"
+          }
+        },
+        "owners": {
+          "type": "array",
+          "description": "The owners of this API and who can modify it or decide to delete it",
+          "items": {
+            "type": "string"
+          }
+        },
+        "editors": {
+          "type": "array",
+          "description": "The editors of this API who cant delete it but change things like versions etc.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "security": {
+      "description": "The security to activate on this service.",
+      "type": "string",
+      "title": "ServiceEntryStatus",
+      "javaType": "io.klustr.schemas.console.services.ServiceSecurityRequirement",
+      "enum": [
+        "none",
+        "token"
+      ]
+    }
+  },
+  "required": []
+}

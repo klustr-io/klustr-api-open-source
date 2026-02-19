@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GitProjectDockerImageReference",
+  "description": "The request to create a new group.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "path": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "image_id": {
+      "type": "string"
+    },
+    "revision": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "total_size": {
+      "type": "number",
+      "existingJavaType": "java.lang.Long"
+    }
+  },
+  "required": []
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "OrgRoles",
+  "description": "An organizational unit.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique ID of this organization",
+      "type": "string"
+    },
+    "roles": {
+      "description": "The roles defined for this organization",
+      "type": "array",
+      "items": {
+        "$ref": "../roles/role.schema.json"
+      }
+    }
+  }
+}

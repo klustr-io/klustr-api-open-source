@@ -1,0 +1,28 @@
+{
+  "title": "ProjectDockerFeature",
+  "type": "object",
+  "description": "Catalog feature representing a generic Docker-based workload deployed via the platform provisioning system.",
+  "javaType": "io.klustr.schemas.console.features.docker.ProjectDockerFeature",
+  "x-type-name": "docker",
+
+  "extends": {
+    "$ref": "project.feature.schema.json"
+  },
+
+  "properties": {
+    "provisioning": {
+      "$ref": "project.feature.provisioning.spec.schema.json",
+      "description": "Provisioning configuration used to deploy the Docker workload."
+    },
+    "networking": {
+      "$ref": "project.feature.networking.spec.schema.json",
+      "description": "Optional networking configuration for the Docker workload."
+    },
+    "observability": {
+      "$ref": "project.feature.observability.spec.schema.json",
+      "description": "Optional observability configuration for the Docker workload."
+    }
+  },
+
+  "required": ["provisioning"]
+}

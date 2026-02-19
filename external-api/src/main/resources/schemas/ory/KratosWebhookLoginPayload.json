@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "title": "KratosWebhookLoginPayload",
+  "description": "Configuration of kratos to send webhook events when a user logins in at any time.",
+  "properties": {
+    "user_id": {
+      "type": "string"
+    },
+    "identity": {
+      "type": "object",
+      "$ref": "./Identity.json"
+    }
+  }
+}

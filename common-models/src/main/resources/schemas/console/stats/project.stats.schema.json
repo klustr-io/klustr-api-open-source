@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ProjectStats",
+  "description": "Stats related to this project.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The ID of this record."
+    },
+    "project_id": {
+      "type": "string",
+      "description": "The project ID to reference."
+    },
+    "client_id": {
+      "type": "string",
+      "description": "The the client ID linked to this project"
+    },
+    "unique_users": {
+      "type": "integer",
+      "description": "The total number of unique users"
+    }
+  },
+  "required": []
+}

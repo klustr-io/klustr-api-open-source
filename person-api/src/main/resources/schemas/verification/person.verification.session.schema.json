@@ -1,0 +1,36 @@
+{
+  "title": "PersonVerificationSession",
+  "description": "Request to start a verification for a user.",
+  "type": "object",
+  "properties": {
+    "sessionToken": {
+      "description": "The session token to use.",
+      "type": "string"
+    },
+    "url": {
+      "description": "The URL that can be used to initiate the verification.",
+      "type": "string"
+    },
+    "id": {
+      "description": "The unique ID of this session request",
+      "type": "string"
+    },
+    "status": {
+      "description": "The status of this request.",
+      "type": "string"
+    },
+    "creation_date": {
+      "description": "The timestamp that this session was created",
+      "type": "string"
+    },
+    "modified_date": {
+      "description": "The timestamp that this session was last modified",
+      "type": "string"
+    },
+    "original_request": {
+      "description": "The status of this request.",
+      "type": "object",
+      "$ref": "./person.verification.request.schema.json"
+    }
+  }
+}

@@ -1,0 +1,222 @@
+{
+  "data": {
+    "verification": {
+      "person": {
+        "gender": {
+          "value": "M",
+          "sources": [
+            "MRZ",
+            "VIZ"
+          ],
+          "confidenceCategory": "high"
+        },
+        "address": {
+          "value": null,
+          "sources": [
+          ],
+          "components": {
+          },
+          "confidenceCategory": null
+        },
+        "employer": null,
+        "idNumber": {
+          "value": null,
+          "sources": [
+          ],
+          "confidenceCategory": "low"
+        },
+        "lastName": {
+          "value": "SNYDER",
+          "sources": [
+            "MRZ",
+            "VIZ"
+          ],
+          "confidenceCategory": "high"
+        },
+        "firstName": {
+          "value": "TERRANCE ARTHER LEE",
+          "sources": [
+            "MRZ",
+            "VIZ"
+          ],
+          "confidenceCategory": "high"
+        },
+        "extraNames": null,
+        "occupation": null,
+        "dateOfBirth": {
+          "value": "1984-06-28",
+          "sources": [
+            "MRZ"
+          ],
+          "confidenceCategory": "low"
+        },
+        "nationality": {
+          "value": "US",
+          "sources": [
+            "MRZ",
+            "VIZ"
+          ],
+          "confidenceCategory": "high"
+        },
+        "placeOfBirth": null,
+        "foreignerStatus": null
+      },
+      "decision": "resubmission_requested",
+      "document": {
+        "type": {
+          "value": "passport"
+        },
+        "number": {
+          "value": "046773586",
+          "sources": [
+            "VIZ"
+          ],
+          "confidenceCategory": "high"
+        },
+        "country": {
+          "value": "RO"
+        },
+        "validFrom": {
+          "value": "2020-10-25",
+          "sources": [
+            "VIZ"
+          ],
+          "confidenceCategory": "low"
+        },
+        "firstIssue": null,
+        "validUntil": {
+          "value": "2020-10-24",
+          "sources": [
+            "VIZ"
+          ],
+          "confidenceCategory": "low"
+        },
+        "placeOfIssue": null,
+        "licenseNumber": null,
+        "processNumber": null,
+        "residencePermitType": null
+      },
+      "insights": [
+        {
+          "label": "allowedIpLocation",
+          "result": "yes",
+          "category": "fraud"
+        },
+        {
+          "label": "documentAccepted",
+          "result": "yes",
+          "category": "document"
+        },
+        {
+          "label": "documentBackFullyVisible",
+          "result": "notApplicable",
+          "category": "document"
+        },
+        {
+          "label": "documentBackImageAvailable",
+          "result": "notApplicable",
+          "category": "document"
+        },
+        {
+          "label": "documentFrontFullyVisible",
+          "result": "yes",
+          "category": "document"
+        },
+        {
+          "label": "documentFrontImageAvailable",
+          "result": "yes",
+          "category": "document"
+        },
+        {
+          "label": "documentImageQualitySufficient",
+          "result": "no",
+          "category": "document"
+        },
+        {
+          "label": "documentNotExpired",
+          "result": null,
+          "category": "document"
+        },
+        {
+          "label": "documentRecognised",
+          "result": "yes",
+          "category": "document"
+        },
+        {
+          "label": "expectedTrafficBehaviour",
+          "result": "yes",
+          "category": "fraud"
+        },
+        {
+          "label": "faceImageAvailable",
+          "result": "yes",
+          "category": "biometric"
+        },
+        {
+          "label": "faceImageQualitySufficient",
+          "result": "yes",
+          "category": "biometric"
+        },
+        {
+          "label": "faceLiveness",
+          "result": "yes",
+          "category": "biometric"
+        },
+        {
+          "label": "faceNotInBlocklist",
+          "result": "yes",
+          "category": "biometric"
+        },
+        {
+          "label": "faceSimilarToPortrait",
+          "result": "yes",
+          "category": "biometric"
+        },
+        {
+          "label": "lowFraudRateForDocument",
+          "result": "yes",
+          "category": "document"
+        },
+        {
+          "label": "newDocument",
+          "result": "yes",
+          "category": "velocity"
+        },
+        {
+          "label": "newUser",
+          "result": "yes",
+          "category": "velocity"
+        },
+        {
+          "label": "noDeviceRisk",
+          "result": "yes",
+          "category": "fraud"
+        },
+        {
+          "label": "physicalDocumentPresent",
+          "result": "yes",
+          "category": "document"
+        },
+        {
+          "label": "validDocumentAppearance",
+          "result": "yes",
+          "category": "document"
+        },
+        {
+          "label": "validDocumentData",
+          "result": "yes",
+          "category": "document"
+        }
+      ],
+      "decisionScore": 0.92
+    }
+  },
+  "time": "2024-04-24T13:58:29.681Z",
+  "status": "success",
+  "version": "1.0.0",
+  "attemptId": "34bb8a3a-dfb8-4036-9a08-55bcabfd1ec0",
+  "eventType": "fullauto",
+  "sessionId": "5ba5336b-0f73-4c30-9730-88af8656cdee",
+  "vendorData": "f3f6b262-1a5f-401d-8875-9dba26ac88e5",
+  "acceptanceTime": "2024-04-24T13:56:57.263937Z"
+}

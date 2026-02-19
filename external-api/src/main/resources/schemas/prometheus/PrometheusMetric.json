@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "title": "PrometheusMetric",
+  "description": "The metric being applied.",
+  "properties": {
+    "metric": {
+      "type": "object",
+      "title": "PrometheusMetricReference",
+      "properties": {
+        "service": {
+          "type": "string",
+          "description": "The optional grouping by status service."
+        },
+        "consumer": {
+          "type": "string",
+          "description": "The optional grouping by consumer."
+        },
+        "code": {
+          "type": "string",
+          "description": "The optional grouping by status code."
+        }
+      }
+    },
+    "values": {
+      "type": "array",
+      "title": "PrometheusMetricDataFrame",
+      "items": {
+        "type": "array",
+        "title": "PrometheusMetricDataPoint",
+        "items": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "number"
+          }
+        ]
+      }
+    }
+  }
+}

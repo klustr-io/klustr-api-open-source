@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ExperimentMembership",
+  "description": "Manages the membership of users into experiments.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique ID of this membership",
+      "type": "string"
+    },
+    "experiment_id": {
+      "description": "The ID of the experiment being issued.",
+      "type": "string"
+    },
+    "subject_id": {
+      "description": "The ID of the subject involved with the experiment.",
+      "type": "string"
+    },
+    "project_id": {
+      "description": "The ID of the project that owns this experiment.",
+      "type": "string"
+    },
+    "app_id": {
+      "description": "The ID of the application that subscribed this person to the experiment.",
+      "type": "string"
+    },
+    "org_id": {
+      "description": "The ID of the organization that owns this experiment.",
+      "type": "string"
+    },
+    "timestamp": {
+      "description": "The timestamp that this membership was updated.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "description": "The action that the user performed for this membership",
+      "type": "string",
+      "enum": [
+        "opt-in",
+        "opt-out",
+        "revoked"
+      ]
+    }
+  },
+  "required": []
+}

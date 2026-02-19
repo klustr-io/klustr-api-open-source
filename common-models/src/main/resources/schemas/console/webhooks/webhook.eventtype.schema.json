@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "WebhookEventType",
+  "description": "The main app that contains zero, one, or more endpoints",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The unique name of this event type, in the format of `foo.name` similar or `user.login`."
+    },
+    "deprecated": {
+      "type": "boolean",
+      "description": "If this event type has been deprecated"
+    },
+    "description": {
+      "type": "string",
+      "description": "The description of this event type available."
+    },
+    "schema": {
+      "type": "object",
+      "description": "The JSON schema for this event type if available.",
+      "existingJavaType": "java.lang.Object"
+    },
+    "date_created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The unique timestamp of this entity when it was created."
+    },
+    "date_modified": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The unique timestamp of this entity when it was modified"
+    }
+
+  }
+}

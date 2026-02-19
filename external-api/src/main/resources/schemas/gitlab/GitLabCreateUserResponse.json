@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GitLabCreateUserResponse",
+  "description": "Response from gitlab for successful creation of a user",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int",
+      "description": "The unique ID of the user in gitlab"
+    },
+    "username": {
+      "type": "string",
+      "description": "The username of the user in the actual gitlab instance."
+    },
+    "state": {
+      "type": "string",
+      "description": "The state of the user"
+    },
+    "locked": {
+      "type": "boolean",
+      "description": "If the user has been locked"
+    },
+    "email": {
+      "type": "string",
+      "description": "The email address of the user."
+    },
+    "avatar": {
+      "type": "string",
+      "description": "The URL of the avatar for the user profile."
+    },
+    "organization": {
+      "type": "string",
+      "description": "The organization name that this user belongs to."
+    },
+    "identities": {
+      "type": "array",
+      "description": "The list of identities linked to this user.",
+      "items": {
+        "type": "object",
+        "existingJavaType": "io.klustr.schemas.integrations.git.GitUserFederatedIdentity"
+      }
+    }
+  },
+  "required": []
+}

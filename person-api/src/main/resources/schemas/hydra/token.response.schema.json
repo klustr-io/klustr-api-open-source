@@ -1,0 +1,15 @@
+{
+  "title": "HydraEnrichmentResponse",
+  "description": "Enrichment information returned to Hydra to populate the ID token and Access Token.",
+  "type": "object",
+  "properties": {
+    "session": {
+      "description": "The session containing the enrichment data.",
+      "type": "object",
+      "$ref": "./token.session.schema.json"
+    }
+  },
+  "required": [
+    "session"
+  ]
+}

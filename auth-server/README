@@ -1,0 +1,40 @@
+# Auth Server
+
+This component is solely responsible for decorating and integration with the hydra and kratos
+identity components to enrich the token with various bits of information.
+
+It is expected that kratos is configured to point at this address to webhook post the login and token hook
+inputs. You can find these in kratos configuration.
+
+```
+ory:
+  kratos:
+    // ...
+    selfservice:
+      // ...
+      flows:
+        login:
+          web_hook: "http://local.dev.klustr.io:7878/ory/kratos/login?apikey=XXXX"
+```
+
+For token enrichment this comes from the hydra side of configuraiton
+
+```
+ory:
+  hydra:
+    // ...
+    oauth2:
+      token_hook: "http://local.dev.klustr.io:7878/ory/hydra/token_hook"
+      expose_internal_errors: "false"
+```
+
+In the future this webhook should have some type of credential exchange (api key) so that
+the webhook can validate who is calling it or use mtls or something similar to authorize
+the request.
+
+By default the apis are accessible once the server starts here;
+- http://localhost:7878/swagger-ui/index.html
+
+Health metrics area here
+- http://localhost:7878/actuator/metrics
+- http://localhost:7878/actuator/health

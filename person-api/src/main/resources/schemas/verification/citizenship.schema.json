@@ -1,0 +1,44 @@
+{
+  "title": "Citizenship",
+  "description": "The citizenship for the person",
+  "type": "object",
+  "properties": {
+    "citizenship_country_code": {
+      "description": "The country code of citizenship for the person (different from where the person resides).",
+      "type": "string"
+    },
+    "residency_country_code": {
+      "description": "The country code of the residency for this person",
+      "type": "string"
+    },
+    "residency_type": {
+      "description": "The status of residency and status of the person.",
+      "type": "string",
+      "enum": [
+        "PERMANENT_VISA",
+        "RESIDENT_VISA",
+        "NATURAL_CITIZEN"
+      ],
+      "javaEnums": [
+        {
+          "name": "PERMANENT_VISA",
+          "description": "The persons residency is permanent visa"
+        },
+        {
+          "name": "RESIDENT_VISA",
+          "description": "The persons residency is based on a resident visa with an expiration."
+        },
+        {
+          "name": "NATURAL_CITIZEN",
+          "description": "The persons residency is of a natural citizen."
+        }
+      ]
+    },
+    "residency_expiration": {
+      "description": "The date of expiration for residency (if applicable).",
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": []
+}

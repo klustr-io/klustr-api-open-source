@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "AppContactInformation",
+  "description": "The contact information this an application",
+  "type": "object",
+  "properties": {
+    "support_email": {
+      "description": "The email to use when asking for support for this app.",
+      "type": "string",
+      "format": "email"
+    },
+    "developer_emails": {
+      "description": "Email addresses for us to contact in case of breaking changes or API updates",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "email"
+      }
+    }
+  },
+  "required": []
+}

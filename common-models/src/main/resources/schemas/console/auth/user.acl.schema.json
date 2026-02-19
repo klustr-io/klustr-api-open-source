@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "UserAccessControl",
+  "description": "Enables the ability to map users who have logged in to be managed or authorized to access specific roles and groups.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique ID of the record.",
+      "type": "string"
+    },
+    "user_id": {
+      "description": "The user id to grant permissions against.",
+      "type": "string"
+    },
+    "project_id": {
+      "description": "The project id that a user was granted right to.",
+      "type": "string"
+    },
+    "groups": {
+      "type": "array",
+      "description": "The groups related to a user.",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": []
+}

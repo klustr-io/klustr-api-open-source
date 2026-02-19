@@ -1,0 +1,13 @@
+{
+  "title": "ProjectMongoDbFeature",
+  "type": "object",
+  "description": "MongoDB database feature definition.",
+  "javaType": "io.klustr.schemas.console.features.database.mongo.ProjectMongoDbFeature",
+  "x-type-name": "mongodb",
+  "extends": {
+    "$ref": "project.feature.database.schema.json"
+  },
+  "properties": {
+
+  }
+}

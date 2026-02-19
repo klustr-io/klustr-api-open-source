@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Account",
+  "description": "The account and billing information.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The ID of this billing account",
+      "type": "string"
+    },
+    "external_id": {
+      "description": "The ID linked to this account from an external system.",
+      "type": "string"
+    },
+    "external_source": {
+      "description": "The source of the external ID.",
+      "type": "string"
+    },
+    "external_sales_force_id": {
+      "description": "The external ID of this account if loaded into salesforce.",
+      "type": "string"
+    },
+    "name": {
+      "description": "A friendly description for this billing account.",
+      "type": "string"
+    },
+    "creation_date": {
+      "description": "The date this billing info was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified_date": {
+      "description": "The date this billing info was modified.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "contact": {
+      "title": "AccountContact",
+      "description": "The billing contact information.",
+      "properties": {
+        "legal_name": {
+          "description": "The legal name for this billing entity.",
+          "type": "string"
+        },
+        "email": {
+          "description": "The email for this billing entity.",
+          "type": "string"
+        },
+        "phone": {
+          "description": "The phone number for this billing contact",
+          "type": "string"
+        }
+      }
+    },
+    "address": {
+      "title": "Address",
+      "type": "object",
+      "description": "The billing address information.",
+      "existingJavaType": "io.klustr.schemas.console.Address"
+    }
+  },
+  "required": []
+}

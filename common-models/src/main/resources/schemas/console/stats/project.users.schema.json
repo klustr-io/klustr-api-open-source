@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ProjectUsers",
+  "description": "Information on the users who logged in and accessed an app.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The ID of this record."
+    },
+    "project_id": {
+      "type": "string",
+      "description": "The project ID to reference."
+    },
+    "client_id": {
+      "type": "string",
+      "description": "The the client ID linked to this project"
+    },
+    "users": {
+      "type": "array",
+      "description": "The users who have been in the project",
+      "items": {
+        "type": "object",
+        "$ref": "./project.user.reference.schema.json"
+      }
+    }
+  },
+  "required": []
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "BillingPlanChargePackagePricing",
+  "description": "Pricing based on a package which simple offers, a base rate, with some amount of charges per bundle. This enables scenarios such as charging $0.00 for the first 3 users, but $10 for the next.",
+  "type": "object",
+  "properties": {
+    "amount": {
+      "description": "The amount to charge per package.",
+      "type": "number"
+    },
+    "free_units": {
+      "description": "The total free units included with the package.",
+      "type": "integer"
+    },
+    "package_size": {
+      "description": "The package size that is billed, for example if (1) then charged each, if (10) will be charged per 10 units.",
+      "type": "integer"
+    }
+  },
+  "required": ["amount", "free_units", "package_size"]
+}

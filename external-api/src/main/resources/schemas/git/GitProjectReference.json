@@ -1,0 +1,222 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "GitProjectReference",
+  "description": "Response from gitlab for successful creation of a user",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "avatar_url": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "last_activity_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "path": {
+      "type": "string"
+    },
+    "path_with_namespace": {
+      "type": "string"
+    },
+    "repository_storage": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "default_branch": {
+      "type": "string"
+    },
+    "ssh_url_to_repo": {
+      "type": "string"
+    },
+    "http_url_to_repo": {
+      "type": "string"
+    },
+    "web_url": {
+      "type": "string"
+    },
+    "readme_url": {
+      "type": "string"
+    },
+    "license_url": {
+      "type": "string"
+    },
+    "topics": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "owner": {
+      "type": "object",
+      "name": "GitEntityReference",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "The unique ID of the user"
+        },
+        "name": {
+          "type": "string",
+          "description": "The display name of the user"
+        }
+      }
+    },
+    "namespace": {
+      "type": "object",
+      "name": "GitNamespaceReference",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "group"
+          ]
+        },
+        "full_path": {
+          "type": "string"
+        },
+        "avatar_url": {
+          "type": "string"
+        },
+        "web_url": {
+          "type": "string"
+        }
+      }
+    },
+    "shared_with_groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "title": "ProjectGroupRelationship",
+        "properties": {
+          "group_id": {
+            "type": "integer"
+          },
+          "group_name": {
+            "type": "string"
+          },
+          "group_full_path": {
+            "type": "string"
+          },
+          "group_access_level": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "issues_enabled": {
+      "type": "boolean"
+    },
+    "shared_runners_enabled": {
+      "type": "boolean"
+    },
+    "group_runners_enabled": {
+      "type": "boolean"
+    },
+    "runners_token": {
+      "type": "string"
+    },
+    "container_registry_image_prefix": {
+      "type": "string"
+    },
+    "open_issues_count": {
+      "type": "integer"
+    },
+    "merge_requests_enabled": {
+      "type": "boolean"
+    },
+    "archived": {
+      "type": "boolean"
+    },
+    "container_registry_enabled": {
+      "type": "boolean"
+    },
+    "jobs_enabled": {
+      "type": "boolean"
+    },
+    "wiki_enabled": {
+      "type": "boolean"
+    },
+    "snippets_enabled": {
+      "type": "boolean"
+    },
+    "auto_devops_deploy_strategy": {
+      "type": "string",
+      "enum": [
+        "continuous", "manual","timed_incremental"
+      ],
+      "default": "continuous"
+    },
+    "auto_devops_enabled": {
+      "type": "boolean",
+      "default": true
+    },
+    "statistics": {
+      "type": "object",
+      "title": "GitProjectStatistics",
+      "properties": {
+        "commit_count": {
+          "type": "integer"
+        },
+        "storage_size": {
+          "type": "integer"
+        },
+        "repository_size": {
+          "type": "integer"
+        },
+        "wiki_size": {
+          "type": "integer"
+        },
+        "lfs_objects_size": {
+          "type": "integer"
+        },
+        "job_artifacts_size": {
+          "type": "integer"
+        },
+        "pipeline_artifacts_size": {
+          "type": "integer"
+        },
+        "packages_size": {
+          "type": "integer"
+        },
+        "snippets_size": {
+          "type": "integer"
+        },
+        "uploads_size": {
+          "type": "integer"
+        },
+        "container_registry_size": {
+          "type": "integer"
+        },
+        "languages": {
+          "type": "object",
+          "description": "statistics about the languages found in the git project. With the percent of each file type.",
+          "existingJavaType": "java.util.Map<String,Double>"
+        }
+      }
+    }
+  },
+  "required": []
+}

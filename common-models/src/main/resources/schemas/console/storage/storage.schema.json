@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "title": "ProjectStorageBucket",
+  "description": "Configurable storage for a project to use with apps and services compatible with S3 clients.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique ID of this storage."
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of this storage for auditing and usage."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags used to classify and categories the storage."
+    },
+    "type": {
+      "type": "string",
+      "enum": ["private", "public"],
+      "description": "The type of storage."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["creating", "active", "destroying", "deleted"],
+      "description": "The type of storage."
+    },
+    "project_id": {
+      "type": "string",
+      "description": "The project ID that owns this storage."
+    },
+    "url": {
+      "type": "string",
+      "description": "The url used to connect to this storage."
+    },
+    "tier": {
+      "type": "string",
+      "description": "The tier of this storage.",
+      "enum": ["free", "micro", "small", "medium", "large", "xlarge"]
+    },
+    "limit_mb": {
+      "type": "number",
+      "existingJavaType": "java.lang.Long",
+      "description": "The limits for this storage in mb"
+    },
+    "usage_mb": {
+      "type": "number",
+      "existingJavaType": "java.lang.Long",
+      "description": "The current usage in mb"
+    },
+    "objects": {
+      "type": "number",
+      "existingJavaType": "java.lang.Long",
+      "description": "The count of objects stored."
+    },
+    "date_created": {
+      "description": "The date the agreement was created.",
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

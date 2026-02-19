@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Text",
+  "description": "Supports default english label with i18n translations",
+  "type": "object",
+  "properties": {
+    "en": {
+      "description": "The english version of this text.",
+      "type": "string"
+    },
+    "jp": {
+      "description": "The japanese version of this text.",
+      "type": "string"
+    }
+  },
+  "required": []
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ConsentScopeMetrics",
+  "description": "The insights and metrics associated with a consent scope.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique ID of this consent scope.",
+      "type": "string"
+    },
+    "apps": {
+      "description": "The total applications that have consumed this scope.",
+      "type": "integer"
+    },
+    "clients": {
+      "description": "The total clients that have consumed this scope.",
+      "type": "integer"
+    },
+    "users": {
+      "description": "The total users that have consumed this scope",
+      "type": "integer"
+    }
+  }
+}

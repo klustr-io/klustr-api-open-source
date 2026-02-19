@@ -1,0 +1,74 @@
+version: "3.8"
+
+services:
+  ${ORG}-pushgateway:
+    image: prom/pushgateway:latest
+    container_name: ${ORG}-pushgateway
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "${CPU_LIMIT:-1.0}"
+          memory: "${MEMORY_LIMIT:-512M}"
+        reservations:
+          cpus: "${CPU_RESERVE:-0.25}"
+          memory: "${MEMORY_RESERVE:-128M}"
+    environment:
+      ORG_ID: ${ORG}
+      PROJECT_ID: ${PROJECT}
+      MACHINE_TYPE: ${MACHINE_TYPE}
+      ROOT_SERVER_URL: ${ROOT_SERVER_URL}
+      SERVER_DOMAIN: ${SERVER_DOMAIN}
+    labels:
+      namespace: "pushgateway"
+      org_id: "${ORG}"
+      project: "pushgateway"
+      project_id: "pushgateway"
+      type: "TENANT"
+      workload: "pushgateway"
+      machine_type: "${MACHINE_TYPE}"
+    networks:
+      - ${ORG}
+      - ingress
+    dns:
+      - ${DNS_HOST}
+
+  ${ORG}-o11ypush:
+    image: "registry.dev.klustr.io/klustr.io/klustr-o11ypush/main"
+    container_name: "${ORG}-klustr-o11ypush"
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "256M"
+        reservations:
+          cpus: "0.25"
+          memory: "32M"
+    environment:
+      ORG_ID: ${ORG}
+      PROJECT_ID: ${PROJECT}
+      MACHINE_TYPE: "m1.micro"
+      PUSHGATEWAY_URL: "https://metrics-pushgateway.dev.klustr.io"
+      OIDC_ISSUER: ${O11Y_GATEWAY_OIDC_ISSUER}
+      OIDC_CLIENT: ${O11Y_GATEWAY_DOCKER_OIDC_CLIENT}
+      OIDC_SECRET: ${O11Y_GATEWAY_DOCKER_OIDC_SECRET}
+    labels:
+      namespace: "${ORG}"
+      org_id: "${ORG}"
+      project: "o11ypush"
+      project_id: "o11ypush"
+      type: "TENANT"
+      workload: "klustr-o11ypush"
+      machine_type: "m1.micro"
+    networks:
+      - ${ORG}
+      - ingress
+    dns:
+      - ${DNS_HOST}
+
+networks:
+  ingress:
+    external: true
+  ${ORG}:
+    external: true

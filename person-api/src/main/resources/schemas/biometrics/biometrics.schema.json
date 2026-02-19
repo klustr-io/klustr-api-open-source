@@ -1,0 +1,15 @@
+{
+  "title": "Biometrics",
+  "description": "The biometrics for the person",
+  "type": "object",
+  "properties": {
+    "facial_recognition_photos": {
+      "description": "The photos that make up facial recognition.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "./biometrics.facial.recognition.schema.json"
+      }
+    }
+  }
+}

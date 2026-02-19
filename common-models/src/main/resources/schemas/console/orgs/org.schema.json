@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Org",
+  "description": "An organizational unit.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique ID of this organization",
+      "type": "string"
+    },
+    "name": {
+      "description": "A friendly description for this billing account.",
+      "type": "string"
+    },
+    "subdomain": {
+      "description": "The subdomain to use for this organization",
+      "type": "string"
+    },
+    "domain": {
+      "description": "The primary hosted domain for this organization",
+      "type": "string"
+    },
+    "logo_url": {
+      "description": "The logo URL of the organization",
+      "type": "string"
+    },
+    "owner": {
+      "description": "The singular administrator and owner of this organization.",
+      "type": "object",
+      "title": "OrgOwner",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The subject identifier for the owner of this organization"
+        }
+      }
+    },
+    "creation_date": {
+      "description": "The date this billing info was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified_date": {
+      "description": "The date this billing info was modified.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "contact": {
+      "title": "OrgContact",
+      "description": "The contact information.",
+      "properties": {
+        "email": {
+          "description": "The email for this organization",
+          "type": "string"
+        },
+        "phone": {
+          "description": "The phone for this organization",
+          "type": "string"
+        },
+        "url": {
+          "description": "The url for this organization",
+          "type": "string"
+        }
+      }
+    },
+    "address": {
+      "title": "Address",
+      "type": "object",
+      "description": "The main address information for this customer.",
+      "existingJavaType": "io.klustr.schemas.console.Address"
+    },
+    "children": {
+      "description": "The departments for this org",
+      "type": "array",
+      "items": {
+        "$ref": "./org.unit.schema.json"
+      }
+    },
+
+    "status": {
+      "type": "string",
+      "description": "The status of this organization.",
+      "enum": [
+        "active",
+        "inactive"
+      ]
+    },
+    "external_sales_force_id": {
+      "description": "The external ID of this org if loaded into salesforce.",
+      "type": "string"
+    }
+  },
+  "required": []
+}

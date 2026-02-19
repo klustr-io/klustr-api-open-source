@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PortainerNetworkReference",
+  "description": "Request to make a new network in portainer (docker)",
+  "type": "object",
+  "properties": {
+    "Id": {
+      "type": "string",
+      "description": "The Id for this network"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The Name for this network"
+    },
+    "Driver": {
+      "type": "string",
+      "description": "The driver for this network (defaults to bridge)",
+      "default": "bridge"
+    },
+    "Internal": {
+      "type": "boolean",
+      "description": "If this network is an internal network only between instances. Default is true",
+      "default": "true"
+    },
+    "Labels": {
+      "existingJavaType": "java.util.Map<String,String>",
+      "type": "object"
+    }
+  },
+  "required": ["Name", "Driver", "Internal"]
+}

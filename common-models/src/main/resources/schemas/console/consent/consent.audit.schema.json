@@ -1,0 +1,165 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ConsentAudit",
+  "description": "A record of a specific event where a user gave or issued consent.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique ID of this audit record.",
+      "type": "string"
+    },
+    "subject_id": {
+      "description": "The identity or subject of this consent.",
+      "type": "string"
+    },
+    "org_id": {
+      "description": "The org id that owns this consent audit",
+      "type": "string"
+    },
+    "project_id": {
+      "description": "The project id that owns this client.",
+      "type": "string"
+    },
+    "app_id": {
+      "description": "The application id that made this request",
+      "type": "string"
+    },
+    "client_id": {
+      "description": "The client id that made this request",
+      "type": "string"
+    },
+    "session_id": {
+      "description": "The session id that if the user was answering multiple requests.",
+      "type": "string"
+    },
+    "timestamp": {
+      "description": "The timestamp of this audit record.",
+      "type": "string",
+      "format":"date-time"
+    },
+    "skipped": {
+      "description": "If the consent was skipped due to existing business logic.",
+      "type": "boolean"
+    },
+    "scopes": {
+      "description": "The scopes that were approved by the user.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "experiments": {
+      "description": "The scopes requested by the application and reviewed by the user.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "agent": {
+      "type": "object",
+      "description": "The device that was used to initiate this request. See https://github.com/ua-parser/uap-java OR https://github.com/k143408/user-agent-parser-spring-boot-3",
+      "title": "ConsentAuditAgent",
+      "properties": {
+        "os": {
+          "description": "The OS that the user is using.",
+          "type": "object",
+          "title": "ConsentAuditAgentOs",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of this OS agent"
+            },
+            "short_name": {
+              "type": "string",
+              "description": "The short name for this agent"
+            },
+            "version": {
+              "type": "string",
+              "description": "The version of this agent"
+            },
+            "platform": {
+              "type": "string",
+              "description": "The platform of this agent"
+            },
+            "family": {
+              "type": "string",
+              "description": "The product family of this agent"
+            }
+          }
+        },
+        "client": {
+          "description": "The client that the user is using.",
+          "type": "object",
+          "title": "ConsentAuditAgentClient",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The client name"
+            },
+            "short_name": {
+              "type": "string",
+              "description": "The short name"
+            },
+            "version": {
+              "type": "string",
+              "description": "The version name"
+            },
+            "engine": {
+              "type": "string",
+              "description": "The engine of this agent"
+            },
+            "engine_version": {
+              "type": "string",
+              "description": "The engine version"
+            },
+            "family": {
+              "type": "string",
+              "description": "The engine family"
+            }
+          }
+        },
+        "device": {
+          "description": "The device that the user is using.",
+          "type": "object",
+          "title": "ConsentAuditAgentDevice",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The device the user is using"
+            },
+            "type": {
+              "type": "string",
+              "description": "The type of device being used."
+            },
+            "brand": {
+              "type": "string",
+              "description": "The brand of the device being used."
+            },
+            "model": {
+              "type": "string",
+              "description": "The model of the device being used."
+            },
+            "code": {
+              "type": "string",
+              "description": "The device code of the device being used."
+            },
+            "trusted": {
+              "type": "string",
+              "description": "The device code of the device being used."
+            }
+          }
+        },
+        "header": {
+          "description": "The raw user agent making this request.",
+          "type": "string"
+        }
+      }
+    },
+    "ip": {
+      "description": "The raw IP making this request.",
+      "type": "string"
+    }
+  },
+  "required": [
+  ]
+}

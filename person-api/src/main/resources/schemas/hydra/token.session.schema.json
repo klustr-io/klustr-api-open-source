@@ -1,0 +1,211 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "HydraSessionEnrichment",
+  "description": "Enrichment information for the session.",
+  "type": "object",
+  "properties": {
+    "id_token": {
+      "description": "Information in the OIDC ID token for the ability to returned type information",
+      "type": "object",
+      "title": "HydraIdTokenEnrichment",
+      "properties": {
+        "source": {
+          "description": "The client and sourcing information which generated this token",
+          "type": "object",
+          "title": "HydraSessionSource",
+          "properties": {
+            "client_id": {
+              "description": "The source client ID that generated this access token.",
+              "type": "string",
+              "examples": [
+                "f5a997a5-49e2-42cf-840b-1da981640f57"
+              ]
+            },
+            "project_id": {
+              "description": "The project ID that owns the client that generated this token.",
+              "type": "string",
+              "examples": [
+                "humble-monkeyfish-x278ab"
+              ]
+            },
+            "app_id": {
+              "description": "The app ID that is linked to this request.",
+              "type": "string",
+              "examples": [
+                "f5a997a5-49e2-42cf-840b-1da981640f57"
+              ]
+            },
+            "org_id": {
+              "description": "The organization ID that initiated this access token.",
+              "type": "string",
+              "examples": [
+                "my-org-1234"
+              ]
+            }
+          }
+        },
+        "aud": {
+          "description": "The audiences that this token is valid for.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sso_provider": {
+          "description": "The login sso provider for this login attempt.",
+          "type": "string"
+        },
+        "roles": {
+          "description": "The additional role information given the client, project, and organization.",
+          "type": "array",
+          "existingJavaType": "java.util.Set<String>",
+          "examples": [
+            "admin",
+            "inventor"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "orgs": {
+          "description": "The organizations this user has access rights to.",
+          "type": "array",
+          "existingJavaType": "java.util.Set<String>",
+          "examples": [
+            "acme",
+            "foo"
+          ]
+        },
+        "projects": {
+          "description": "The project identifiers this person has access to.",
+          "type": "array",
+          "existingJavaType": "java.util.Set<String>",
+          "examples": [
+            "simple-camel-79a9e5",
+            "associated-horse-2892ss"
+          ]
+        },
+        "groups": {
+          "description": "The additional groups information given the client, project, and organization.",
+          "type": "array",
+          "existingJavaType": "java.util.Set<String>",
+          "examples": [
+            "data-science-group",
+            "org_group_1"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "experiments": {
+          "description": "The experiments that this user has active.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "permissions": {
+          "description": "The additional role information given the client, project, and organization.",
+          "type": "array",
+          "examples": [
+            "user.consent.delete",
+            "org.directory.list"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "policy": {
+          "description": "Policy based access controls used with things like minio and s3 and other IAM providers.",
+          "type": "string",
+          "examples": [
+            "consoleAdmin"
+          ]
+        }
+      }
+    },
+    "access_token": {
+      "description": "Information in the OIDC Access token for the ability to returned type information",
+      "type": "object",
+      "title": "HydraAccessTokenEnrichment",
+      "properties": {
+        "client_id": {
+          "description": "The source client ID that generated this access token.",
+          "type": "string",
+          "examples": [
+            "f5a997a5-49e2-42cf-840b-1da981640f57"
+          ]
+        },
+        "scope": {
+          "description": "The additional scopes that they would like to add.",
+          "type": "string",
+          "examples": [
+            "openid offline"
+          ]
+        },
+        "project_id": {
+          "description": "The project ID that owns the client that generated this token.",
+          "type": "string",
+          "examples": [
+            "humble-monkeyfish-x278ab"
+          ]
+        },
+        "org_id": {
+          "description": "The organization ID that initiated this access token.",
+          "type": "string",
+          "examples": [
+            "my-org-1234"
+          ]
+        },
+        "permissions": {
+          "description": "The additional role information given the client, project, and organization.",
+          "type": "array",
+          "existingJavaType": "java.util.Set<String>",
+          "examples": [
+            "user.consent.delete",
+            "org.directory.list"
+          ]
+        },
+        "roles": {
+          "description": "The additional role information given the client, project, and organization.",
+          "type": "array",
+          "existingJavaType": "java.util.Set<String>",
+          "examples": [
+            "user.consent.delete",
+            "org.directory.list"
+          ]
+        },
+        "orgs": {
+          "description": "The organizations this user has access rights to.",
+          "type": "array",
+          "existingJavaType": "java.util.Set<String>",
+          "examples": [
+            "acme",
+            "foo"
+          ]
+        },
+        "projects": {
+          "description": "The project identifiers this person has access to.",
+          "type": "array",
+          "existingJavaType": "java.util.Set<String>",
+          "examples": [
+            "simple-camel-79a9e5",
+            "associated-horse-2892ss"
+          ]
+        },
+        "groups": {
+          "description": "The additional role information given the client, project, and organization.",
+          "type": "array",
+          "existingJavaType": "java.util.Set<String>",
+          "examples": [
+            "user.consent.delete",
+            "org.directory.list"
+          ]
+        }
+      }
+    }
+  },
+  "required": [
+    "session"
+  ]
+}

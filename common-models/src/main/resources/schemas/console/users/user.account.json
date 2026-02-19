@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserAccount",
+  "description": "An account linked to a specific user.",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "The ID of the user account."
+      },
+      "account_code": {
+        "type": "string",
+        "description": "The account code for this user account, combined with organization we get the unique code."
+      },
+      "org_id": {
+        "type": "string",
+        "description": "The organization that this account is linked to."
+      },
+      "subject_id": {
+        "type": "string",
+        "description": "The subject that has been given this account."
+      },
+      "status": {
+        "type": "string",
+        "description": "The status of the user account.",
+        "existingJavaType": "io.klustr.schemas.console.Status"
+      },
+      "creation_date": {
+        "description": "The date this account was created.",
+        "type": "string",
+        "format": "date-time"
+      },
+      "effective_date": {
+        "description": "The date this account is effective.",
+        "type": "string",
+        "format": "date-time"
+      },
+      "expiration_date": {
+        "description": "The date this account expires.",
+        "type": "string",
+        "format": "date-time"
+      }
+    }
+}

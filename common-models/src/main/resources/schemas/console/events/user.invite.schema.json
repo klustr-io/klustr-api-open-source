@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "UserInvite",
+  "description": "A user who was invited to participate in an app",
+  "type": "object",
+  "$id": "user.invite.schema.json",
+  "properties": {
+    "email": {
+      "description": "The email address of the user who you invited.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "email"
+  ]
+}

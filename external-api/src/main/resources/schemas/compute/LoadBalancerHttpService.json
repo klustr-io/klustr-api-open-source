@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LoadBalancerHttpService",
+  "description": "Maps the whole domain concept of a service so we can one-shot the configuration",
+  "type": "object",
+  "properties": {
+    "project_id": {
+      "type": "string",
+      "description": "The project_id we want to expose. This will map to the server hosting."
+    },
+    "port": {
+      "type": "integer",
+      "description": "The port the service is running on."
+    }
+  },
+  "required": []
+}

@@ -1,0 +1,42 @@
+{
+  "title": "VeriffSessionResponse",
+  "description": "A response from asking for a session",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "description": "xxx"
+    },
+    "verification": {
+      "title": "VeriffSessionInformation",
+      "type": "object",
+      "description": "Information on the status and links to execute the session.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "String UUID v4 which identifies the verification session"
+        },
+        "url": {
+          "type": "string",
+          "description": "URL of the verification to which the person is redirected (Combination of the baseUrl and sessionToken)"
+        },
+        "vendorData": {
+          "type": "string",
+          "description": "Customer-specific data string, max 1000 characters long"
+        },
+        "host": {
+          "type": "string",
+          "description": "The base url the sessionToken can be used for"
+        },
+        "status": {
+          "type": "string",
+          "description": "Verification session status"
+        },
+        "sessionToken": {
+          "type": "string",
+          "description": "Session-specific token of the verification"
+        }
+      }
+    }
+  }
+}

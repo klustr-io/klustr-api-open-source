@@ -1,0 +1,387 @@
+svix:
+  url: "${SVIX_URL:https://svix.dev.klustr.io}"
+  secret: "${SVIX_SECRET:}"
+
+mailtrap:
+  apikey: "${MAILTRAP_API_KEY:}"
+
+cdn:
+  s3:
+    projectId: "${CDN_S3_PROJECT_ID:klustr.io}"
+    bucketId: "${CDN_S3_BUCKET_ID:media}"
+    url: "${CDN_S3_URL:http://minio.dev.klustr.io:9000}"
+    accessKey: "${CDN_S3_ACCESS_KEY:}"
+    secretKey: "${CDN_S3_SECRET_KEY:}"
+
+lago:
+  url: "${LAGO_URL:https://lago-api.dev.klustr.io/api/v1}"
+  apiKey: "${LAGO_API_KEY:}"
+  plans:
+    - code: basic-plan
+      name: Basic Plan
+      description: The default plan used for all accounts.
+      invoice_display_name: Basic Plan
+      interval: monthly
+      amount_cents: 1000
+      amount_currency: USD
+      trial_period: 7
+      charges:
+        - invoice_display_name: Directory APIs
+          billable_metric_codes:
+            - directory-api
+          description: Charges for using the organization APIs.
+          package_pricing:
+            amount: 0.02
+            free_units: 0
+            package_size: 1
+        - invoice_display_name: Project APIs
+          billable_metric_codes:
+            - projects-api
+          description: Charges for using the project APIs.
+          package_pricing:
+            amount: 0.01
+            free_units: 0
+            package_size: 1
+        - invoice_display_name: Identity APIs
+          billable_metric_codes:
+            - identity-api
+          description: Charges for using identity APIs.
+          package_pricing:
+            amount: 0.01
+            free_units: 0
+            package_size: 1
+        - invoice_display_name: Consent APIs
+          billable_metric_codes:
+            - consent-api
+          description: Charges for using and consuming consent APIs
+          package_pricing:
+            amount: 1
+#            free_units: 10
+            package_size: 10
+        - invoice_display_name: Tracking APIs
+          billable_metric_codes:
+            - events-api
+            - notification-api
+          description: Charges for using identity APIs.
+          package_pricing:
+            amount: 0.005
+            free_units: 0
+            package_size: 1
+        - invoice_display_name: Total Projects
+          billable_metric_codes:
+            - count_projects
+          description: Charges for the number of projects created, free up to 5 units.
+          package_pricing:
+            amount: 5
+            free_units: 0
+            package_size: 1
+        - invoice_display_name: Total Users
+          billable_metric_codes:
+            - count_users
+          description: Charges for monthly users for projects.
+          volume_pricing:
+            range:
+              - start: 0
+                stop: 1
+                per_unit_price: 0
+                flat_fee: 0
+              - start: 2
+                stop: 10
+                per_unit_price: 10
+                flat_fee: 20
+              - start: 11
+                per_unit_price: 5
+                flat_fee: 50
+        - invoice_display_name: Total GitLab Projects
+          billable_metric_codes:
+            - gitlab_projects
+          description: Charges for the total number of active gitlab projects.
+          volume_pricing:
+            range:
+              - start: 0
+                stop: 5
+                per_unit_price: 0
+                flat_fee: 0
+              - start: 6
+                stop: 20
+                per_unit_price: 0
+                flat_fee: 1000
+              - start: 21
+                per_unit_price: 100
+                flat_fee: 0
+        - invoice_display_name: GitLab Storage
+          billable_metric_codes:
+            - gitlab_storage_bytes
+          description: Charges for the storage used by gitlab
+          volume_pricing:
+            range:
+              - start: 0
+                stop: 10485760
+                per_unit_price: 0
+                flat_fee: 0
+              - start: 10485761
+                per_unit_price: 0.000000005586
+                flat_fee: 5
+        - invoice_display_name: Compute Usage (Minutes)
+          billable_metric_codes:
+            - compute_usage_minutes
+          description: Charges for the compute used every 15 minutes.
+          package_pricing:
+            amount: 0.0104
+            free_units: 0
+            package_size: 15
+
+  metrics:
+    - code: "count_users"
+      name: "# Active Users"
+      description: "Will provide a billable metric for the total monthly active users for a project."
+      type: "metered"
+      aggregation_type: "unique_count_agg"
+      field_name: "user_id"
+      recurring: "false"
+
+    - code: "count_projects"
+      name: "# of Projects"
+      description: "Will charge based on the unique number of projects created."
+      type: "metered"
+      aggregation_type: "unique_count_agg"
+      field_name: "project_id"
+      recurring: "false"
+
+    - code: "count_logins"
+      name: "# of Logins"
+      description: "Will charge based on the total number of logins."
+      type: "metered"
+      field_name: "logins"
+      aggregation_type: "sum_agg"
+      recurring: "false"
+
+    - code: "consent-api"
+      name: "Consent API Usage"
+      description: "API usage for consent"
+      type: "metered"
+      field_name: "http_requests_total"
+      aggregation_type: "sum_agg"
+      recurring: "false"
+
+    - code: "ekyc-api"
+      name: "EKYC API Usage"
+      description: "API usage for ekyc"
+      type: "metered"
+      field_name: "http_requests_total"
+      aggregation_type: "sum_agg"
+      recurring: "false"
+
+    - code: "identity-api"
+      name: "Identity API Usage"
+      description: "API usage for ekyc"
+      type: "metered"
+      field_name: "http_requests_total"
+      aggregation_type: "sum_agg"
+      recurring: "false"
+
+    - code: "events-api"
+      name: "Event API Usage"
+      description: "API usage for events"
+      type: "metered"
+      field_name: "http_requests_total"
+      aggregation_type: "sum_agg"
+      recurring: "false"
+
+    - code: "notification-api"
+      name: "Notification API Usage"
+      description: "API usage for events"
+      type: "metered"
+      field_name: "http_requests_total"
+      aggregation_type: "sum_agg"
+      recurring: "false"
+
+    - code: "directory-api"
+      name: "Directory API Usage"
+      description: "API usage for events"
+      type: "metered"
+      field_name: "http_requests_total"
+      aggregation_type: "sum_agg"
+      recurring: "false"
+
+    - code: "projects-api"
+      name: "Project API Usage"
+      description: "API usage for events"
+      type: "metered"
+      field_name: "http_requests_total"
+      aggregation_type: "sum_agg"
+      recurring: "false"
+
+    - code: "gitlab_projects"
+      name: "GitLab Projects"
+      description: "Will charge based on the number of gitlab projects."
+      type: "metered"
+      aggregation_type: "unique_count_agg"
+      field_name: "project_id"
+      recurring: "false"
+
+    - code: "gitlab_storage_bytes"
+      name: "GitLab Total Storage"
+      description: "The total size of the gitlab storage used"
+      type: "metered"
+      field_name: "bytes"
+      aggregation_type: "sum_agg"
+      recurring: "false"
+
+    - code: "compute_usage_minutes"
+      name: "Compute Usage Minutes"
+      description: "The  total minutes consumed for compute usage."
+      type: "metered"
+      field_name: "minutes"
+      aggregation_type: "sum_agg"
+      recurring: "false"
+
+
+minio:
+  url: "${MINIO_URL:http://minio.dev.klustr.io:9000}"
+  accessKey: "${MINIO_ACCESS_KEY:}"
+  secretKey: "${MINIO_SECRET_KEY:}"
+
+camunda:
+  connectors:
+    url: "${CAMUNDA_CONNECTORS_URL:https://camunda-connectors.dev.klustr.io}"
+
+veriff:
+  baseUrl: "${VERIFF_BASE_URL:https://stationapi.veriff.com}"
+  authKey: "${VERIFF_AUTH_KEY:}"
+
+prometheus:
+  url: "${PROMETHEUS_URL:https://metrics.dev.klustr.io}"
+
+kong:
+  admin:
+    url: "${KONG_ADMIN_URL:https://kong-admin.dev.klustr.io/admin}"
+  plugins:
+    prometheus:
+      status_code_metrics: "${KONG_PROM_STATUS_METRICS:true}"
+      bandwidth_metrics: "${KONG_PROM_BANDWIDTH_METRICS:false}"
+      latency_metrics: "${KONG_PROM_LATENCY_METRICS:true}"
+      upstream_health_metrics: "${KONG_PROM_UPSTREAM_HEALTH:false}"
+      per_consumer: "${KONG_PROM_PER_CONSUMER:true}"
+    token_introspection:
+      client_id: "${KONG_TOKEN_INTROSPECTION_CLIENT_ID:}"
+      client_secret: "${KONG_TOKEN_INTROSPECTION_CLIENT_SECRET:}"
+      introspection_endpoint: "${KONG_INTROSPECTION_ENDPOINT:https://hydra-admin.dev.klustr.io/admin/oauth2/introspect}"
+
+hydra:
+  url: "${HYDRA_URL:https://hydra.dev.klustr.io}"
+  admin:
+    url: "${HYDRA_ADMIN_URL:https://hydra-admin.dev.klustr.io}"
+
+kratos:
+  admin:
+    url: "${KRATOS_ADMIN_URL:https://kratos-admin.dev.klustr.io}"
+  self-service:
+    url: "${KRATOS_SELF_SERVICE_URL:https://secure.dev.klustr.io/kratos/self-service/settings/browser?&prompt=profile}"
+  login:
+    listener:
+      kafka:
+        brokers: "${KRATOS_KAFKA_BROKERS:kafka.dev.klustr.io:9092}"
+        consumer: "${KRATOS_KAFKA_CONSUMER:sync-server-dev}"
+
+keto:
+  write:
+    url: "${KETO_WRITE_URL:https://keto-admin.dev.klustr.io/admin}"
+  read:
+    url: "${KETO_READ_URL:https://keto.dev.klustr.io}"
+
+openapi:
+  tokenUrl: "${OPENAPI_TOKEN_URL:https://secure.dev.klustr.io/hydra/oauth2/token}"
+  authorizationUrl: "${OPENAPI_AUTH_URL:https://secure.dev.klustr.io/hydra/oauth2/auth}"
+
+server:
+  port: "${SERVER_PORT:7979}"
+  address: "${SERVER_ADDRESS:0.0.0.0}"
+  error:
+    include-message: ALWAYS
+    include-stacktrace: NEVER
+
+web:
+  cors:
+    allowed-origins: "${WEB_CORS_ALLOWED_ORIGINS:http://localhost:3000}"
+    allowed-methods: GET, POST, PATCH, PUT, DELETE, OPTIONS, HEAD
+    max-age: 3600
+
+management:
+  prometheus:
+    metrics:
+      export:
+        pushgateway:
+          enabled: "${PUSHGATEWAY_ENABLED:true}"
+          base-url: "${PUSHGATEWAY_BASE_URL:https://metrics-pushgateway.dev.klustr.io}"
+          job: "${PUSHGATEWAY_JOB:klustr.io}"   # name shown in Prometheus
+          push-rate: "${PUSHGATEWAY_PUSH_RATE:10s}"       # how often to push metrics
+          shutdown-operation: "${PUSHGATEWAY_SHUTDOWN_OPERATION:NONE}"  # push final metrics on shutdown
+          grouping-key:
+            version: "${APP_VERSION:1.0.0}"
+            env: "${APP_ENV:localhost}"
+            region: "${APP_REGION:tokyo/home}"
+            instance: "${HOSTNAME:localhost}"
+            workload: "${APP_WORKLOAD:sync-api}"
+  endpoint:
+    health:
+      show-components: always
+      show-details: always
+      cache:
+        time-to-live: 30s
+        enabled: true
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+    export:
+      atlas:
+        enabled: false
+      datadog:
+        enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "info,env,metrics,prometheus,health"
+
+rethinkdb:
+  hostname: "${RETHINKDB_HOST:rethinkdb.dev.klustr.io}"
+  port: "${RETHINKDB_PORT:28015}"
+
+db-adapter:
+  kafka:
+    brokers: "${DB_KAFKA_BROKERS:kafka.dev.klustr.io:9092}"
+
+spring:
+  kafka:
+    bootstrap-servers: "${SPRING_KAFKA_BOOTSTRAP:kafka.dev.klustr.io:9092}"
+    consumer:
+      group-id: "${SPRING_KAFKA_GROUP:your-group-id}"
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+  security:
+    oauth2:
+      resourceserver:
+        opaque-token:
+          introspection-uri: "${OAUTH2_INTROSPECTION_URI:https://hydra-admin.dev.klustr.io/admin/oauth2/introspect}"
+          client-id: "${OAUTH2_INTROSPECTION_CLIENT_ID:}"
+          client-secret: "${OAUTH2_INTROSPECTION_CLIENT_SECRET:}"
+
+# For sorting endpoints alphabetically
+springdoc:
+  api-docs:
+    groups:
+      enabled: true
+  swagger-ui:
+    operationsSorter: 'alpha'
+    tagsSorter: 'alpha'
+
+logging:
+  level:
+    root: "${LOG_LEVEL_ROOT:WARN}"
+    io.klustr: "${LOG_LEVEL_KLUSTR:INFO}"
+    org.springframework.security.oauth2.server.resource.authentication.OpaqueTokenAuthenticationProvider: WARN
+    org.springframework.security.web.access.ExceptionTranslationFilter: WARN

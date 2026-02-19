@@ -1,0 +1,50 @@
+{
+  "title": "Demographic",
+  "description": "The demographics for the user.",
+  "type": "object",
+  "properties": {
+    "age": {
+      "type": "string",
+      "description": "The age range for this user particular user.",
+      "enum": [
+        "_0_to_14",
+        "_15_to_19",
+        "_20_to_26",
+        "_27_to_34",
+        "_35_to_40",
+        "_41_to_60",
+        "_61_plus"
+      ]
+    },
+    "income": {
+      "type": "string",
+      "description": "The income range for the user.",
+      "enum": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "very-high"
+      ]
+    },
+    "gender": {
+      "type": "string",
+      "existingJavaType": "io.klustr.schemas.console.Gender",
+      "description": "The gender for the specified user."
+    },
+    "household": {
+      "type": "boolean",
+      "description": "If the person is part of a household of more than 1 person."
+    },
+    "relationship_status": {
+      "type": "string",
+      "description": "If the person has declared they are in a relationship.",
+      "existingJavaType": "io.klustr.schemas.persons.RelationshipStatus"
+    },
+    "parental_status": {
+      "type": "string",
+      "description": "If the person has parental responsibilities or duties.",
+      "existingJavaType": "io.klustr.schemas.persons.ParentalStatus"
+    }
+  }
+}

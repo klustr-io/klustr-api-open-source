@@ -1,0 +1,187 @@
+{
+  "data": {
+    "verification": {
+      "person": {
+        "gender": {
+          "value": "M",
+          "sources": [
+            "VIZ"
+          ],
+          "confidenceCategory": "high"
+        },
+        "address": {
+          "value": null,
+          "sources": [],
+          "components": {},
+          "confidenceCategory": null
+        },
+        "employer": null,
+        "idNumber": {
+          "value": null,
+          "sources": [],
+          "confidenceCategory": null
+        },
+        "lastName": {
+          "value": null,
+          "sources": [],
+          "confidenceCategory": null
+        },
+        "firstName": {
+          "value": "SNYDER TERRANCE ARTHER LEE",
+          "sources": [
+            "VIZ"
+          ],
+          "confidenceCategory": "high"
+        },
+        "extraNames": null,
+        "occupation": null,
+        "dateOfBirth": {
+          "value": "1984-06-28",
+          "sources": [
+            "VIZ"
+          ],
+          "confidenceCategory": "high"
+        },
+        "nationality": {
+          "value": null,
+          "sources": [],
+          "confidenceCategory": null
+        },
+        "placeOfBirth": null,
+        "foreignerStatus": null
+      },
+      "decision": "approved",
+      "document": {
+        "type": {
+          "value": "residence_permit"
+        },
+        "number": {
+          "value": "NP15848619EA",
+          "sources": [
+            "VIZ"
+          ],
+          "confidenceCategory": "high"
+        },
+        "country": {
+          "value": "JP"
+        },
+        "validFrom": {
+          "value": "2023-05-11",
+          "sources": [
+            "VIZ"
+          ],
+          "confidenceCategory": "high"
+        },
+        "firstIssue": null,
+        "validUntil": {
+          "value": "2028-05-11",
+          "sources": [
+            "VIZ"
+          ],
+          "confidenceCategory": "high"
+        },
+        "placeOfIssue": null,
+        "licenseNumber": null,
+        "processNumber": null,
+        "residencePermitType": null
+      },
+      "insights": [
+        {
+          "label": "allowedIpLocation",
+          "result": "yes",
+          "category": "fraud"
+        },
+        {
+          "label": "documentAccepted",
+          "result": "yes",
+          "category": "document"
+        },
+        {
+          "label": "documentBackFullyVisible",
+          "result": "yes",
+          "category": "document"
+        },
+        {
+          "label": "documentBackImageAvailable",
+          "result": "yes",
+          "category": "document"
+        },
+        {
+          "label": "documentFrontFullyVisible",
+          "result": "yes",
+          "category": "document"
+        },
+        {
+          "label": "documentFrontImageAvailable",
+          "result": "yes",
+          "category": "document"
+        },
+        {
+          "label": "documentImageQualitySufficient",
+          "result": "yes",
+          "category": "document"
+        },
+        {
+          "label": "documentNotExpired",
+          "result": "yes",
+          "category": "document"
+        },
+        {
+          "label": "documentRecognised",
+          "result": "yes",
+          "category": "document"
+        },
+        {
+          "label": "expectedTrafficBehaviour",
+          "result": "yes",
+          "category": "fraud"
+        },
+        {
+          "label": "faceImageAvailable",
+          "result": "yes",
+          "category": "biometric"
+        },
+        {
+          "label": "faceImageQualitySufficient",
+          "result": "yes",
+          "category": "biometric"
+        },
+        {
+          "label": "faceLiveness",
+          "result": "yes",
+          "category": "biometric"
+        },
+        {
+          "label": "faceNotInBlocklist",
+          "result": "yes",
+          "category": "biometric"
+        },
+        {
+          "label": "faceSimilarToPortrait",
+          "result": "yes",
+          "category": "biometric"
+        },
+        {
+          "label": "physicalDocumentPresent",
+          "result": "yes",
+          "category": "document"
+        },
+        {
+          "label": "validDocumentAppearance",
+          "result": "yes",
+          "category": "document"
+        }
+      ],
+      "decisionScore": 1
+    }
+  },
+  "time": "2025-01-14T06:29:02.065Z",
+  "status": "success",
+  "version": "1.0.0",
+  "attemptId": "6fea9378-7a97-4599-a0a2-a4708d4f607f",
+  "endUserId": null,
+  "eventType": "fullauto",
+  "sessionId": "942b8519-7135-4db8-8e79-31b2beb7fcbb",
+  "vendorData": "87ce0d03-f27d-4310-8c54-fe3062ff55fc",
+  "acceptanceTime": "2025-01-14T06:25:54.779041Z"
+}

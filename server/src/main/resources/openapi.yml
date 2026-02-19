@@ -1,0 +1,347 @@
+---
+servers:
+  - url: https://gateway.dev.klustr.io
+    name: Production
+services:
+  - group: prompt
+    match:
+      - /admin/prompts
+      - /admin/prompts/**
+    title: Prompt API
+    description: |
+      ## What are prompts?
+
+      Prompt is used to deliver and experience where
+      users will be given various prompts to agree, or consent
+      to when using your application or service.
+
+      ## What can you do with the Prompt API?
+
+      * Check and verify a user has consented to various scopes.
+      * Get UX json documents for displaying consent / agreements to users
+  - group: accounts
+    match:
+      - /console/accounts
+      - /console/accounts/**
+    title: Account API
+    description: |
+      ## What are accounts?
+
+      Accounts are used to identify the entity and contacts that
+      are used for billing and accounting purposes.
+
+      ## What can you do with the Account API?
+
+      * Manage the contacts and billing addresses and link to salesforce or other CRMs
+  - group: gateway
+    match:
+      - /console/gateway/
+      - /console/gateway/**
+    title: Service Catalog API
+    description: |
+      ## Why use the API Gateway
+                   
+                   
+                   The API gateway enables you to wrap your service in the common features
+                   
+                   and plugins required to run a production service. The API gateway will enable
+                   
+                   your API and service layer to have billing, usage, and protections.
+                   
+                   
+                   Additionally the API gateway will apply security so that your
+                   
+                   application will get full OIDC tokens injected into the request process.
+
+
+      ## What can you do with the API Gateway?
+                   
+                   
+                   * Host your API gateway and expose it for use by others.
+                   
+                   * Enable other developers to register and access and enable your service.
+                   
+                   * Protect and enable approval and restricted access to services.
+                   
+                   * Enable your service with security and standardization of OIDC and JWT token injection.
+                   
+                   * Enable billing and usage based pricing on your services.
+                   
+                   * Enable your service to be discoverable by others.
+  - group: projects
+    match:
+      - /console/projects/**
+      - /console/projects/
+      - /console/apps/
+      - /console/apps/**
+      - /console/invites
+      - /console/invites/**
+    title: Project API
+    description: >
+      ## What are projects?
+
+
+      Projects are the general container for your development of a specific
+
+      product or service. You can have as many projects as you like, and each
+
+      project can be shared or owned by one or more organizations or be a personal
+
+      project.
+
+
+      Projects let you contain common settings and preferences to streamline your
+
+      development. They also contain the billing information and usage information
+
+      important to understand how your products and services are consuming or utilizing
+
+      resources.
+
+
+      ## What can you do with the Project API?
+
+
+      * Create and manage your development process
+
+      * Link projects to initiatives in your organization
+
+      * Deploy and manage the lifecycle of your applications and services
+
+      * Organize your development process.
+  - group: notifications
+    match:
+      - /notifications/**
+      - /**/notifications/**
+    exclude:
+      - /ekyc/**
+    title: Notifications API
+    description: |
+      ## Why use the Notification API?
+
+      Communication with people is complex, and the notification API helps
+      you connect directly with people in a secure, compliant, and privacy
+      forward way.
+
+      * Define templates to send people using email, sms, and push notification.
+      * Track and record analytics on email opens and key metrics.
+      * Test response rates of emails with our experiment framework.
+
+      ## What can you do with the Notification API?
+
+      * Email
+      * SMS
+      * Push
+  - group: collections
+    match:
+      - /collections
+      - /collections/**
+      - /**/collections/**
+    title: Collections API
+    description: |
+      ## Why use the Collections API
+
+      This collection API enables you to store and manage documents
+      in a document database but then also get for free event based
+      architecture where any mutation will generate a published event. 
+
+      ## What can you do with the Collection API?
+
+      * Create and manage rich complex documents
+      * Publish and change control events
+      * Full Text Search and index of documents
+      * Rich permissions models for row based access controls
+  - group: identity
+    match:
+      - /identities
+      - /identities/**
+    title: Identity API
+    description: |
+      ## Why use the Identity API
+
+      This identity API enables you to store and manage identities (people)
+      who can and interact with your product and services or who work for your 
+      organization.
+
+      ## What can you do with the API Gateway?
+
+      * Register, Create and Manage Identities
+      * Link Identities to Logins and User Accounts
+      * Centralize your identities and identity management solution.
+  - group: events
+    match:
+      - /events
+      - /events/**
+      - /admin/events
+      - /admin/events/**
+    title: Event API
+    description: |
+      ## Why use the" Events API?
+
+      The Events API enables your application or service to track analytic
+      events and click stream data from your touchpoints. These events can
+      range from user events to device or signal events.
+
+      ## What you shouldn't use Events API for?
+
+      The Events API is meant to model user driven events that are based
+      on users performing actions. It is not meant for operational events
+      or tracking events that are more system and CPU and hardware related.
+  - group: ekyc
+    match:
+      - /ekyc
+      - /ekyc/**
+      - /admin/ekyc
+      - /admin/ekyc/**
+    title: EKYC API
+    description: |
+      ## Why use the EKYC API?
+
+      The EKYC api is available for you to start registering and
+      verifying a user identity. This enables you to verify and
+      control access to your system.
+
+      If you have sensitive data or need to truely trust a user
+      is who they claim to be you can use this service to initiate
+      ekyc verification flows.
+
+      ![alt text](https://cdn.dev.klustr.io/_temp/ekyc.png "EKYC Flow")
+  - group: directory
+    match:
+      - /directory/**
+    exclude:
+      - /directory/**/agreements/**
+    title: Directory API
+    description: >
+      ## Why use the Directory Management API?
+
+
+      When developing your products and services you often need to work with others
+
+      and also manage your data and access to core services and data based on your organizational
+
+      hierarchy.
+
+
+      * Define your organization hierarchy and directory
+
+      * Apply roles and groups to your hierarchy
+
+      * Add users and permissions to your directory to manage access to services.
+
+
+      ## What can you do with the Directory API?
+
+
+      Use the Directory API to manage your access, roles, groups, and organizational hierarchy. Define your
+
+      sales teams, marketing teams, and other teams to power permissions and insights.
+
+
+      * Provide a view of your organization.
+
+      * Link people to groups, roles, and permissions.
+
+      * Enable fine grained access to custom applications and services
+
+      * Integration with OIDC and Identity platform.
+  - group: consent
+    match:
+      - /consent/**
+      - /**/consent/**
+      - /directory/**/agreements/**
+    title: Consent API
+    description: >
+      ## Why use the Consent API?
+
+
+      Today, products are more than just UX and apps, they include the ability to enrich
+
+      user interactions and data with other 3rd parties. To do this, consent is needed to
+
+      ensure that these third parties can ask for and get consent for your data and attributes.
+
+
+      * Create intuitive and easy-to-use consent management process for your users.
+
+      * Define your data elements, attributes, and definitions for the types of data to consent to.
+
+      * Enable third parties to lookup and verify consent as well as get notified of consent changes.
+
+      * Support GDPR and regulatory privacy needs.
+
+
+      ## What can you do with the Consent API?
+
+
+      You can use the Places API to include the following features in your applications:
+
+
+      * Provide centralized consent management for your organization.
+
+      * Provide consent that can be automated and managed through the organization, projects, apps and experiments.
+
+      * Empower your OIDC / OAuth 2 flows to create compelling consent screens.
+  - group: agreements
+    match:
+      - /agreements/**
+      - /**/agreements/**
+    title: Agreements API
+    description: >
+      ## Agreement APIs
+      
+      Enables your organization, projects, experiments, and applications
+      to have a unified view of terms, conditions that have versioning
+      multi language support and tie into our consent systems.
+
+  - group: cdn
+    match:
+      - /cdn/**
+      - /cdn
+    title: Content Delivery API
+    description: >
+      ## Why use the CDN API?
+
+
+      Often when enabling user input users will need to upload images (gif, png, etc)
+
+      and will need these images optimized and stored for public access and distributed
+
+      along a CDN.
+
+
+      This CDN server enables developers to upload images and get back a public URL
+
+      that can be used inside websites and hosts for delivery of these images.
+  - group: account
+    match:
+      - /directory/orgs/**/accounts/**
+    title: Account Types API
+    description: >
+      ## What is an account?
+      
+      An account represents the relationship between a service provider (entity)
+      and an individual or corporation. The account is a representation of a paid
+      service or set of services and help define what the user has access to or
+      is given in relation to this entity.
+      
+      We encounter accounts everyday, such as your Google Pay account, YouTube account,
+      Spotify Account, or Netflix account. Some accounts are usage based and others
+      maybe subscription based.
+      
+      More traditional accounts can be things like a Gym Membership account which
+      could define hours, as well as certain perks.
+      
+      ## What is the account type API?
+      
+      
+      The variability of accounts can be defined in your organization to structure
+      
+      your products and services that are provided to users.
+  - group: everything
+    match:
+      - /**
+    title: _debug
+    description: >
+      This is just to debug all the endpoints.
+

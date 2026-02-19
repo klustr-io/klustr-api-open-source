@@ -1,0 +1,52 @@
+{
+  "title": "Relationship",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "$id": "keto.relationship.schema.json",
+  "description": "Relationships are the underlying datatype of Ory Permissions. They encode relations between objects, which are the resources that you want to manage to, and subjects, which are the people or things that want to access these resources. A relationship is associated with a namespace where its relation has to be defined and configured.",
+  "properties": {
+    "namespace": {
+      "type": "string",
+      "description": "The namespace that bundles the objects. This could be group, video, file, document, and is basically the 'noun' being protected. They are used to scope objects and subjects."
+    },
+    "object": {
+      "type": "string",
+      "description": "Objects are identifiers of entities in an application. For example, objects can represent files, network ports, or physical items. It's up to the application to map its objects to unambiguous identifiers. The name length limit for object identifiers is 64 characters.",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "subject_id": {
+      "type": "string",
+      "description": "In Ory Keto subjects are a recursive polymorphic datatype. They refer to specific subjects by an identifier defined by the application, for example users, or to sets of subjects."
+    },
+    "relation": {
+      "type": "string",
+      "description": "The relationship to the specified object forming the tie."
+    },
+    "subject_set": {
+      "type": "object",
+      "description": "A way to abstract and indirectly map. For example if you modeled { 'namespace': 'residents', 'object': '*', 'relation': 'viewers' } ",
+      "title": "RelationshipSubset",
+      "properties": {
+        "namespace": {
+          "type": "string",
+          "description": "The namespace that bundles the objects. This could be group, video, file, document, and is basically the 'noun' being protected. They are used to scope objects and subjects."
+        },
+        "object": {
+          "type": "string",
+          "description": "Objects are identifiers of entities in an application. For example, objects can represent files, network ports, or physical items. It's up to the application to map its objects to unambiguous identifiers. The name length limit for object identifiers is 64 characters.",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "subject": {
+          "type": "string",
+          "description": "In Ory Keto subjects are a recursive polymorphic datatype. They refer to specific subjects by an identifier defined by the application, for example users, or to sets of subjects."
+        },
+        "relation": {
+          "type": "string",
+          "description": "The relationship to the specified object forming the tie."
+        }
+      }
+    }
+  }
+}

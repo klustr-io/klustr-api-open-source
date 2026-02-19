@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Gender",
+  "type": "string",
+  "enum": [
+    "male",
+    "female",
+    "unknown"
+  ],
+  "javaEnums": [
+    {
+      "name": "male",
+      "description": "Determines themselves to associate with male sex characteristics"
+    },
+    {
+      "name": "female",
+      "description": "Determines themselves to associate with female sex characteristics"
+    },
+    {
+      "name": "unknown",
+      "description": "Determines themselves not to be associated with any specific sex."
+    }
+  ]
+}

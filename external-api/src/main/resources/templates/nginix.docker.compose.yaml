@@ -1,0 +1,53 @@
+version: "3.8"
+
+services:
+  ${PROJECT}:
+    image: "nginxdemos/hello:latest"
+    container_name: ${PROJECT}
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "${CPU_LIMIT:-1.0}"
+          memory: "${MEMORY_LIMIT:-512M}"
+        reservations:
+          cpus: "${CPU_RESERVE:-0.25}"
+          memory: "${MEMORY_RESERVE:-128M}"
+    ulimits:
+      nofile:
+        soft: 1000000
+        hard: 1000000
+    environment:
+      ORG_ID: ${ORG}
+      PROJECT_ID: ${PROJECT}
+      MACHINE_TYPE: ${MACHINE_TYPE}
+      PERSISTENT_VOLUME_ID: ${PERSISTENT_VOLUME_ID}
+      ROOT_SERVER_URL: ${ROOT_SERVER_URL}
+      SERVER_DOMAIN: ${SERVER_DOMAIN}
+      OIDC_URL: ${OIDC_URL}
+      CLIENT_ID: ${OIDC_CLIENT}
+      CLIENT_SECRET: ${OIDC_SECRET}
+      CLIENT_SCOPES: ${OIDC_SCOPES}
+      OIDC_ISSUER: ${OIDC_ISSUER}
+      OIDC_CLIENT: ${OIDC_CLIENT}
+      OIDC_SECRET: ${OIDC_SECRET}
+      OIDC_SCOPES: "${OIDC_SCOPES}"
+    labels:
+      namespace: "${PROJECT}"
+      org_id: "${ORG}"
+      project: "${PROJECT}"
+      project_id: "${PROJECT}"
+      type: "TENANT"
+      workload: "nginxdemos"
+      machine_type: "${MACHINE_TYPE}"
+    networks:
+      - ${ORG}
+      - ingress
+    dns:
+      - ${DNS_HOST}
+
+networks:
+  ingress:
+    external: true
+  ${ORG}:
+    external: true

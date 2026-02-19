@@ -1,0 +1,48 @@
+This script will walk the various open-api specifications
+and look at the code and documentation and generate updated
+open-api specifications and labels that are appropriate.
+
+Leveraging the @Operation and @JavaDoc to ensure consistency
+in our documentation as well as some standardization using chat-gpt
+and open-api entries.
+
+The prompt is as follows (included in enrich.js)
+
+CHAT PROMPT:
+
+```
+Overall controller context:
+${classContext}
+
+Local method context:
+${context}
+
+And this @Operation body (inside the parentheses only):
+${opBody}
+
+Your goal:
+- Generate a UNIQUE operationId (camelCase).
+- Disambiguate endpoints that differ by path (e.g. /me/, /public/, /admin/).
+- operationId should reflect scope (e.g. getMyProfile, getPublicUserProfile).
+- operationId should indicate if admin based on the route including /admin and so the operationId should prefix with admin (e.g. adminListProfiles, adminDeleteOrganization)
+- opreationId should indicate if it is for the current user when it has /me/ in the route. (e.g listMyLocations, getMyProfile, deleteMyLocation)
+- summary should clearly indicate if it's self, public, or admin scope.
+- should the route or context be "channel" or "notification" assume that the context is around notifications for sending messages to users (sms, firebase, android, email, etc)
+- description should emphasize the visibility level and purpose and be meaningful and helpful for a user and also for exposing and usage by LLM and text embeddings to discover and answer questions
+- The overall end goal is to be able to leverage this context with fastmcp to be able to build a MCP tooling around these apis
+
+Return JSON with:
+- operationId: camelCase verbObject (e.g., getApiCatalog)
+- summary: one concise line (<= 12 words)
+- description: 2–4 lines, plain text (no markdown)
+Do NOT invent non-existent parameters. Keep semantics faithful to the method.
+```
+
+To run;
+
+npm install
+npm enrich.js
+
+Note:
+
+You must have a .env.local file in same directory with your OPEN_API_KEY

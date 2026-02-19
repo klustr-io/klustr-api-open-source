@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ConsentEvent",
+  "description": "An event the occurs when a user changes their consent settings.",
+  "type": "object",
+  "properties": {
+    "sub": {
+      "type": "string",
+      "description": "The id of the user where the consent was modified."
+    },
+    "timestamp": {
+      "description": "The time and date that this application was created",
+      "type": "string",
+      "format": "date-time"
+    },
+    "scopes": {
+      "description": "The consent scopes available for the user.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

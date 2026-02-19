@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "title": "IdentityMetadataPublic",
+  "description": "Store metadata about the identity which the identity itself can see when calling for example the session endpoint. Do not store sensitive information (e.g. credit score) about the identity in this field.",
+  "properties": {
+    "picture": {
+      "type": "string",
+      "description": "The photo of the user, usually of their face or avatar."
+    }
+  }
+}

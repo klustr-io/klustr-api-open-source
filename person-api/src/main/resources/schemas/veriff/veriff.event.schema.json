@@ -1,0 +1,36 @@
+{
+  "title": "VeriffEventPayload",
+  "description": "When veriff calls with their event payload it will have an action ['started','submitted']",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique ID of this verification, for saving and reference."
+    },
+    "action": {
+      "type": "string",
+      "description": "The status of the verification made, can be [started, submitted] anything else not good",
+      "enum": [
+        "started",
+        "submitted"
+      ]
+    },
+    "attemptId": {
+      "type": "string",
+      "description": "The specific attempt that was generated."
+    },
+    "vendorData": {
+      "type": "string",
+      "description": "Link to the original user ID requested."
+    },
+    "feature": {
+      "type": "string",
+      "description": "The feature that was generated"
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "The feature that was generated, populated on server side.",
+      "format": "date-time"
+    }
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "title": "VeriffNotificationPayload",
+  "description": "A webhook notification by veriff indicating the success or failure of a verification.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique ID of this verification, for saving and reference."
+    },
+    "status": {
+      "type": "string",
+      "description": "The status of the verification made, can be [sucesss] anything else not good"
+    },
+    "sessionId": {
+      "type": "string",
+      "description": "The session id."
+    },
+    "vendorData": {
+      "type": "string",
+      "description": "The vendor key data for linking."
+    },
+    "attemptId": {
+      "type": "string",
+      "description": "The attempted id for this."
+    },
+    "version": {
+      "type": "string",
+      "description": "The version of this verification."
+    },
+    "data": {
+      "type": "object",
+      "title": "VeriffVerificationData",
+      "properties": {
+        "verification": {
+          "title": "VeriffVerification",
+          "type": "object",
+          "description": "The verification that was performed",
+          "properties": {
+            "code": {
+              "type": "number",
+              "description": "The reason code for this verification"
+            },
+            "id": {
+              "type": "string",
+              "description": "The unique reference to this verification by veriff and third party for linkage."
+            },
+            "person": {
+              "type": "object",
+              "description": "The person for this request.",
+              "$ref": "./veriff.person.schema.json"
+            },
+            "reason": {
+              "type": "string",
+              "description": "Any reason codes for the rejection."
+            },
+            "decision": {
+              "type": "string",
+              "description": "Verification decision"
+            },
+            "comments": {
+              "type": "array",
+              "description": "Comments made by a human verifier.",
+              "items": {
+                "type": "string"
+              }
+            },
+            "document": {
+              "type": "object",
+              "$ref": "./veriff.document.schema.json"
+            },
+            "reasonCode": {
+              "type": "string",
+              "description": "Any reason codes for the rejection."
+            },
+            "decisionTime": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "acceptanceTime": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+      }
+    },
+    "technicalData": {
+      "type": "object",
+      "description": "Reference and technical data about this verification",
+      "properties": {
+        "ip": {
+          "type": "string",
+          "description": "The origin IP for this verification"
+        }
+      }
+    }
+  }
+}

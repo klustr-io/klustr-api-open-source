@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "BillingPlan",
+  "description": "This object represents a plan. This plan can then be assigned to a customer.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The ID of this customer account",
+      "type": "string"
+    },
+    "name": {
+      "description": "A friendly name for this plan.",
+      "type": "string"
+    },
+    "description": {
+      "description": "A friendly description for this plan.",
+      "type": "string"
+    },
+    "invoice_display_name": {
+      "description": "Specifies the name that will be displayed on an invoice. If no value is set for this field, the name of the plan will be used as the default display name.",
+      "type": "string"
+    },
+    "code": {
+      "description": "The code of the plan. It serves as a unique identifier associated with a particular plan. The code is typically used for internal or system-level identification purposes, like assigning a subscription, for instance.",
+      "type": "string"
+    },
+    "interval": {
+      "description": "The interval used for recurring billing. It represents the frequency at which subscription billing occurs. The interval can be one of the following values: yearly, quarterly, monthly or weekly.",
+      "type": "string",
+      "enum": [
+        "yearly",
+        "quarterly",
+        "monthly",
+        "weekly"
+      ]
+    },
+    "amount_cents": {
+      "description": "The base cost of the plan, excluding any applicable taxes, that is billed on a recurring basis. This value is defined at 0 if your plan is a pay-as-you-go plan.",
+      "type": "integer",
+      "default": 0
+    },
+    "amount_currency": {
+      "description": "The currency of the plan. It indicates the monetary unit in which the plan's cost, including taxes and usage-based charges, is expressed.",
+      "type": "string",
+      "$ref": "./currency_code.schema.json"
+    },
+    "trial_period": {
+      "description": "The duration in days during which the base cost of the plan is offered for free.",
+      "type": "integer"
+    },
+    "charges": {
+      "type": "array",
+      "title": "BillingPlanCharges",
+      "items": {
+        "type": "object",
+        "title": "BillingPlanCharge",
+        "$ref": "./billable.plan.charge.schema.json"
+      }
+    }
+  },
+  "required": []
+}

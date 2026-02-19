@@ -1,0 +1,12 @@
+- webhook or poll interface for collections
+- topic creation/update (topic-api)
+- configuration of collections (indexes)
+- AI assist to help users optimize
+- Upgrade paths for more dedicated services (move from light server, to medium, to heavy, to dedicated, isolated)
+    - pick region
+    - enhanced security (RBAC, OPA)
+    - retention logs
+    - wildcard filters, rules
+    - large max records, larger max storage
+    - blobs
+    - federation

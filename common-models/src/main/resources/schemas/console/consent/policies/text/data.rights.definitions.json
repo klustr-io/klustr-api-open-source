@@ -1,0 +1,12 @@
+{
+  "ACCESS": "The user's right to access their data.",
+  "DELETION": "The user's right to request deletion of their data.",
+  "MODIFICATION": "The user's right to request modification of their data.",
+  "RESTRICTION": "The user's right to restrict processing of their data.",
+  "PORTABILITY": "The user's right to data portability.",
+  "OBJECTION": "The user's right to object to processing of their data.",
+  "CONSENT_WITHDRAWAL": "The user's right to withdraw consent for data processing.",
+  "AUTOMATED_DECISIONS": "The user's rights related to automated decision-making.",
+  "INFORMATION": "The user's right to receive information about data processing activities.",
+  "DATA_BREACH_NOTIFICATION": "Notification requirements in case of a data breach."
+}

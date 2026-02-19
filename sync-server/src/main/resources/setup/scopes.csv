@@ -1,0 +1,58 @@
+Category,Subcategory,Label,ID,Description,Sensitive,Visible
+Permission,Offline Access,Offline Access,offline,Access information while you are not connected to the application or service.,Low,TRUE
+Permission,Offline Access,Offline Access,offline_access,Access information while you are not connected to the application or service.,Low,TRUE
+Profile,Personal Data,Basic Information,profile,"See your personal info, including any personal info you've made publicly available",Low,TRUE
+Profile,Personal Data,ID,openid,Associate you with your personal info,Medium,FALSE
+Profile,Personal Data,Email,email,See your primary Account email address,Low,TRUE
+Profile,Personal Data,Date of Birth,person.birthday.read,See and download your exact date of birth,Medium,TRUE
+Profile,Personal Data,Gender,person.gender.read,See your gender,Medium,TRUE
+Profile,Organization,Work History,person.work.history.read,See your work history,Medium,TRUE
+Profile,Organization,Education,person.education.read,See your education history and information,Medium,TRUE
+Profile,Organization,Education,person.education.write,Create or update education information,High,TRUE
+Profile,Organization,Job Title,person.job.read,See your current job title and responsibilties.,Medium,TRUE
+Fitness,Fitness Activity,Access Fitness Activity Data,fitness.activity.read,Use Fit to see and store your physical activity data,High,TRUE
+Fitness,Fitness Activity,Modify Fitness Activity Data,fitness.activity.write,Add to your Fit physical activity data,High,TRUE
+Fitness,Blood Glucose,Access Blood Glucose Data,fitness.blood_glucose.read,See info about your blood glucose in Rize Fit. I consent to sharing my blood glucose information with this app.,High,TRUE
+Fitness,Blood Glucose,Modify Blood Glucose Data,fitness.blood_glucose.write,Add info about your blood glucose to Rize Fit. I consent to using my blood glucose information with this app.,High,TRUE
+Fitness,Blood Pressure,Access Blood Pressure Data,fitness.blood_pressure.read,See info about your blood pressure in Rize Fit. I consent to sharing my blood pressure information with this app.,High,TRUE
+Fitness,Blood Pressure,Modify Blood Pressure Data,fitness.blood_pressure.write,Add info about your blood pressure in Rize Fit. I consent to using my blood pressure information with this app.,High,TRUE
+Fitness,Body Measurements,Access Body Measurements,fitness.body.read,See info about your body measurements in Rize Fit,High,TRUE
+Fitness,Body Measurements,Modify Body Measurements,fitness.body.write,Add info about your body measurements to Rize Fit,High,TRUE
+Fitness,Body Temperature,Access Body Temperature,fitness.body_temperature.read,See info about your body temperature in Rize Fit. I consent to sharing my body temperature information with this app.,High,TRUE
+Fitness,Body Temperature,Modify Body Temperature,fitness.body_temperature.write,Add to info about your body temperature in Rize Fit. I consent to using my body temperature information with this app.,High,TRUE
+Fitness,Heart Rate,Access Heart Rate Data,fitness.heart_rate.read,See your heart rate data in Rize Fit. I consent to sharing my heart rate information with this app.,High,TRUE
+Fitness,Heart Rate,Modify Heart Rate Data,fitness.heart_rate.write,Add to your heart rate data in Rize Fit. I consent to using my heart rate information with this app.,High,TRUE
+Fitness,Heart Rate,Share Heart Rate Data,fitness.heart_rate.share,Agree to share heart rate data with others. I consent to sharing my heart rate information with third parties.,High,TRUE
+Fitness,Fitness Location,Access Fitness Location,fitness.location.read,See your location speed and distance data,High,TRUE
+Fitness,Fitness Location,Modify Fitness Location,fitness.location.write,Add to your location data,High,TRUE
+Fitness,Food / Nutrition,Access Food / Nutrition,fitness.nutrition.read,See info about your nutrition.,High,TRUE
+Fitness,Food / Nutrition,Modify Food / Nutrition,fitness.nutrition.write,Add to info about your nutrition.,High,TRUE
+Fitness,Medications,Access Medication Data,health.medications.read,Information about medications you take or have taken in the past.,High,TRUE
+Fitness,Oxygen Saturation,Access Oxygen Saturation Data,fitness.oxygen_saturation.read,See info about your oxygen saturation.,High,TRUE
+Fitness,Oxygen Saturation,Modify Oxygen Saturation Data,fitness.oxygen_saturation.write,Add info about your oxygen saturation.,High,TRUE
+Fitness,Reproductive Health,Access Reproductive Health,fitness.reproductive_health.read,See info about your reproductive health.,High,TRUE
+Fitness,Reproductive Health,Modify Reproductive Health Data,fitness.reproductive_health.write,Add info about your reproductive health.,High,TRUE
+Fitness,Sleep,Access Sleep Data,fitness.sleep.read,See your sleep data.,High,TRUE
+Fitness,Sleep,Modify Sleep Data,fitness.sleep.write,Add to your sleep data.,High,TRUE
+Person,Contacts,Modify Contacts,person.contacts.write,"See, edit, save, and delete your contacts",Medium,TRUE
+Person,Contacts,Access Contacts,person.contacts.read,See and download your contacts,Medium,TRUE
+Person,Contacts,Access Addresses,person.addresses.read,View your street addresses,Medium,TRUE
+Person,Contacts,Access Emails,person.emails.read,See and access all email addresses in your contact list.,Medium,TRUE
+Person,Contacts,Access Phone Numbers,person.phones.read,See and access all your personal phone numbers in your contact list.,Medium,TRUE
+Calendar,Calendar,Update Calendar,calendar.events.write,View and edit events on all your calendars,Medium,TRUE
+Calendar,Calendar,Access Calendar,calendar.events.read,View events on all your calendars,Medium,TRUE
+Location,Location History,Access Location History,location.history.read,See and access your prior location history and timeline.,High,TRUE
+Location,Location History,Modify Location History,location.history.write,"See, edit, save, and delete information on your location history timeline.",High,TRUE
+Location,Location History,Access Place History,location.places.read,See and access places you visited and the times you visited.,High,TRUE
+Location,Location History,Modify Place History,location.places.write,See and access places you visited and the times you visited.,High,TRUE
+Communication,Chat,Delete Chats,chat.delete,Delete conversations and spaces & remove access to associated files in Chat,Medium,TRUE
+Communication,Chat,Members List,chat.memberships,Add and remove members from conversations in Chat,Medium,TRUE
+Communication,Chat,Modify Members of Chat,chat.memberships.app,Add and remove members from conversations in Chat,Medium,TRUE
+Communication,Chat,Compose Messages,chat.messages,View and compose messages in chat,Medium,TRUE
+Biometric,Identification,Face,biometric.face.read,Read hashed biometric information on face for facial detection.,High,TRUE
+Biometric,Identification,Fingerpint,biometric.fingerprint.read,Read biometric information on fingerprints.,High,TRUE
+Biometric,Identification,Gender,biometric.gender.read,Read biometric information estimating gender.,High,TRUE
+Biometric,Identification,Age,biometric.age.read,Read biometric information estimating gender.,High,TRUE
+Biometric,Identification,Location,biometric.location.read,Read/write location information given your biometrics,High,TRUE
+Person,Household,View Household,person.household.read,Read household information and family members,High,TRUE
+Person,Household,Update Household,person.household.write,Create or update household information and family members,High,TRUE

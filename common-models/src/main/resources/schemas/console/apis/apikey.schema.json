@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ApiKey",
+  "description": "A api key that is used to access services.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique ID for this key",
+      "type": "string"
+    },
+    "name": {
+      "description": "An optional description for this key, for example prod, uat, etc.",
+      "type": "string"
+    },
+    "key": {
+      "description": "The api key available to use.",
+      "type": "string"
+    },
+    "creation_date": {
+      "description": "The date this client was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "description": "The status of this key",
+      "title": "ApiKeyStatus",
+      "enum": [
+        "enabled",
+        "deleted"
+      ]
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "restriction": {
+      "description": "The restriction for this api key",
+      "type": "object",
+      "$ref": "./apirestriction.schema.json"
+    }
+  },
+  "required": []
+}

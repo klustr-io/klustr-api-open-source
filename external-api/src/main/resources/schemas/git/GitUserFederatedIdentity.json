@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GitUserFederatedIdentity",
+  "description": "The linked identities to a specific user",
+  "type": "object",
+  "properties": {
+    "provider": {
+      "type": "string",
+      "description": "The provider that created this user, used to link your system to gitlab user."
+    },
+    "extern_uid": {
+      "type": "string",
+      "description": "The unique ID of the user from the external system."
+    }
+  },
+  "required": []
+}

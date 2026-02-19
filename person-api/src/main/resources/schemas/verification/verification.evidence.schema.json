@@ -1,0 +1,94 @@
+{
+  "title": "VerificationEvidence",
+  "description": "What and how information was verified.",
+  "type": "object",
+  "properties": {
+    "verification_id": {
+      "description": "The id that was used to verify.",
+      "type": "string"
+    },
+    "verification_status": {
+      "description": "Who had the status",
+      "type": "string",
+      "enum": [
+        "PENDING",
+        "REJECTED",
+        "APPROVED",
+        "DRAFT"
+      ]
+    },
+    "verification_method": {
+      "description": "The method of verification",
+      "type": "string",
+      "enum": [
+        "GOVERNMENT_ISSUED_ID",
+        "UTILITY_BILL",
+        "DIGITAL_CODE",
+        "SENT_VERIFICATION_CODE",
+        "MANUAL",
+        "NOT_VERIFIED",
+        "CONTRACT"
+      ],
+      "javaEnums": [
+        {
+          "name": "GOVERNMENT_ISSUED_ID",
+          "description": "The method of verification was a government issued ID."
+        },
+        {
+          "name": "UTILITY_BILL",
+          "description": "The method of verification was a utility bill for the person or household."
+        },
+        {
+          "name": "DIGITAL_CODE",
+          "description": "The method of verification was a digital token such as a digital passcode."
+        },
+        {
+          "name": "SENT_VERIFICATION_CODE",
+          "description": "The method of verification was a digital token such as a digital passcode."
+        },
+        {
+          "name": "MANUAL",
+          "description": "The method of verification was performed manually by a human inspection."
+        },
+        {
+          "name": "NOT_VERIFIED",
+          "description": "The information was not verified or not verification method was captured."
+        },
+        {
+          "name": "CONTRACT",
+          "description": "Legally binding and certified contract was provided as verification."
+        }
+      ]
+    },
+    "submit_date": {
+      "description": "The date this verification was submitted",
+      "type": "string",
+      "format": "date-time"
+    },
+    "verification_date": {
+      "description": "The date this verification was performed.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "expiration_date": {
+      "description": "The date this verification expires and needs to be re-performed.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "vendor_data": {
+      "description": "The vendor data associated with this for linkage and consistency.",
+      "type": "string"
+    },
+    "source_system": {
+      "description": "The system which perfomed this verification.",
+      "type": "string"
+    },
+    "reference_url": {
+      "description": "When applied the url of the data or document that was used to verified.",
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https?://"
+    }
+  },
+  "required": []
+}

@@ -1,0 +1,75 @@
+{
+  "title": "PersonIdentityDocument",
+  "description": "The identification document that proves the identity of the person.",
+  "type": "object",
+  "properties": {
+    "type": {
+      "title": "IdentificationType",
+      "description": "The type of identification.",
+      "type": "string",
+      "enum": [
+        "VISA",
+        "RESIDENCE_PERMIT",
+        "PASSPORT",
+        "ID_CARD",
+        "DRIVERS_LICENSE"
+      ],
+      "javaEnums": [
+        {
+          "name": "VISA",
+          "description": "Visa issued by government."
+        },
+        {
+          "name": "RESIDENCE_PERMIT",
+          "description": "RESIDENCE_PERMIT issued by government."
+        },
+        {
+          "name": "PASSPORT",
+          "description": "The persons residency is based on a resident visa with an expiration."
+        },
+        {
+          "name": "ID_CARD",
+          "description": "The persons residency is of a natural citizen."
+        },
+        {
+          "name": "DRIVERS_LICENSE",
+          "description": "Drivers license provided by a state or issuing country."
+        }
+      ]
+    },
+    "country_code": {
+      "description": "The country code of citizenship for the person (different from where the person resides).",
+      "type": "string"
+    },
+    "link": {
+      "description": "The photos or evidence for this identification.",
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https?://"
+    },
+    "date_effective": {
+      "description": "The date of this document is valid from.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "date_expires": {
+      "description": "The date of expiration for residency (if applicable).",
+      "type": "string",
+      "format": "date-time"
+    },
+    "date_created": {
+      "description": "The date record was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "vendor_reference_data": {
+      "description": "The data that supports linking back to the original source.",
+      "type": "string"
+    },
+    "vendor": {
+      "description": "The vendor that provided the verification",
+      "type": "string"
+    }
+  },
+  "required": []
+}

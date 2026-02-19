@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "UserGroupDefinition",
+  "description": "The definition of the group.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique ID of the record.",
+      "type": "string"
+    },
+    "name": {
+      "description": "The friendly name for this group.",
+      "type": "string"
+    },
+    "description": {
+      "description": "The description of this group and how it is used.",
+      "type": "string"
+    },
+    "project_id": {
+      "description": "The project id that a user was granted right to.",
+      "type": "string"
+    },
+    "users": {
+      "type": "array",
+      "description": "The users that are in this group as referenced by their email address",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": []
+}

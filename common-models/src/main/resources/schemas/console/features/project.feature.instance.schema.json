@@ -1,0 +1,77 @@
+{
+  "title": "ProjectFeatureInstance",
+  "type": "object",
+  "description": "Runtime instance of a feature attached to a specific project.",
+  "javaType": "io.klustr.schemas.console.features.ProjectFeatureInstance",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for this feature instance.",
+      "examples": [
+        "featinst-123"
+      ]
+    },
+    "project_id": {
+      "type": "string",
+      "description": "Project this feature instance belongs to.",
+      "examples": [
+        "project-a"
+      ]
+    },
+    "feature_id": {
+      "type": "string",
+      "description": "Reference to the catalog feature ID.",
+      "examples": [
+        "mongodb"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "description": "Runtime status of the feature instance.",
+      "enum": [
+        "provisioning",
+        "active",
+        "error",
+        "deleting"
+      ],
+      "examples": [
+        "active"
+      ]
+    },
+    "env": {
+      "type": "object",
+      "description": "Resolved environment variables for runtime.",
+      "existingJavaType": "java.util.Map<String,String>",
+      "examples": [
+        {
+          "MONGO_USERNAME": "admin",
+          "MONGO_PASSWORD": "********"
+        }
+      ]
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Runtime metadata for hydration and idempotency.",
+      "existingJavaType": "java.util.Map<String,String>",
+      "examples": [
+        {
+          "_hydrated_by": "PortainerComputeResourceProvider"
+        }
+      ]
+    },
+    "creation_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Creation timestamp.",
+      "examples": [
+        "2025-01-01T12:00:00Z"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "project_id",
+    "feature_id",
+    "status"
+  ]
+}

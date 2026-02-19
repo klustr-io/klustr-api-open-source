@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "BillingPlanChargeVolumePricing",
+  "description": "Pricing that is determined by how much is consumed. Typically this offers discounts as you approach higher tiers.",
+  "type": "object",
+  "properties": {
+    "range": {
+      "description": "The range to define",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "title": "BillingPlanChargeVolumePricingRange",
+        "properties": {
+          "start": {
+            "type": "integer"
+          },
+          "stop": {
+            "type": "integer"
+          },
+          "per_unit_price": {
+            "type": "number"
+          },
+          "flat_fee": {
+            "type": "number"
+          }
+        },
+        "required": ["start", "stop", "per_unit_price", "flat_fee"]
+      }
+    }
+  },
+  "required": []
+}

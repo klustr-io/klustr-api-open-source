@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PortainerNetworkCreateRequest",
+  "description": "Request to make a new network in portainer (docker)",
+  "type": "object",
+  "properties": {
+    "Name": {
+      "type": "string",
+      "description": "The name for this network"
+    },
+    "Driver": {
+      "type": "string",
+      "description": "The driver for this network (defaults to bridge)",
+      "default": "bridge"
+    },
+    "Internal": {
+      "type": "boolean",
+      "description": "If this network is an internal network only between instances. Default is true",
+      "default": "true"
+    },
+    "Labels": {
+      "type": "object",
+      "description": "The common labels to apply for this environment",
+      "properties": {
+        "org_id": {
+          "type": "string",
+          "description": "The organization ID that owns this instance."
+        },
+        "source": {
+          "type": "string",
+          "description": "The source of this environment",
+          "default": "klustr.io"
+        }
+      },
+      "required": ["org_id"]
+    }
+  },
+  "required": ["Name", "Driver", "Internal", "Labels"]
+}

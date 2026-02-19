@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GitGroupReference",
+  "description": "Response from gitlab for successful creation of a user",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "The unique ID of the user in gitlab"
+    },
+    "name": {
+      "type": "string",
+      "description": "The username of the user in the actual gitlab instance."
+    },
+    "path": {
+      "type": "string",
+      "description": "The username of the user in the actual gitlab instance."
+    },
+    "avatar_url": {
+      "type": "string",
+      "description": "The state of the user"
+    },
+    "web_url": {
+      "type": "string",
+      "description": "The preferred language for the user (en, jp, etc)"
+    },
+    "created_at": {
+      "type": "string",
+      "description": "If the user can create a group"
+    }
+  },
+  "required": []
+}

@@ -1,0 +1,64 @@
+{
+  "title": "BiometricFacialRecognition",
+  "description": "Metadata regarding biometric facial recognition.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique ID of this facial recognition record.",
+      "type": "string"
+    },
+    "url": {
+      "description": "The url for the facial recognition image.",
+      "type": "string"
+    },
+    "status": {
+      "title": "BiometricFacialRecognitionStatus",
+      "description": "The status of this facial recognition.",
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "SUBMITTED",
+        "REVIEWING",
+        "INVALID",
+        "VALID"
+      ],
+      "javaEnums": [
+        {
+          "name": "DRAFT",
+          "description": "The facial recognition is drafted but not submitted."
+        },
+        {
+          "name": "SUBMITTED",
+          "description": "The persons residency is based on a resident visa with an expiration."
+        },
+        {
+          "name": "REVIEWING",
+          "description": "The facial recognition is under review."
+        },
+        {
+          "name": "INVALID",
+          "description": "The facial recognition is invalid a new photo or evidence should be retaken."
+        },
+        {
+          "name": "VALID",
+          "description": "The status is valid and available."
+        }
+      ]
+    },
+    "status_details": {
+      "description": "The code or status details that help with diagnosing an issue with the validation of this biometric",
+      "type": "string"
+    },
+    "creation_date": {
+      "description": "The date this record was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "expiration_date": {
+      "description": "The date that this record expires.",
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": []
+}

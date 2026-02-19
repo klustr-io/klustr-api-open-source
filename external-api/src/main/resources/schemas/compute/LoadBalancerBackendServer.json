@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LoadBalancerBackendServer",
+  "description": "One or more servers linked to the backend",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The unique name for this server for roundrobin etc."
+    },
+    "port": {
+      "type": "integer",
+      "description": "The port of the service"
+    },
+    "address": {
+      "type": "string",
+      "description": "The server address (machine name or ip or dns)"
+    },
+    "init-addr": {
+      "type": "string",
+      "description": "The server address (machine name or ip or dns)",
+      "default": "none"
+    },
+    "resolvers": {
+      "type": "string",
+      "description": "The DNS resolvers to use, defaults to docker.",
+      "default": "dockerdns"
+    }
+  },
+  "required": []
+}

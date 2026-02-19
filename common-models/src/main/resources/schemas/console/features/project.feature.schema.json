@@ -1,0 +1,366 @@
+{
+  "title": "AbstractProjectFeature",
+  "type": "object",
+  "description": "Catalog definition of a feature that can be enabled on projects. This object defines intent, requirements, and provisioning hints, but is not bound to a specific project instance.",
+  "javaType": "io.klustr.schemas.console.features.AbstractProjectFeature",
+
+  "x-polymorphic": true,
+  "x-discriminator": "type",
+
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Stable unique identifier for the feature.",
+      "examples": ["mongodb"]
+    },
+
+    "name": {
+      "type": "string",
+      "description": "Human-readable name of the feature.",
+      "examples": ["MongoDB"]
+    },
+
+    "category": {
+      "type": "string",
+      "description": "High-level category of the feature.",
+      "enum": ["database", "storage", "docker", "networking", "observability", "compute", "analytics", "serverless", "ai", "tools", "ci_cd", "operations", "security"],
+      "javaType": "io.klustr.schemas.console.features.Category",
+      "examples": ["database"]
+    },
+
+    "tags": {
+      "type": "array",
+      "description": "Tags applied to this project feature for search",
+      "items": {"type": "string"}
+    },
+
+    "status": {
+      "type": "string",
+      "description": "Lifecycle status of the feature.",
+      "javaType": "io.klustr.schemas.console.features.FeatureStatus",
+      "enum": ["active", "inactive"],
+      "examples": ["active"]
+    },
+
+    "description": {
+      "type": "string",
+      "description": "Detailed description of what this feature provides.",
+      "examples": [
+        "Provisions a managed MongoDB instance for use within your project."
+      ]
+    },
+
+    "documentation_url": {
+      "type": "string",
+      "description": "URL to documentation for this feature.",
+      "examples": ["https://docs.klustr.io/features/mongodb"]
+    },
+
+    "documentation": {
+      "type": "object",
+      "description": "Specific seections of documentation",
+      "title": "FeatureDocumentation",
+      "properties": {
+        "overview": {
+          "type": "string"
+        },
+        "documentation": {
+          "type": "string"
+        },
+        "support": {
+          "type": "string"
+        }
+      }
+    },
+
+    "pricing": {
+      "type": "object",
+      "title": "FeaturePricing",
+      "properties": {
+        "plans": {
+          "type": "array",
+          "title": "FeaturePlans",
+          "items": {
+            "type": "object",
+            "title": "FeaturePlan",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name for this plan"
+              },
+              "tier": {
+                "type": "string",
+                "enum": ["free", "basic", "premium", "enterprise"],
+                "javaType": "io.klustr.schemas.console.features.PlanTier"
+              },
+              "subscription_prices": {
+                "type": "array",
+                "title": "SubscriptionPrices",
+                "items": {"type": "object",
+                  "title": "SubscriptionPrice",
+                  "properties": {
+                    "price_usd": {
+                      "type": "number"
+                    },
+                    "label": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+               "package_pricing": {
+                 "type": "array",
+                 "items": {
+                   "type": "object",
+                   "title": "PackagePrice",
+                   "properties": {
+                     "billable_metric_codes": {
+                       "type": "array",
+                       "items": {"type": "string"}
+                     },
+                     "free_units": {
+                       "type": "number"
+                     },
+                     "amount_usd": {
+                       "type": "number"
+                     },
+                     "package_size": {
+                       "type": "number"
+                     }
+                   }
+                 }
+               },
+              "volume_pricing": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "title": "VolumePrice",
+                  "properties": {
+                    "rage": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "title": "VolumePriceRange",
+                        "properties": {
+                          "start": {
+                            "type": "number"
+                          },
+                          "stop": {
+                            "type": "number"
+                          },
+                          "per_unit_price_usd": {
+                            "type": "number"
+                          },
+                          "flat_fee": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "branding": {
+      "type": "object",
+      "title": "Branding",
+      "properties": {
+        "icon": {
+          "type": "string"
+        }
+      }
+    },
+
+    "company": {
+      "type": "object",
+      "description": "The core provider of this project feature can be first or third party",
+      "title": "CompanyReference",
+      "properties": {
+        "company_id": {
+          "type": "string",
+          "description": "The company ID"
+        },
+        "company_name": {
+          "type": "string",
+          "description": "The name of the company providing this feature."
+        },
+        "company_type": {
+          "type": "string",
+          "javaType": "io.klustr.schemas.console.features.CompanyType",
+          "enum": ["third_party", "first_party", "partner"]
+        }
+      }
+    },
+
+    "ui": {
+      "type": "object",
+      "title": "ProjectFeatureUISpec",
+      "javaType": "io.klustr.schemas.console.features.core.ProjectFeatureUISpec",
+      "description": "UI metadata used by the console to render navigation and feature-specific views.",
+      "properties": {
+        "ui_module": {
+          "type": "string",
+          "description": "Frontend module responsible for rendering this feature.",
+          "examples": ["mongodb"]
+        },
+        "ui_label": {
+          "type": "string",
+          "description": "Navigation label shown in the sidebar.",
+          "examples": ["MongoDB"]
+        },
+        "ui_icon": {
+          "type": "string",
+          "description": "Icon identifier used in the UI.",
+          "examples": ["database"]
+        }
+      },
+      "required": ["module", "nav_label"]
+    },
+
+    "constraints": {
+      "type": "object",
+      "title": "ProjectFeatureConstraints",
+      "javaType": "io.klustr.schemas.console.features.core.ProjectFeatureConstraints",
+      "description": "Constraints that limit how this feature may be applied.",
+      "properties": {
+        "limit_one_per_project": {
+          "type": "boolean",
+          "description": "If true, only one instance of this feature may exist per project.",
+          "examples": [true]
+        }
+      }
+    },
+
+    "configuration": {
+      "type": "object",
+      "title": "ProjectFeatureRequiredConfiguration",
+      "javaType": "io.klustr.schemas.console.features.dns.ProjectFeatureRequiredConfiguration",
+      "description": "Project-level capabilities required by this feature. Each capability is a first-class, typed object containing any configuration required to satisfy it.",
+      "properties": {
+        "dns": {
+          "type": "object",
+          "description": "DNS capability required to expose network endpoints.",
+          "title": "ProjectFeatureDnsConfiguration",
+          "javaType": "io.klustr.schemas.console.features.dns.ProjectFeatureDnsConfiguration",
+          "properties": {
+            "template_value": {
+              "type": "string",
+              "description": "DNS record name template.",
+              "examples": ["{projectId}.dev.klustr.io."]
+            }
+          }
+        },
+
+        "credentials": {
+          "type": "object",
+          "description": "Credential capability required to generate and inject secrets.",
+          "title": "ProjectFeatureCredentialsConfiguration",
+          "javaType": "io.klustr.schemas.console.features.credentials.ProjectFeatureCredentialsConfiguration",
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Human-readable explanation for why credentials are required."
+            },
+            "basic_credentials": {
+              "type": "object",
+              "description": "Basic username/password credential configuration.",
+              "title": "ProjectFeatureBasicCredentialsConfiguration",
+              "javaType": "io.klustr.schemas.console.features.credentials.ProjectFeatureBasicCredentialsConfiguration",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Unique identifier for the credential.",
+                  "examples": ["mongo_admin_credential"]
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label shown to users for this credential.",
+                  "examples": ["Mongo Admin"]
+                },
+                "env_var_name_username": {
+                  "type": "string",
+                  "description": "Environment variable name for the username.",
+                  "examples": ["MONGO_USERNAME"]
+                },
+                "env_var_name_password": {
+                  "type": "string",
+                  "description": "Environment variable name for the password.",
+                  "examples": ["MONGO_PASSWORD"]
+                },
+                "required_password_length": {
+                  "type": "integer",
+                  "description": "Length of generated password.",
+                  "examples": [18]
+                }
+              },
+              "required": ["id", "env_var_name_username", "env_var_name_password"]
+            },
+            "oidc_credentials": {
+              "type": "object",
+              "description": "OIDC configuration credentials required for the project",
+              "title": "ProjectFeatureOIDCCredentialsConfiguration",
+              "javaType": "io.klustr.schemas.console.features.credentials.ProjectFeatureOIDCCredentialsConfiguration",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Unique identifier for the credential.",
+                  "examples": [
+                    "mongo_admin_credential"
+                  ]
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label shown to users for this credential.",
+                  "examples": [
+                    "Mongo Admin"
+                  ]
+                },
+                "env_var_name_client_id": {
+                  "type": "string",
+                  "description": "Environment variable name for the client ID.",
+                  "examples": [
+                    "1809d233-0fd2-4181-a73b-c7d363013c2c"
+                  ]
+                },
+                "env_var_name_client_secret": {
+                  "type": "string",
+                  "description": "Environment variable name for the client secret.",
+                  "examples": [
+                    "Fb_5ynbR~m-QJkzs7OcKzasvfw"
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "env_var_name_client_id",
+                "env_var_name_client_secret"
+              ]
+            }
+          }
+        }
+      }
+    },
+
+    "metadata": {
+      "type": "object",
+      "description": "Free-form metadata used for tagging, migration markers, idempotency, and AI reasoning.",
+      "existingJavaType": "java.util.Map<String,String>",
+      "examples": [
+        {
+          "source": "legacy-project-template",
+          "legacy_type": "DATA_STORAGE"
+        }
+      ]
+    }
+  },
+
+  "required": ["id", "type", "name", "feature_kind", "status"]
+}

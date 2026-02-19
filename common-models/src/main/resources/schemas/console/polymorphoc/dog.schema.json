@@ -1,0 +1,16 @@
+{
+  "title": "Dog",
+  "type": "object",
+
+  "javaType": "example.animals.Dog",
+
+  "extends": {
+    "$ref": "animal.schema.json"
+  },
+
+  "properties": {
+    "goodBoy": {
+      "type": "boolean"
+    }
+  }
+}

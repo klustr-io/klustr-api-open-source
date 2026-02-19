@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserConsent",
+  "properties": {
+    "id": {
+      "description": "The unique ID of this specific consent.",
+      "type": "string"
+    },
+    "subject_id": {
+      "description": "The unique ID of this specific consent.",
+      "type": "string"
+    },
+    "scopes": {
+      "description": "The scopes that were approved by the user.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "The scope definition",
+        "title": "UserConsentScope",
+        "$ref": "./user.consent.scope.schema.json"
+      }
+    }
+  },
+  "required": [
+    "id"
+  ]
+}

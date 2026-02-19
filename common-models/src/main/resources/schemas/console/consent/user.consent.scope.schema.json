@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "UserConsentScope",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The scope that is associated."
+    },
+    "status": {
+      "type": "string",
+      "description": "The status of the consent granted",
+      "enum": ["active", "revoked", "expired"]
+    },
+    "consent_method": {
+      "type": "string",
+      "description": "The status of the consent granted",
+      "enum": ["implicit", "explicit"]
+    },
+    "date_created": {
+      "description": "The date record was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "date_revoked": {
+      "description": "The date record was revoked",
+      "type": "string",
+      "format": "date-time"
+    },
+    "date_modified": {
+      "description": "The date record was modified",
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "id"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ApiRestriction",
+  "description": "The restrictions for an API that is used to protect unauthorized access.",
+  "type": "object",
+  "properties": {
+    "type": {
+      "description": "Application restrictions limit an API key’s usage to specific websites, IP addresses, Android applications, or iOS applications. You can set one application restriction per key.",
+      "enum": [
+        "none",
+        "websites",
+        "ip_addresses",
+        "android_apps",
+        "ios_apps"
+      ]
+    },
+    "values": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": []
+}

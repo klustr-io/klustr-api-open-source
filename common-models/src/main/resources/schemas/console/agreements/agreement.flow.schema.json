@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "AgreementApprovalFlow",
+  "description": "Defines the key stakeholders who must sign and agree to the agreement being made active.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique ID of this agreement flow."
+    },
+    "org_id": {
+      "type": "string",
+      "description": "The organization that owns this flow"
+    },
+    "agreement_type": {
+      "type": "string",
+      "description": "The type of agreement that is approved"
+    },
+    "email": {
+      "type": "string",
+      "description": "The email address that will notify users when a request was made."
+    },
+    "approvers": {
+      "type": "array",
+      "description": "The list of roles that an approvers must have, and is used.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string",
+            "description": "The role that an approvers must have.",
+            "examples": ["org.agreements.approvers", "app.agreements.approvers"]
+          }
+        }
+      }
+    }
+  }
+}

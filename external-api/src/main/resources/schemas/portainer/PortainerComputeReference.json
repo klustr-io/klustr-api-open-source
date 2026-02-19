@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PortainerComputeReference",
+  "description": "A reference to a compute instance",
+  "type": "object",
+  "properties": {
+    "Id": {
+      "type": "string"
+    },
+    "Image": {
+      "type": "string"
+    },
+    "Created": {
+      "type": "integer"
+    },
+    "ImageID": {
+      "type": "string"
+    },
+    "State": {
+      "type": "string"
+    },
+    "Status": {
+      "type": "string"
+    },
+    "Ports": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "IP": {
+            "type": "string"
+          },
+          "PrivatePort": {
+            "type": "integer"
+          },
+          "PublicPort": {
+            "type": "integer"
+          },
+          "Type": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Labels": {
+      "existingJavaType": "java.util.Map<String,String>",
+      "type": "object"
+    }
+  },
+  "required": ["Name", "Driver", "Internal"]
+}

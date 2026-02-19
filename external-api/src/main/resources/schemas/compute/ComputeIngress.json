@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ComputeIngress",
+  "description": "Examines the current live configuration of the ingress and determines its status.",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "description": "If this compute has an ingress active and attached.",
+      "enum": [
+        "active", "disabled"
+      ]
+    },
+    "connection_string": {
+      "type": "string",
+      "description": "A connection string to use to connect to the instance or primary service."
+    },
+    "dns": {
+      "type": "object",
+      "description": "The DNS related to this compute instance",
+      "title": "ComputeIngressDns",
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "description": "If this DNS is active."
+        },
+        "zone": {
+          "type": "string",
+          "description": "The zone that this compute is bound to."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name for this dns ."
+        },
+        "ip": {
+          "type": "object",
+          "title": "ComputeIngressDnsIpRecord",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The type of ip address allocated",
+              "title": "ComputeIngressDnsIpRecordType",
+              "enum": ["private", "public"]
+            },
+            "address": {
+              "type": "string",
+              "description": "The ip address available and bound."
+            }
+          }
+        }
+      }
+    },
+    "bindings": {
+          "type": "array",
+          "description": "If binding should be on https",
+          "title": "ComputeIngressBindingDestination",
+          "items": {
+            "type": "object",
+            "title": "ComputeIngressBinding",
+            "properties": {
+              "server": {
+                "type": "string",
+                "description": "The destination server to route against."
+              },
+              "port": {
+                "type": "integer",
+                "description": "The destination to map to."
+              },
+              "weight": {
+                "type": "integer",
+                "description": "Optional weight for this server instance"
+              }
+            }
+          }
+        }
+  }
+}

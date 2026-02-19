@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ConsentGroup",
+  "description": "The scope of consents requested by this application",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique ID of this consent group (optional) if linked to application.",
+      "type": "string"
+    },
+    "scopes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "title": "ConsentScope",
+        "description": "The consent information requested by this app or available for this app to request.",
+        "properties": {
+          "id": {
+            "description": "The unique ID of this consent attribute.",
+            "type": "string"
+          },
+          "sensitivity": {
+            "description": "The sensitivity of this consent scope. This is read only and will be assigned by organization privacy.",
+            "type": "string"
+          },
+          "purpose": {
+            "type": "array",
+            "description": "The purposes associated with this consent scope.",
+            "items": {
+              "type": "object",
+              "$ref": "../consent/policies/data.purposes.schema.json"
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": []
+}

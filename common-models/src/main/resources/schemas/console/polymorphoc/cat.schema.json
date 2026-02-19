@@ -1,0 +1,17 @@
+{
+  "title": "Cat",
+  "type": "object",
+
+  "javaType": "example.animals.Cat",
+
+  "extends": {
+    "$ref": "animal.schema.json"
+  },
+
+  "properties": {
+    "lives": {
+      "type": "integer",
+      "default": 9
+    }
+  }
+}

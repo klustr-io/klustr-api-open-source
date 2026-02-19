@@ -1,0 +1,165 @@
+svix:
+  url: "${SVIX_URL:https://svix.dev.klustr.io}"
+  secret: "${SVIX_SECRET:}"
+
+lago:
+  url: "${LAGO_URL:https://lago-api.dev.klustr.io/api/v1}"
+  apiKey: "${LAGO_API_KEY:}"
+
+mailtrap:
+  apikey: "${MAILTRAP_API_KEY:}"
+
+cdn:
+  s3:
+    projectId: "${CDN_S3_PROJECT_ID:klustr.io}"
+    bucketId: "${CDN_S3_BUCKET_ID:media}"
+    url: "${CDN_S3_URL:http://minio.dev.klustr.io:9000}"
+    accessKey: "${CDN_S3_ACCESS_KEY:}"
+    secretKey: "${CDN_S3_SECRET_KEY:}"
+
+minio:
+  url: "${MINIO_URL:http://minio.dev.klustr.io:9000}"
+  accessKey: "${MINIO_ACCESS_KEY:}"
+  secretKey: "${MINIO_SECRET_KEY:}"
+
+camunda:
+  connectors:
+    url: "${CAMUNDA_CONNECTORS_URL:https://camunda-connectors.dev.klustr.io}"
+
+consent:
+  listener:
+    kafka:
+      brokers: "${CONSENT_KAFKA_BROKERS:kafka.dev.klustr.io:9092}"
+      consumer: "${CONSENT_KAFKA_CONSUMER:console-dev}"
+
+kafka:
+  servers: "${KAFKA_SERVERS:kafka.dev.klustr.io:9092}"
+
+ekyc:
+  verification:
+    listener:
+      kafka:
+        brokers: "${EKYC_KAFKA_BROKERS:kafka.dev.klustr.io:9092}"
+        consumer: "${EKYC_KAFKA_CONSUMER:console-dev}"
+
+prometheus:
+  url: "${PROMETHEUS_URL:https://metrics.dev.klustr.io}"
+
+kong:
+  admin:
+    url: "${KONG_ADMIN_URL:https://kong-admin.dev.klustr.io/admin}"
+  plugins:
+    prometheus:
+      status_code_metrics: "${KONG_PROM_STATUS_METRICS:true}"
+      bandwidth_metrics: "${KONG_PROM_BANDWIDTH_METRICS:false}"
+      latency_metrics: "${KONG_PROM_LATENCY_METRICS:true}"
+      upstream_health_metrics: "${KONG_PROM_UPSTREAM_HEALTH:false}"
+      per_consumer: "${KONG_PROM_PER_CONSUMER:true}"
+    token_introspection:
+      client_id: "${KONG_TOKEN_INTROSPECTION_CLIENT_ID:}"
+      client_secret: "${KONG_TOKEN_INTROSPECTION_CLIENT_SECRET:}"
+      introspection_endpoint: "${KONG_INTROSPECTION_ENDPOINT:https://hydra-admin.dev.klustr.io/admin/oauth2/introspect}"
+
+gitlab:
+  url: "${GITLAB_API_URL:https://kong-admin.dev.klustr.io/admin}"
+  token: "${GITLAB_API_KEY:}"
+
+hydra:
+  url: "${HYDRA_URL:https://hydra.dev.klustr.io}"
+  admin:
+    url: "${HYDRA_ADMIN_URL:https://hydra-admin.dev.klustr.io}"
+
+kratos:
+  admin:
+    url: "${KRATOS_ADMIN_URL:https://kratos-admin.dev.klustr.io}"
+  self-service:
+    url: "${KRATOS_SELF_SERVICE_URL:https://secure.dev.klustr.io/kratos/self-service/settings/browser?&prompt=profile}"
+  login:
+    listener:
+      kafka:
+        brokers: "${KRATOS_KAFKA_BROKERS:kafka.dev.klustr.io:9092}"
+        consumer: "${KRATOS_KAFKA_CONSUMER:console-dev}"
+
+keto:
+  write:
+    url: "${KETO_WRITE_URL:https://keto-admin.dev.klustr.io/admin}"
+  read:
+    url: "${KETO_READ_URL:https://keto.dev.klustr.io}"
+
+openapi:
+  tokenUrl: "${OPENAPI_TOKEN_URL:https://secure.dev.klustr.io/hydra/oauth2/token}"
+  authorizationUrl: "${OPENAPI_AUTH_URL:https://secure.dev.klustr.io/hydra/oauth2/auth}"
+
+server:
+  port: "${SERVER_PORT:7777}"
+  address: "${SERVER_ADDRESS:0.0.0.0}"
+  error:
+    include-message: ALWAYS
+    include-stacktrace: NEVER
+
+web:
+  cors:
+    allowed-origins: "${WEB_CORS_ALLOWED_ORIGINS:http://localhost:3000}"
+    allowed-methods: GET, POST, PATCH, PUT, DELETE, OPTIONS, HEAD
+    max-age: 3600
+
+management:
+  prometheus:
+    metrics:
+      export:
+        pushgateway:
+          enabled: true
+          base-url: "${PROM_PUSHGATEWAY_URL:https://metrics-pushgateway.dev.klustr.io}"
+          job: "${PROM_JOB:klustr.io}"
+          push-rate: 10s
+          shutdown-operation: NONE
+          grouping-key:
+            version: "${APP_VERSION:1.0.0}"
+            env: "${APP_ENV:localhost}"
+            region: "${APP_REGION:tokyo/home}"
+            instance: "${HOSTNAME:localhost}"
+            workload: "${APP_WORKLOAD:console-api}"
+
+rethinkdb:
+  hostname: "${RETHINKDB_HOST:rethinkdb.dev.klustr.io}"
+  port: "${RETHINKDB_PORT:28015}"
+
+db-adapter:
+  kafka:
+    brokers: "${DB_KAFKA_BROKERS:kafka.dev.klustr.io:9092}"
+
+veriff:
+  baseUrl: "${VERIFF_BASE_URL:https://stationapi.veriff.com}"
+  authKey: "${VERIFF_AUTH_KEY:}"
+
+spring:
+  data:
+    mongodb:
+      enabled: false
+  kafka:
+    bootstrap-servers: "${SPRING_KAFKA_BOOTSTRAP:kafka.dev.klustr.io:9092}"
+    consumer:
+      group-id: "${SPRING_KAFKA_GROUP:your-group-id}"
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+  security:
+    oauth2:
+      resourceserver:
+        opaque-token:
+          introspection-uri: "${OAUTH2_INTROSPECTION_URI:https://hydra-admin.dev.klustr.io/admin/oauth2/introspect}"
+          client-id: "${OAUTH2_INTROSPECTION_CLIENT_ID:}"
+          client-secret: "${OAUTH2_INTROSPECTION_CLIENT_SECRET:}"
+
+springdoc:
+  api-docs:
+    groups:
+      enabled: true
+  swagger-ui:
+    operationsSorter: 'alpha'
+    tagsSorter: 'alpha'
+
+logging:
+  level:
+    root: "${LOG_LEVEL_ROOT:WARN}"
+    io.klustr: "${LOG_LEVEL_KLUSTR:INFO}"

@@ -1,0 +1,17 @@
+{
+  "title": "ProjectMinioFeature",
+  "type": "object",
+  "description": "Enables minio features for a specific project.",
+  "javaType": "io.klustr.schemas.console.features.minio.ProjectMinioFeature",
+  "x-type-name": "minio",
+
+  "extends": {
+    "$ref": "project.feature.schema.json"
+  },
+
+  "properties": {
+
+  },
+
+  "required": []
+}

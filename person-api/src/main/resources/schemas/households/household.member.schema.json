@@ -1,0 +1,38 @@
+{
+  "title": "HouseholdMember",
+  "description": "A member of a particular household and their role or affiliation.",
+  "type": "object",
+  "properties": {
+    "person_id": {
+      "description": "The unique ID of the person.",
+      "type": "string"
+    },
+    "primary": {
+      "description": "If this person can be a primary contact for the household.",
+      "type": "boolean"
+    },
+    "create_date": {
+      "description": "The date this member was created, but could be earlier than start date given status.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "start_date": {
+      "description": "The date this member was or will be added to this household.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "expiration_date": {
+      "description": "The date this member was removed from the household.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "description": "The status of this household member.",
+      "type": "string",
+      "existingJavaType": "io.klustr.schemas.console.Status"
+    }
+  },
+  "required": [
+    "person_id"
+  ]
+}

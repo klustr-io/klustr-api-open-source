@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GitCreateProjectRequest",
+  "type": "object",
+  "required": ["name", "user_id"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the new project."
+    },
+    "path": {
+      "type": "string",
+      "description": "The unique path for the project."
+    },
+    "user_id": {
+      "type": "integer",
+      "description": "The user ID of the project owner."
+    },
+    "description": {
+      "type": "string",
+      "description": "Short project description."
+    },
+    "visibility": {
+      "type": "string",
+      "enum": ["private", "internal", "public"],
+      "default": "private",
+      "description": "Project visibility level."
+    },
+    "namespace_id": {
+      "type": "integer",
+      "description": "Namespace for the new project. Specify a group ID or subgroup ID. If not provided, defaults to the current user’s personal namespace."
+    },
+    "initialize_with_readme": {
+      "type": "boolean",
+      "default": false,
+      "description": "Initialize repository with a README."
+    },
+    "lfs_enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable Git LFS support."
+    },
+    "issues_enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable issue tracking."
+    },
+    "merge_requests_enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable merge requests."
+    },
+    "wiki_enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable wiki."
+    },
+    "snippets_enabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable snippets."
+    },
+    "shared_runners_enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable shared runners for CI/CD."
+    },
+    "auto_devops_deploy_strategy": {
+      "type": "string",
+      "enum": [
+        "continuous", "manual","timed_incremental"
+      ],
+      "default": "continuous"
+    },
+    "auto_devops_enabled": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "additionalProperties": false
+}

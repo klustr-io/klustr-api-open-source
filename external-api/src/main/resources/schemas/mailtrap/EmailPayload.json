@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "title": "EmailPayload",
+  "properties": {
+    "from": {
+      "type": "object",
+      "description": "The source email.",
+      "title": "EmailReference",
+      "javaType": "io.klustr.schemas.integrations.mailtrap.EmailReference",
+      "properties": {
+        "name": {
+          "description": "The name of the person to send to.",
+          "type": "string"
+        },
+        "email": {
+          "description": "The email to send to.",
+          "type": "string"
+        }
+      }
+    },
+    "to": {
+      "type": "array",
+      "description": "The source email.",
+      "items": {
+        "title": "EmailReference",
+        "javaType": "io.klustr.schemas.integrations.mailtrap.EmailReference",
+        "properties": {
+          "name": {
+            "description": "The name of the person to send to.",
+            "type": "string"
+          },
+          "email": {
+            "description": "The email to send to.",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "subject": {
+      "type": "string",
+      "description": "The subject of this email"
+    },
+    "text": {
+      "type": "string",
+      "description": "The text version of this email"
+    },
+    "html": {
+      "type": "string",
+      "description": "The html version of this email"
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "The feature that was generated, populated on server side.",
+      "format": "date-time"
+    },
+    "template_uuid": {
+      "type": "string"
+    },
+    "template_variables": {
+      "type": "object",
+      "description": "The variables used to populate the template",
+      "existingJavaType": "java.util.Map<String, String>"
+    }
+  }
+}

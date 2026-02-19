@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GitUpdateProjectRequest",
+  "type": "object",
+  "required": [],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the new project."
+    },
+    "description": {
+      "type": "string",
+      "description": "Short project description."
+    },
+    "avatar": {
+      "type": "string",
+      "description": "Short project description."
+    },
+    "auto_devops_enabled": {
+      "type": "boolean",
+      "default": "true"
+    },
+    "auto_devops_deploy_strategy": {
+      "type": "string",
+      "default": "continuous"
+    }
+  },
+  "additionalProperties": false
+}

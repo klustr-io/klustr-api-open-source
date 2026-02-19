@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "title": "HttpUsageMetrics",
+  "properties": {
+    "status": {
+      "type": "string"
+    },
+    "data": {
+      "type": "object",
+      "title": "HttpUsageMetric",
+      "properties": {
+        "resultType": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "title": "HttpMetric",
+            "properties": {
+              "metric": {
+                "type": "object",
+                "properties": {
+                  "service": {
+                    "type": "string"
+                  }
+                }
+              },
+              "values": {
+                "type": "array",
+                "items": {
+                  "type": "array"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

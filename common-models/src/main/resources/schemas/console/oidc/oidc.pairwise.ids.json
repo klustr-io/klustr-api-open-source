@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "UserPairwiseIds",
+  "description": "Enabling mapping an identifier that is pairwise to the original subject identifier.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "A uuid for this pairwise id map.",
+      "type": "string"
+    },
+    "pairwise_id": {
+      "description": "The pairwise ID mapped to oidc provider",
+      "type": "string"
+    },
+    "subject_id": {
+      "description": "The pairwise ID mapped to oidc provider",
+      "type": "string"
+    },
+    "client_id": {
+      "description": "The client ID that was associated to this pairwise ID",
+      "type": "string"
+    },
+    "project_id": {
+      "description": "The client ID that was associated to this pairwise ID",
+      "type": "string"
+    },
+    "org_id": {
+      "description": "The org ID that was associated to this pairwise ID",
+      "type": "string"
+    },
+    "timestamp": {
+      "description": "The timestamp that this membership was updated.",
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": []
+}

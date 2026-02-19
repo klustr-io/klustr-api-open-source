@@ -1,0 +1,20 @@
+{
+  "title": "Animal",
+  "type": "object",
+
+  "javaType": "example.animals.Animal",
+
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["cat", "dog"],
+      "description": "Discriminator for animal subtype"
+    },
+
+    "name": {
+      "type": "string"
+    }
+  },
+
+  "required": ["type", "name"]
+}

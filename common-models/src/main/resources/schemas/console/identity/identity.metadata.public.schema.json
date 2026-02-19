@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "title": "IdentityTraits",
+  "description": "This maps to the identity traits found in ORY kratos so that we can get basic information about a user.",
+  "properties": {
+    "name": {
+      "type": "object",
+      "title": "IdentityName",
+      "description": "The name for this identity",
+      "properties": {
+        "given_name": {
+          "type": "string",
+          "description": "The given name of this identity"
+        },
+        "family_name": {
+          "type": "string",
+          "description": "The family name of this identity"
+        },
+        "middle_name": {
+          "type": "string",
+          "description": "The middle name of this identity"
+        }
+      }
+    },
+    "birthdate": {
+      "type": "string",
+      "format": "date",
+      "description": "The date of birth for this identity (YYYY-MM-DD)",
+      "existingJavaType": "org.joda.time.LocalDate"
+    },
+    "email": {
+      "type": "string",
+      "description": "The email address for this identity"
+    },
+    "username": {
+      "type": "string",
+      "description": "The username that the user can use to login."
+    },
+    "gender": {
+      "type": "string",
+      "description": "The gender of the individual",
+      "existingJavaType": "io.klustr.schemas.console.Gender"
+    },
+    "citizenship": {
+      "type": "string",
+      "description": "The citizenship of the individual"
+    },
+    "locale": {
+      "type": "string",
+      "description": "The locale of the individual"
+    }
+  }
+}

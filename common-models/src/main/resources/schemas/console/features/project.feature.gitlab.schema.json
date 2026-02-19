@@ -1,0 +1,17 @@
+{
+  "title": "ProjectGitLabFeature",
+  "type": "object",
+  "description": "Enables gitlab on a project and creates a space for code.",
+  "javaType": "io.klustr.schemas.console.features.gitlab.ProjectGitLabFeature",
+  "x-type-name": "gitlab",
+
+  "extends": {
+    "$ref": "project.feature.schema.json"
+  },
+
+  "properties": {
+
+  },
+
+  "required": []
+}

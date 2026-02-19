@@ -1,0 +1,31 @@
+package io.klustr.billing.models;
+
+import io.klustr.utils.U;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
+import java.util.concurrent.TimeUnit;
+
+public class BillingEventForProjectMonthlyActiveUser extends BillingEvent {
+
+    @Deprecated
+    public BillingEventForProjectMonthlyActiveUser() {
+    }
+    public BillingEventForProjectMonthlyActiveUser(BillingKey key, String user_id, DateTime timestamp) {
+        // obuscate the user id for security
+        user_id = U.md5(user_id);
+        this.properties.put("user_id", user_id);
+        this.properties.put("project_id", key.getProjectId());
+        this.properties.put("org_id", key.getOrgId());
+        this.timestamp = TimeUnit.MILLISECONDS.toSeconds(timestamp.getMillis());
+        DateTimeFormatter yyyyMMdd = DateTimeFormat.forPattern("yyyy-MM-dd-HH:mm");
+        this.transaction_id = yyyyMMdd.print(new DateTime(timestamp)) + "_mau_" + key.getProjectId() + "_" + U.md5(user_id);
+        this.external_subscription_id = key.getProjectId();
+    }
+
+    @Override
+    public String getLagoMappedBillingCode() {
+        return "count_users";
+    }
+}

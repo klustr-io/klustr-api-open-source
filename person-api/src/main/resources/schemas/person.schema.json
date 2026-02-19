@@ -1,0 +1,167 @@
+{
+  "title": "Person",
+  "description": "A sample person",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique ID of the person.",
+      "type": "string"
+    },
+    "namespace": {
+      "description": "The namespace for this person which owns the record or operates it.",
+      "type": "string"
+    },
+    "deleted": {
+      "description": "If the person is deleted.",
+      "type": "boolean"
+    },
+    "verification": {
+      "description": "The namespace for this person which owns the record or operates it.",
+      "type": "object",
+      "title": "PersonVerification",
+      "properties": {
+        "status": {
+          "type": "string",
+          "title": "PersonVerificationStatus",
+          "description": "The status of the current verification",
+          "enum": [
+            "started",
+            "expired",
+            "abandoned",
+            "rejected",
+            "success",
+            "submitted",
+            "declined",
+            "approved"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "name": {
+      "description": "The names for this person.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "./name.schema.json"
+      }
+    },
+    "citizenship": {
+      "description": "The citizenship for this person.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "./verification/citizenship.schema.json"
+      }
+    },
+    "contact": {
+      "description": "The contact information for this person",
+      "type": "object",
+      "$ref": "./person.contact.schema.json"
+    },
+    "ids": {
+      "description": "Identities that can be used to map this person to other systems and management systems. For example if this person is from a CRM or could be linked to an identity management solution.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "./external.reference.schema.json"
+      }
+    },
+    "documents": {
+      "description": "The ID documents related for this person.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "./verification/person.identification.schema.json"
+      }
+    },
+    "credentials": {
+      "type": "object",
+      "title": "PersonCredentials",
+      "description": "The credentials available for this identity",
+      "existingJavaType": "io.klustr.schemas.console.identity.IdentityCredentials"
+    },
+    "creation_date": {
+      "description": "The date this client was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "object",
+      "title": "ProfileStatus",
+      "properties": {
+        "supervised_status": {
+          "type": "object",
+          "title": "SupervisedStatus",
+          "javaType": "io.klustr.schemas.persons.supervised.SupervisedStatus",
+          "properties": {
+            "avatar": {
+              "type": "string",
+              "javaType": "io.klustr.schemas.persons.supervised.AvatarPermission",
+              "title": "AvatarPermissions",
+              "description": "The supervised account can change their profile picture",
+              "enum": [
+                "deny",
+                "allow"
+              ]
+            },
+            "third_party_consent": {
+              "type": "string",
+              "javaType": "io.klustr.schemas.persons.supervised.ThirdPartyPermission",
+              "title": "ThirdPartyPermission",
+              "description": "The supervised account can approve consent for basic operations or not.",
+              "enum": [
+                "deny_all",
+                "allow_basic"
+              ]
+            }
+          }
+        },
+        "relationship_status": {
+          "type": "string",
+          "javaType": "io.klustr.schemas.persons.RelationshipStatus",
+          "title": "RelationshipStatus",
+          "description": "The relationship status for the user.",
+          "enum": [
+            "single",
+            "co-habitation",
+            "in-relationship",
+            "married",
+            "divorced",
+            "widow"
+          ]
+        },
+        "parental_status": {
+          "type": "string",
+          "javaType": "io.klustr.schemas.persons.ParentalStatus",
+          "title": "ParentalStatus",
+          "description": "The relationship status for the user.",
+          "enum": [
+            "parent",
+            "caregiver",
+            "none"
+          ]
+        }
+      }
+    },
+    "traits": {
+      "type": "object",
+      "description": "Traits and meta data related to the user that are public available.",
+      "existingJavaType": "io.klustr.schemas.console.identity.IdentityTraits"
+    },
+    "metadata_public": {
+      "type": "object",
+      "description": "Public related information",
+      "existingJavaType": "io.klustr.schemas.console.identity.IdentityMetadataPublic"
+    }
+  },
+  "required": [
+    "id"
+  ]
+}

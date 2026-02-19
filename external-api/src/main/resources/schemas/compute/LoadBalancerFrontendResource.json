@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LoadBalancerFrontendResource",
+  "description": "A frontend for the loadbalancer for serving content",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the front end."
+    },
+    "mode": {
+      "type": "string",
+      "description": "The mode of operation such as http or tcp",
+      "enum": ["http", "tcp"]
+    }
+  },
+  "required": []
+}

@@ -1,0 +1,47 @@
+{
+  "_creation_date": "2025-09-01T15:00:00Z",
+  "_etag": "433bfbc2515aa820f85de2043780f5a2",
+  "_modified_date": "2025-09-01T15:00:00Z",
+  "classifiers": {
+    "mood": "peaceful",
+    "objects": [
+      "cat",
+      "cushion"
+    ],
+    "scene": "indoor"
+  },
+  "filename": "cat_sleeping.jpg",
+  "hashtags": [
+    "#catsofinstagram",
+    "#sleepykitty",
+    "#adorable"
+  ],
+  "id": "59a1b022-7e83-4c11-97a4-872d3e820c88",
+  "location": {
+    "lat": 51.5074,
+    "long": -0.1278
+  },
+  "md5": "1234abcd5678ef9012ab34cd56ef7890",
+  "owner": {
+    "subject_id": "sub-777888999111",
+    "acls": [{
+      "global": {
+        "sub": {
+          "list": ["x","y","z"]
+        }
+      }
+    }]
+  },
+  "permission_set": {
+    "id": "permset-photos-pets",
+    "link": "acl://permissions/photos/pets"
+  },
+  "size": 1843290,
+  "tags": [
+    "cat",
+    "sleep",
+    "pet",
+    "cute"
+  ],
+  "url": "https://example.com/photos/cat_sleeping.jpg"
+}

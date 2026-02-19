@@ -1,0 +1,3 @@
+rethinkdb:
+  hostname: rethinkdb.dev.klustr.io
+  port: 28015

@@ -1,0 +1,231 @@
+# -- Events API
+- id: "events-api"
+  name: "Events API"
+  summary: "Enable your application to record events such as exposure to experiments."
+  org_id: "klustr.io"
+  icon: "https://cdn.dev.klustr.io/klustr/gcs/send.png"
+  url: "https://api.dev.klustr.io/events"
+  open_api_url: "https://api.dev.klustr.io/v3/api-docs.yaml/events"
+  status: general_availability
+  consent_scopes:
+    - "profile"
+  routes:
+    - hosts:
+        - "gateway.dev.klustr.io"
+      paths:
+        - "/events"
+  tags:
+    - "analytics"
+    - "data-platform"
+
+# -- Token Introspection
+- id: "token-introspection-api"
+  name: "Token Introspection API"
+  summary: "Enable token introspection validation given an access token."
+  org_id: "klustr.io"
+  icon: "https://cdn.dev.klustr.io/klustr/gcs/data-protection-private.png"
+  url: "https://hydra-admin.dev.klustr.io/admin/oauth2/introspect"
+  open_api_url: "https://api.dev.klustr.io/api/token-introspection.yaml"
+  status: general_availability
+  consent_scopes: [ ]
+  routes:
+    - hosts:
+        - "gateway.dev.klustr.io"
+      paths:
+        - "/oauth2/introspect"
+  tags:
+    - "security"
+
+# -- EKYC
+- id: "ekyc-api"
+  name: "eKYC Verification API"
+  summary: "Enables your applications to participate in eKYC flows to verify the user\
+    \ identity through face and document verification processes."
+  org_id: "klustr.io"
+  icon: "https://cdn.dev.klustr.io/klustr/gcs/fingerprints.png"
+  url: "https://api.dev.klustr.io/ekyc"
+  open_api_url: "https://api.dev.klustr.io/v3/api-docs.yaml/ekyc"
+  status: general_availability
+  consent_scopes:
+    - "profile"
+    - "identity.read"
+    - "identity.write"
+    - "eykc.read"
+    - "ekyc.write"
+  routes:
+    - hosts:
+        - "gateway.dev.klustr.io"
+      paths:
+        - "/ekyc"
+  tags:
+    - "identity"
+    - "privacy"
+
+# -- Projects
+- id: "projects-api"
+  name: "Agora Console API"
+  summary: "Exposes the APIs used to manage the current console and enables the creation\
+    \ of projects, apps, and OIDC clients."
+  org_id: "klustr.io"
+  icon: "https://cdn.dev.klustr.io/klustr/gcs/hexagon.png"
+  url: "https://api.dev.klustr.io/console/projects"
+  open_api_url: "https://api.dev.klustr.io/v3/api-docs.yaml/projects"
+  status: general_availability
+  consent_scopes: [ ]
+  routes:
+    - hosts:
+        - "gateway.dev.klustr.io"
+      paths:
+        - "/console/projects"
+  tags: [ ]
+
+# -- Accounts
+- id: "accounts-api"
+  name: "Account API"
+  summary: "Exposes access to creating accounts and billable entities."
+  org_id: "klustr.io"
+  icon: "https://cdn.dev.klustr.io/klustr/gcs/app-design.png"
+  url: "https://api.dev.klustr.io/accounts"
+  open_api_url: "https://api.dev.klustr.io/v3/api-docs.yaml/accounts"
+  status: general_availability
+  consent_scopes: [ ]
+  routes:
+    - hosts:
+        - "gateway.dev.klustr.io"
+      paths:
+        - "/console/accounts"
+  tags: [ ]
+
+# -- API Gateway
+- id: "gateway"
+  name: "Service Catalog API"
+  summary: "Exposes access to creating accounts and billable entities."
+  org_id: "klustr.io"
+  icon: "https://cdn.dev.klustr.io/klustr/gcs/dataset.png"
+  url: "https://api.dev.klustr.io/gateway"
+  open_api_url: "https://api.dev.klustr.io/v3/api-docs.yaml/gateway"
+  status: general_availability
+  consent_scopes: [ ]
+  routes:
+    - hosts:
+        - "gateway.dev.klustr.io"
+      paths:
+        - "/console/gateway"
+  tags: [ ]
+
+- id: "notification-api"
+  name: "Notification API"
+  summary: "Enable sending notifications of various types such as email, sms, and\
+    \ push notifications."
+  org_id: "klustr.io"
+  icon: "https://cdn.dev.klustr.io/klustr/gcs/notification.png"
+  url: "https://api.dev.klustr.io/notifications"
+  open_api_url: "https://api.dev.klustr.io/v3/api-docs.yaml/notifications"
+  status: general_availability
+  consent_scopes:
+    - "profile"
+  routes:
+    - hosts:
+        - "gateway.dev.klustr.io"
+      paths:
+        - "/notifications"
+  tags:
+    - "analytics"
+    - "data-platform"
+
+- id: "consent-api"
+  name: "Consent API"
+  summary: "Consent APIs for management of all consent features in the city."
+  org_id: "klustr.io"
+  icon: "https://cdn.dev.klustr.io/klustr/gcs/data-protection.png"
+  url: "https://api.dev.klustr.io/consent"
+  open_api_url: "https://api.dev.klustr.io/v3/api-docs.yaml/consent"
+  status: general_availability
+  consent_scopes:
+    - "profile"
+    - "consent.read"
+    - "consent.write"
+  routes:
+    - hosts:
+        - "gateway.dev.klustr.io"
+      paths:
+        - "/consent"
+  tags:
+    - "identity"
+    - "privacy"
+
+
+- id: "identity-api"
+  name: "Identity API"
+  summary: "Enables the management and creation of identities with an organization\
+    \ as well as their general profile and account settings."
+  org_id: "klustr.io"
+  icon: "https://cdn.dev.klustr.io/klustr/gcs/bank-card.png"
+  url: "https://api.dev.klustr.io/identities"
+  open_api_url: "https://api.dev.klustr.io/v3/api-docs.yaml/identity"
+  status: general_availability
+  consent_scopes:
+    - "profile"
+    - "email"
+    - "identity"
+  routes:
+    - hosts:
+        - "gateway.dev.klustr.io"
+      paths:
+        - "/identities"
+  tags:
+    - "identity"
+
+- id: "directory-api"
+  name: "Directory API"
+  summary: "Enables you to interact and manage organizations, users, and groups."
+  org_id: "klustr.io"
+  icon: "https://cdn.dev.klustr.io/klustr/gcs/objective.png"
+  url: "https://api.dev.klustr.io/directory"
+  open_api_url: "https://api.dev.klustr.io/v3/api-docs.yaml/directory"
+  status: general_availability
+  consent_scopes: [ ]
+  routes:
+    - hosts:
+        - "gateway.dev.klustr.io"
+      paths:
+        - "/directory"
+  tags:
+    - "data-platform"
+
+- id: "directions-api"
+  name: "Directions API"
+  summary: "Given pairs of coordinates this service will return routes and directions\
+    \ for walking, driving and other transportation methods."
+  org_id: "klustr.io"
+  icon: "https://cdn.dev.klustr.io/klustr/gcs/location.png"
+  url: "https://maps.dev.klustr.io/ors/v2/directions"
+  open_api_url: "https://api.dev.klustr.io/api/directions.json"
+  status: general_availability
+  consent_scopes: [ ]
+  routes:
+    - hosts:
+        - "gateway.dev.klustr.io"
+      paths:
+        - "/directions"
+  tags:
+    - "analytics"
+    - "location"
+
+- id: "cdn-api"
+  name: "Content Delivery API"
+  summary: "Enables your service or application to upload images and video for the use for content delivery."
+  org_id: "klustr.io"
+  icon: "https://cdn.dev.klustr.io/klustr/gcs/db.png"
+  url: "https://api.dev.klustr.io/cdn"
+  open_api_url: "https://api.dev.klustr.io/v3/api-docs.yaml/cdn"
+  status: general_availability
+  consent_scopes: [ ]
+  routes:
+    - hosts:
+        - "gateway.dev.klustr.io"
+      paths:
+        - "/cdn"
+  tags:
+    - "analytics"
+    - "location"

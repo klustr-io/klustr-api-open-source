@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ServiceRegistrationRequest",
+  "description": "Information about a particular API for registration.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The ID of the service to update or create, if provided will update.",
+      "type": "string"
+    },
+    "name": {
+      "description": "The name of the service.",
+      "type": "string"
+    },
+    "code": {
+      "description": "The unique code of this service.",
+      "type": "string"
+    },
+    "org_id": {
+      "description": "The organization that owns this service.",
+      "type": "string"
+    },
+    "summary": {
+      "description": "The quick summary of this service for basic information on why and when to use it.",
+      "type": "string"
+    },
+    "path": {
+      "description": "The path for this service when registered in the API gateway.",
+      "type": "string"
+    },
+    "icon": {
+      "description": "The image or logo to associate with this API which can be base64 or a URL.",
+      "type": "string"
+    },
+    "url": {
+      "description": "The full URL for this service.",
+      "type": "string"
+    },
+    "documentation_url": {
+      "description": "The URL where additional documentation about this service can be found",
+      "type": "string"
+    },
+    "terms_url": {
+      "description": "The URL where terms and conditions of this API are used.",
+      "type": "string"
+    },
+    "open_api_url": {
+      "description": "The URL where the open api specification is defined.",
+      "type": "string"
+    },
+    "ping_api_url": {
+      "description": "The URL used to check if the service is active. If left blank we assume the default route is ok.",
+      "type": "string"
+    },
+    "status": {
+      "description": "The URL used to check if the service is active. If left blank we assume the default route is ok.",
+      "type": "string",
+      "existingJavaType": "io.klustr.schemas.console.services.ServiceEntryStatus"
+    },
+    "security": {
+      "description": "The security to activate on this service.",
+      "type": "string",
+      "existingJavaType": "io.klustr.schemas.console.services.ServiceSecurityRequirement"
+    }
+  },
+  "required": []
+}

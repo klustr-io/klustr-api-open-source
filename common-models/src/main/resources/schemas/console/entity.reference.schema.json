@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "EntityReference",
+  "description": "https://developers.google.com/analytics/devguides/collection/protocol/v1/devguide#commonhits",
+  "type": "object",
+  "javaType": "io.klustr.schemas.console.EntityReference",
+  "properties": {
+    "id": {
+      "description": "The id of the entity.",
+      "type": "string"
+    },
+    "name": {
+      "description": "The display name for this entity.",
+      "type": "string"
+    }
+  },
+  "required": []
+}

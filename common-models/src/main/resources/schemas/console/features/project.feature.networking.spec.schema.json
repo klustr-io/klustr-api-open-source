@@ -1,0 +1,33 @@
+{
+  "title": "NetworkingSpec",
+  "type": "object",
+  "description": "Networking and exposure configuration.",
+  "javaType": "io.klustr.schemas.console.features.core.NetworkingSpec",
+  "properties": {
+    "internal_port": {
+      "type": "integer",
+      "description": "Internal service port.",
+      "examples": [
+        27017
+      ]
+    },
+    "protocol": {
+      "type": "string",
+      "description": "Transport protocol.",
+      "enum": [
+        "tcp",
+        "http"
+      ],
+      "examples": [
+        "tcp"
+      ]
+    },
+    "endpoint_template": {
+      "type": "string",
+      "description": "Connection string or endpoint template.",
+      "examples": [
+        "mongodb://{username}:{password}@{projectId}.dev.klustr.io:27017"
+      ]
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "title": "IdentityUserProfile",
+  "description": "The online persona and profile for a specific identity.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique ID of this identity."
+    },
+    "traits": {
+      "type": "object",
+      "title": "IdentityTraits",
+      "description": "The traits of this individual",
+      "existingJavaType": "io.klustr.schemas.console.identity.IdentityTraits"
+    },
+    "metadata_public": {
+      "type": "object",
+      "title": "IdentityMetadataPublic",
+      "existingJavaType": "io.klustr.schemas.console.identity.IdentityMetadataPublic"
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "WebhookEndpoint",
+  "description": "An endpoint for a webhook registered under a specific app.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The optional unique identifier for this endpoint."
+    },
+    "uid": {
+      "type": "string",
+      "description": "Mapping to the external ID of the endpoint."
+    },
+    "external_id": {
+      "type": "object",
+      "description": "The ID of this webhook from the external system.",
+      "existingJavaType": "io.klustr.schemas.console.webhooks.WebhookExternalId"
+    },
+    "description": {
+      "type": "string",
+      "description": "The friendly description for this endpoint."
+    },
+    "disabled": {
+      "type": "boolean",
+      "description": "if this endpoint is disabled"
+    },
+    "secret": {
+      "type": "string",
+      "description": "The endpoint's verification secret. If null is passed, a secret is automatically generated. Format: base64 encoded random bytes optionally prefixed with whsec_. Recommended size: 24."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata related to the address",
+      "existingJavaType": "java.util.Map<String,String>"
+    },
+    "date_created": {
+      "description": "The time and date that this endpoint was created",
+      "type": "string",
+      "format": "date-time"
+    },
+    "date_modified": {
+      "description": "The time and date that this endpoint was modified",
+      "type": "string",
+      "format": "date-time"
+    },
+    "url": {
+      "description": "The url for this endpoint to send websocket events to",
+      "type": "string",
+      "format": "uri",
+      "pattern": "^http[s]*\\:[\\/]{2}"
+    },
+    "filter_types": {
+      "description": "The types of events to filter, leave empty to receive all events.",
+      "type": "array",
+      "existingJavaType": "java.util.Set<String>",
+      "items": {
+        "type": "string"
+      }
+    },
+    "channels": {
+      "description": "List of message channels this endpoint listens to (omit for all)",
+      "type": "array",
+      "existingJavaType": "java.util.Set<String>",
+      "items": {
+        "type": "string"
+      }
+    },
+    "rate_limit": {
+      "description": "The rate limits for this project",
+      "type": "integer"
+    }
+  }
+}

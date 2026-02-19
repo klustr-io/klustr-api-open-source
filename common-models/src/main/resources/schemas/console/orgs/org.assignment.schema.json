@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "OrgAssignment",
+  "description": "Defines an assignment of a user to a organizational unit.",
+  "$comment": "https://stackoverflow.com/questions/32362286/adding-user-to-organization-unit-and-group-using-google-directory-api",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The generated ID for this assignment.",
+      "type": "string",
+      "readOnly": true
+    },
+    "customer_id": {
+      "description": "The customer ID of this organization",
+      "type": "string"
+    },
+    "org_id": {
+      "description": "The unique ID of this organization",
+      "type": "string"
+    },
+    "org_path": {
+      "description": "The unique ID of this organization",
+      "type": "string"
+    },
+    "assigned_to": {
+      "description": "The unique ID of the entity this role is assigned to—either the userId of a user, the groupId of a group, or the uniqueId of a service account as defined in Identity and Access Management (IAM).",
+      "type": "string"
+    },
+    "assignee_type": {
+      "description": "Output only. The type of the assignee (USER or GROUP).",
+      "type": "string",
+      "enum": [
+        "user",
+        "group"
+      ]
+    }
+  }
+}

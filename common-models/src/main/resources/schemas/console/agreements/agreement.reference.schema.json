@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "AgreementReference",
+  "description": "Reference to a specific agreement without exposing public metadata.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique ID of this agreement."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of this agreement."
+    },
+    "version": {
+      "type": "object",
+      "description": "The version for this agreement.",
+      "$ref": "./agreement.version.schema.json"
+    }
+  }
+}

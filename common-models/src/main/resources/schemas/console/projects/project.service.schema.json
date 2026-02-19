@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ProjectServiceReference",
+  "description": "A reference to a service that a project is enabled to consume.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The service that is registered with this project"
+    },
+    "type": {
+      "type": "string",
+      "description": "The URI for this project.",
+      "enum": ["api", "database", "compute"]
+    },
+    "uri": {
+      "type": "string",
+      "description": "The URI for this project."
+    }
+  },
+  "required": []
+}

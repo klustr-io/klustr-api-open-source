@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "BillingSubscription",
+  "description": "This object represents a plan. This plan can then be assigned to a customer.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique external identifier for the subscription. This identifier serves as an idempotency key, ensuring that each subscription is unique.",
+      "type": "string"
+    },
+    "name": {
+      "description": "The display name of the subscription on an invoice. This field allows for customization of the subscription's name for billing purposes, especially useful when a single customer has multiple subscriptions using the same plan.",
+      "type": "string"
+    },
+    "plan_code": {
+      "description": "The unique code representing the plan to be attached to the customer. This code must correspond to the code property of one of the active plans.",
+      "type": "string"
+    },
+    "external_id": {
+      "description": "The external unique identifier (provided by your own application)",
+      "type": "string"
+    },
+    "external_customer_id": {
+      "description": "The customer external unique identifier (provided by your own application)",
+      "type": "string"
+    },
+    "ending_at": {
+      "description": "The effective end date of the subscription. If this field is set to null, the subscription will automatically renew. This date should be provided in ISO 8601 datetime format, and use Coordinated Universal Time (UTC).",
+      "type": "string",
+      "format": "date-time"
+    },
+    "subscription_at": {
+      "description": "The customer external unique identifier (provided by your own application)",
+      "type": "string",
+      "format": "date-time"
+    },
+    "billing_time": {
+      "description": "The billing time for the subscription, which can be set as either anniversary or calendar. If not explicitly provided, it will default to calendar. The billing time determines the timing of recurring billing cycles for the subscription. By specifying anniversary, the billing cycle will be based on the specific date the subscription started (billed fully), while calendar sets the billing cycle at the first day of the week/month/year (billed with proration).",
+      "type": "string",
+      "enum": [
+        "calendar",
+        "anniversary"
+      ]
+    }
+  },
+  "required": []
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="acls" class="io.klustr.permissions.kafka.KafkaWrapedPermissionProvider">
+        <constructor-arg value="${db-adapter.kafka.brokers}"/>
+        <constructor-arg>
+            <bean class="io.klustr.integrations.ory.KetoPermissionProvider"/>
+        </constructor-arg>
+    </bean>
+
+</beans>

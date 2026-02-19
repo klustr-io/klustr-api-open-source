@@ -1,0 +1,57 @@
+{
+  "title": "ApplicationEvent",
+  "description": "https://developers.google.com/analytics/devguides/collection/protocol/v1/devguide#commonhits",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "description": "The unique event ID",
+      "type": "string"
+    },
+    "user_id": {
+      "description": "The unique user ID for this experiment",
+      "type": "string"
+    },
+    "device_id": {
+      "type": "string",
+      "description": "The unique device ID"
+    },
+    "anonymous_id": {
+      "type": "string",
+      "description": "The anonymous ID of the user"
+    },
+    "ip_address": {
+      "type": "string",
+      "description": "The IP address of the user"
+    },
+    "app_id": {
+      "type": "string"
+    },
+    "received_at": {
+      "description": "The date this client was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "event_type": {
+      "type": "string"
+    },
+    "event_category": {
+      "type": "string"
+    },
+    "event_action": {
+      "type": "string"
+    },
+    "event_label": {
+      "type": "string"
+    },
+    "social_action": {
+      "type": "string"
+    },
+    "social_network": {
+      "type": "string"
+    },
+    "social_target": {
+      "type": "string"
+    }
+  },
+  "required": []
+}

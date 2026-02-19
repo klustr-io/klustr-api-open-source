@@ -1,0 +1,20 @@
+{
+  "title": "VeriffValue",
+  "description": "The value of a property from veriff which would contain the value and confidence score.",
+  "type": "object",
+
+  "properties": {
+      "confidenceCategory": {
+        "type": "string"
+      },
+      "value": {
+        "type": "string"
+      },
+      "sources": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+  }
+}

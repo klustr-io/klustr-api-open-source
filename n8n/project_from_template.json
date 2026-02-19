@@ -1,0 +1,1091 @@
+{
+  "name": "Project Template",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -2592,
+        -752
+      ],
+      "id": "09d83770-d6db-4f8b-ad03-a4053cef5ca8",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "authentication": "gitPassword",
+        "operation": "clone",
+        "repositoryPath": "=/tmp/{{ $('Normalize').item.json.project.id }}",
+        "sourceRepository": "={{ $('Get Template').item.json.required_features.git.git_url }}"
+      },
+      "type": "n8n-nodes-base.git",
+      "typeVersion": 1,
+      "position": [
+        880,
+        -912
+      ],
+      "id": "52481004-dd8f-4c80-ad74-f027eb8ad060",
+      "name": "Clone Existing Template",
+      "credentials": {
+        "gitPassword": {
+          "id": "KrF6mkeX85dl3SG6",
+          "name": "GitLab Admin Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.dev.klustr.io/console/projects/{{$json.project.id}}/git",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Data').item.json.accessToken }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        432,
+        -912
+      ],
+      "id": "3838e92f-83b0-4549-9abd-65e7924ad5e6",
+      "name": "Create Git"
+    },
+    {
+      "parameters": {
+        "authentication": "gitPassword",
+        "operation": "push",
+        "repositoryPath": "=/tmp/{{ $('Normalize').item.json.project.id }}",
+        "options": {
+          "targetRepository": "=https://gitlab.dev.klustr.io/{{ $('Normalize').item.json.project.org_id }}/{{ $('Normalize').item.json.project.id }}.git"
+        }
+      },
+      "type": "n8n-nodes-base.git",
+      "typeVersion": 1,
+      "position": [
+        1328,
+        -912
+      ],
+      "id": "a1430c76-c3f4-4124-a05c-ffa65220c3bd",
+      "name": "Push Template to Project Repo",
+      "credentials": {
+        "gitPassword": {
+          "id": "KrF6mkeX85dl3SG6",
+          "name": "GitLab Admin Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "=cd /tmp/{{ $('Normalize').item.json.project.id }}\ngit remote rename origin old-origin\ngit remote add origin https://gitlab.dev.klustr.io/{{ $('Data').item.json.org_id }}/{{ $('Normalize').item.json.project.id }}.git"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        1104,
+        -912
+      ],
+      "id": "19c5267e-ba99-4cfd-ac55-d0d2b43b6ce8",
+      "name": "Git Switch Repo"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Get Template').item.json.required_features.git.git_url }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    },
+                    "id": "7bb32936-6668-444e-8fe9-2320f8582988"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "git"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "eecb5e51-d323-4777-9e2b-24ab3f42b31c",
+                    "leftValue": "={{ $('Get Template').item.json.required_features.dns.zone }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "dns"
+            }
+          ]
+        },
+        "options": {
+          "allMatchingOutputs": true
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        240,
+        -896
+      ],
+      "id": "0a263eab-ec3a-449b-af16-1342abf770ca",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "http://192.168.0.210:7000/api/v1/servers/localhost/zones/dev.klustr.io",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Key",
+              "value": "mykey"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"rrsets\": [\n    {\n      \"name\": \"{{ $json.project.id }}.dev.klustr.io.\",\n      \"type\": \"A\",\n      \"ttl\": 60,\n      \"changetype\": \"REPLACE\",\n      \"records\": [\n        {\n          \"content\": \"100.124.171.82\",\n          \"disabled\": false\n        }\n      ]\n    }\n  ]\n} ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1136,
+        -320
+      ],
+      "id": "ab48f65f-4aa1-445a-92b6-298ee1fc20c9",
+      "name": "Update DNS Record for HAProxy"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1552,
+        -912
+      ],
+      "id": "5ace6ad4-3dd7-4e55-9480-20c406c13511",
+      "name": "Wait",
+      "webhookId": "46bea122-c218-4f1c-a83d-959cc7936248"
+    },
+    {
+      "parameters": {
+        "url": "=http://192.168.0.53:7777/console/projects/{{ $('Normalize').item.json.project.id }}/git/pipelines/latest",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Data').item.json.accessToken }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1776,
+        -992
+      ],
+      "id": "cb9d54dd-3761-494d-84c2-483ff3963692",
+      "name": "Check Pipeline Complete"
+    },
+    {
+      "parameters": {
+        "jsCode": "// let template =     {\n//         \"id\": \"1\",\n//         \"description\": \"A hello world template that will create your website, register it enable you to access it.\",\n//         \"type\": \"website\",\n//         \"port\": 3000,\n//         \"deployed_url\": \"https://{projectId}.dev.klustr.io/\",\n//         \"documentation_url\": \"https://docs.klustr.io/concepts/apps\",\n//         \"required_features\": {\n//             \"dns\": {},\n//             \"git\": {\n//                 \"git_url\": \"https://gitlab.dev.klustr.io/rize.fit/lucky-canidae-1d5c99\"\n//             },\n//             \"services\": []\n//         },\n//         \"creation_date\": \"2025-11-11T03:56:26.226Z\",\n//         \"status\": \"active\"\n//     }\n// let project = {\n//   \"name\": \"Template\",\n//   \"org_id\": \"rize.fit\",\n//   \"description\": \"Templated project\"\n// };\n\n// return { \n//   template: template, \n//   project: project,\n//   accessToken: \"ory_at_B_GWOlFvxQ9s5BDnCFualHOobhFZ7Q6HRXonO6yflOU.QWzPOn3kpZnP4JMljrEvabOjJ2nZ1V7YMaKED1csO0k\"\n// };\nreturn {\n  templateId: \"hello-world\",\n  org_id: \"rize.fit\",\n  accessToken: \"ory_at_1gUe4bgcWXBjH3fnYyyuA0hsHdBXTcHK0xshi-dx3tc.Z2mirVhu9nsDGB6krOAx0obHibXbEtdQG1mHQgNJKNc\"\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2368,
+        -752
+      ],
+      "id": "cf6fd4b4-561f-462d-b2d0-389c6fb314f3",
+      "name": "Data"
+    },
+    {
+      "parameters": {
+        "command": "=rm -rf /tmp/{{ $('Normalize').item.json.project.id }}"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        656,
+        -912
+      ],
+      "id": "ea80259b-ef1b-437f-9cc4-037ffd5f3b5f",
+      "name": "Clean"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.status }}",
+                    "rightValue": "success",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "6c5ee1e5-ce47-454e-b6a5-b4ce95954615"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "success"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "5d041855-b25d-4af9-8dd9-4403ee5806e8",
+                    "leftValue": "={{ $json.status }}",
+                    "rightValue": "fail",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "fail"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "950ec3ec-ad36-4d1a-aec7-82369fd7f4f2",
+                    "leftValue": "={{ $json.status }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "other"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        1984,
+        -1008
+      ],
+      "id": "97fe8792-a14b-41a1-ade1-d6fee11acfea",
+      "name": "Check Complete"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        2224,
+        -864
+      ],
+      "id": "1e167d18-7829-4c08-a63e-8a0d951d0aac",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://192.168.0.53:7777/console/projects/{{ $('Normalize').item.json.project.id }}/containers/provision?image=registry.dev.klustr.io/{{ $('Normalize').item.json.project.org_id }}/{{ $('Normalize').item.json.project.id }}/main:latest&machineType=m1.small&template_id={{ $('Get Template').item.json.id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Data').item.json.accessToken }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2448,
+        -1056
+      ],
+      "id": "44227699-d538-475c-86e1-842020d3aae1",
+      "name": "Provision Latest Docker Image"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://192.168.0.53:7777/console/projects/{{ $('Create New Project').item.json.id }}/ingress/public",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Data').item.json.accessToken }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2688,
+        -1056
+      ],
+      "id": "0831fac2-b9bd-435e-94ee-0c2837dbcd1d",
+      "name": "Configure Load Balancer"
+    },
+    {
+      "parameters": {
+        "content": "Wait for pipeline to complete its build.",
+        "height": 608,
+        "width": 672,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        -1296
+      ],
+      "id": "78543f70-209e-4297-90b9-37caedee8fd6",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "Clone git from template that is known working copy.",
+        "height": 608,
+        "width": 1056,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        112,
+        -1344
+      ],
+      "id": "4a8dba63-433d-4df6-951e-b48e16c40f15",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "Lets go!",
+        "height": 224,
+        "width": 688,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2192,
+        -1120
+      ],
+      "id": "cf54b6f1-e0bc-43e4-a753-c3efe4056c8c",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://192.168.0.53:7777/console/projects",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Data').item.json.accessToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"name\": \"{{ $json.name }}\",\n  \"org_id\": \"{{ $('Data').item.json.org_id }}\",\n  \"description\": \"{{ $json.description }}\",\n  \"template_id\": \"{{ $json.id }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1152,
+        -752
+      ],
+      "id": "ef17c097-c901-4f46-870f-016579ce3a23",
+      "name": "Create New Project"
+    },
+    {
+      "parameters": {
+        "jsCode": "return { project: { id: $input.first().json.id, org_id: $input.first().json.org_id, owner: $input.first().json.owner.id } }"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -432,
+        -896
+      ],
+      "id": "f84c1eb4-6832-4928-b2e1-45288177fac4",
+      "name": "Normalize"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://192.168.0.53:7777/console/projects/{{ $('Normalize').item.json.project.id }}/notifications/compute/deploy_status",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Data').item.json.accessToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"title\": \"Your project is being built\",\n  \"url\": \"{{ $json.web_url }}\",\n  \"description\": \"Please wait while your project is building...\",\n  \"source\": \"template_engine\",\n  \"level\": \"info\",\n  \"status\": \"processing\"\n} ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1712,
+        -720
+      ],
+      "id": "cc70aa0f-57f9-49e1-b80f-0cbdd88eb453",
+      "name": "Notify User Status (Pending)"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://192.168.0.53:7777/console/projects/{{ $('Normalize').item.json.project.id }}/notifications/compute/deploy_status",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Data').item.json.accessToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"title\": \"Starting compute engine\",\n  \"description\": \"Please wait while we provision your service...\",\n  \"source\": \"template_engine\",\n  \"level\": \"info\",\n  \"status\": \"processing\"\n} ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2624,
+        -1312
+      ],
+      "id": "fd1c9c25-a622-43f0-bf40-a1fb669bdcf1",
+      "name": "Notify Provisioning"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://192.168.0.53:7777/console/projects/{{ $('Normalize').item.json.project.id }}/notifications/compute/deploy_status",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Data').item.json.accessToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"title\": \"Complete!\",\n  \"url\": \"https://{{ $('Normalize').item.json.project.id }}.dev.klustr.io/\",\n  \"description\": \"Your project has been deployed and is available at https://{{ $('Normalize').item.json.project.id }}.dev.klustr.io/\",\n  \"source\": \"template_engine\",\n  \"level\": \"info\",\n  \"status\": \"completed\"\n} ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2960,
+        -1056
+      ],
+      "id": "82dd2216-5c8e-4016-bdcb-28c6b110beb1",
+      "name": "Notify Done"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://192.168.0.53:7777/console/projects/{{ $('Normalize').item.json.project.id }}/notifications/compute/deploy_status",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Data').item.json.accessToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"title\": \"Failed!\",\n  \"url\": \"https://{{ $('Normalize').item.json.project.id }}.dev.klustr.io/\",\n  \"description\": \"Your project could not be deployed!\",\n  \"source\": \"template_engine\",\n  \"level\": \"info\",\n  \"status\": \"failed\"\n} ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2544,
+        -624
+      ],
+      "id": "0a676314-5db0-4713-8a8d-13aa83c80921",
+      "name": "Notify Failure"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://192.168.0.53:7777/console/projects/{{ $json.id }}/notifications/compute/deploy_status",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Data').item.json.accessToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"title\": \"Project {{ $json.id }} Created\",\n  \"description\": \"Your project {{ $json.id }} was created from template #{{ $('Data').item.json.template.id }} and is being provisioned, please wait...\",\n  \"source\": \"template_engine\",\n  \"level\": \"info\",\n  \"status\": \"processing\"\n} ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -752,
+        -464
+      ],
+      "id": "9edc25df-8d90-41ac-aa8d-2b1c1bc1b9b7",
+      "name": "Notify Project Created"
+    },
+    {
+      "parameters": {
+        "mode": "chooseBranch"
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        2224,
+        -1056
+      ],
+      "id": "14d79ef6-b656-45a2-9000-96bb319107ba",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "url": "=http://192.168.0.53:7777/console/projects/templates/{{ $json.templateId }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Data').item.json.accessToken }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -2144,
+        -752
+      ],
+      "id": "2de39cbb-8a61-4edd-826a-30c3f95af192",
+      "name": "Get Template"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "cc7adcbe-69a1-4cd5-bc25-d406f4848946",
+              "leftValue": "={{ $('Get Template').item.json.requires_image }}",
+              "rightValue": "false",
+              "operator": {
+                "type": "boolean",
+                "operation": "false",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -112,
+        -1568
+      ],
+      "id": "db5e771f-a5f9-4aeb-9336-0a2dcb9f05ec",
+      "name": "Skip Git?"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://192.168.0.53:7777/console/projects/{{ $('Normalize').item.json.project.id }}/containers/provision?machieType=m1.medium&template_id={{ $('Get Template').item.json.id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Data').item.json.accessToken }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1072,
+        -1600
+      ],
+      "id": "cbfc6d1a-b5d6-4628-ae37-3dc841b38542",
+      "name": "Provision Latest Docker Image1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://192.168.0.53:7777/console/projects/{{ $('Create New Project').item.json.id }}/ingress/dns?wait_ms=10000",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer ory_at_1gUe4bgcWXBjH3fnYyyuA0hsHdBXTcHK0xshi-dx3tc.Z2mirVhu9nsDGB6krOAx0obHibXbEtdQG1mHQgNJKNc"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2976,
+        -1312
+      ],
+      "id": "528a5336-edc3-458c-b6b7-3ef85de4b5e5",
+      "name": "Register DNS"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://192.168.0.53:7777/console/projects/{{ $('Normalize').item.json.project.id }}/notifications/compute/deploy_status",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Data').item.json.accessToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"title\": \"DNS Setup\",\n  \"url\": \"https://{{ $('Normalize').item.json.project.id }}.dev.klustr.io/\",\n  \"description\": \"Your project has been deployed with DNS routing.\",\n  \"source\": \"template_engine\",\n  \"level\": \"info\",\n  \"status\": \"completed\"\n} ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3296,
+        -1504
+      ],
+      "id": "d9548acb-a6f9-45d1-9740-3184ca30e634",
+      "name": "Notify Done1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clone Existing Template": {
+      "main": [
+        [
+          {
+            "node": "Git Switch Repo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Git": {
+      "main": [
+        [
+          {
+            "node": "Clean",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Push Template to Project Repo": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Git Switch Repo": {
+      "main": [
+        [
+          {
+            "node": "Push Template to Project Repo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Create Git",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update DNS Record for HAProxy",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update DNS Record for HAProxy": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Check Pipeline Complete",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Data": {
+      "main": [
+        [
+          {
+            "node": "Get Template",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clean": {
+      "main": [
+        [
+          {
+            "node": "Clone Existing Template",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Pipeline Complete": {
+      "main": [
+        [
+          {
+            "node": "Check Complete",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Complete": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Notify User Status (Pending)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Provision Latest Docker Image": {
+      "main": [
+        [
+          {
+            "node": "Configure Load Balancer",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Notify Provisioning",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create New Project": {
+      "main": [
+        [
+          {
+            "node": "Normalize",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Notify Project Created",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize": {
+      "main": [
+        [
+          {
+            "node": "Skip Git?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notify User Status (Pending)": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Configure Load Balancer": {
+      "main": [
+        [
+          {
+            "node": "Notify Done",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "No Operation, do nothing": {
+      "main": [
+        [
+          {
+            "node": "Notify Failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Provision Latest Docker Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Template": {
+      "main": [
+        [
+          {
+            "node": "Create New Project",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Skip Git?": {
+      "main": [
+        [
+          {
+            "node": "Provision Latest Docker Image1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Provision Latest Docker Image1": {
+      "main": [
+        [
+          {
+            "node": "Notify Provisioning",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notify Provisioning": {
+      "main": [
+        [
+          {
+            "node": "Register DNS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Register DNS": {
+      "main": [
+        [
+          {
+            "node": "Notify Done1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "84f5f1c6-db64-4260-87dc-02311048cbde",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "01889838a06e53fdd7ce72105adec2753d1afe81eee71e7dd6bb049f0362b796"
+  },
+  "id": "8feyyWAhSeHkynLX",
+  "tags": []
+}

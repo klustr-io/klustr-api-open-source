@@ -1,0 +1,115 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "title": "Identity",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique ID of this identity."
+    },
+    "schema_id": {
+      "type": "string",
+      "description": "The schema for this identity."
+    },
+    "source": {
+      "type": "string",
+      "description": "The source for this identity."
+    },
+    "schema_url": {
+      "type": "string",
+      "description": "The schema URL for this identity."
+    },
+    "organization_id": {
+      "type": "string",
+      "description": "The organization that owns this identity, if applicable."
+    },
+    "credentials": {
+      "type": "object",
+      "title": "IdentityCredentials",
+      "description": "The credentials available for this identity",
+      "existingJavaType": "io.klustr.schemas.console.identity.IdentityCredentials"
+    },
+    "state": {
+      "type": "string",
+      "description": "The state can either be active or inactive."
+    },
+    "state_changed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last time this identity changed state"
+    },
+    "traits": {
+      "type": "object",
+      "title": "IdentityTraits",
+      "description": "The traits of this individual",
+      "existingJavaType": "io.klustr.schemas.console.identity.IdentityTraits"
+    },
+    "verifiable_addresses": {
+      "type": "array",
+      "description": "The verified addresses on file for this identity",
+      "items": {
+        "type": "object",
+        "title": "IdentityVerifiableAddress",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "verified": {
+            "type": "boolean"
+          },
+          "via": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "verified_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    "recovery_addresses": {
+      "type": "array",
+      "description": "The recovery addresses on file for this identity",
+      "items": {
+        "type": "object",
+        "title": "IdentityRecoveryAddress",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "via": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "metadata_public": {
+      "type": "object",
+      "title": "IdentityMetadataPublic",
+      "existingJavaType": "io.klustr.schemas.console.identity.IdentityMetadataPublic"
+    },
+    "metadata_admin": {
+      "type": "object",
+      "title": "IdentityMetadataAdmin",
+      "description": "Attributes which can only be modified and read using the /admin/identities APIs. They are never directly exposed to the identity/user.",
+      "properties": {
+        "person_id": {
+          "type": "string",
+          "description": "The unique person identifier that maps to a registered user."
+        }
+      }
+    }
+  },
+  "required": [
+    "id"
+  ]
+}

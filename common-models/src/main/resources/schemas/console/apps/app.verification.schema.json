@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "AppVerification",
+  "description": "Contains approval status and overall status indicators for publication.",
+  "type": "object",
+  "properties": {
+    "status": {
+      "description": "The current status of the workflow.",
+      "title": "AppStatus",
+      "enum": [
+        "none",
+        "testing",
+        "published"
+      ]
+    },
+    "approval": {
+      "description": "The current status of the application.",
+      "enum": [
+        "none",
+        "pending",
+        "verified",
+        "unverified",
+        "restricted",
+        "rejected"
+      ]
+    },
+    "update_date": {
+      "description": "The current status of the application.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "additional_details": {
+      "description": "The additional details given the application status.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": []
+}

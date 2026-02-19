@@ -1,0 +1,28 @@
+{
+  "title": "ContactInformation",
+  "description": "The contact information for a person",
+  "type": "object",
+  "javaType": "io.klustr.schemas.persons.ContactInformation",
+  "properties": {
+    "phones": {
+      "description": "The phone numbers available for contacting this entity.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "./phone.schema.json"
+      }
+    },
+    "addresses": {
+      "description": "The addresses registered for this entity.",
+      "type": "object",
+      "existingJavaType": "io.klustr.schemas.console.Address"
+    },
+    "email": {
+      "description": "The primary email address for this entity.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id"
+  ]
+}

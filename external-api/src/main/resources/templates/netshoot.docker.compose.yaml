@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  ${PROJECT}:
+    image: nicolaka/netshoot
+    container_name: ${PROJECT}
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "${CPU_LIMIT:-1.0}"
+          memory: "${MEMORY_LIMIT:-512M}"
+        reservations:
+          cpus: "${CPU_RESERVE:-0.25}"
+          memory: "${MEMORY_RESERVE:-128M}"
+    environment:
+      ORG_ID: ${ORG}
+      PROJECT_ID: ${PROJECT}
+      MACHINE_TYPE: ${MACHINE_TYPE}
+      ROOT_SERVER_URL: ${ROOT_SERVER_URL}
+      SERVER_DOMAIN: ${SERVER_DOMAIN}
+    labels:
+      namespace: "${PROJECT}"
+      org_id: "${ORG}"
+      project: "${PROJECT}"
+      project_id: "${PROJECT}"
+      type: "TENANT"
+      workload: "netshoot"
+      machine_type: "${MACHINE_TYPE}"
+    networks:
+      - ${ORG}
+      - ingress
+    dns:
+      - ${DNS_HOST}
+
+networks:
+  ingress:
+    external: true
+  ${ORG}:
+    external: true

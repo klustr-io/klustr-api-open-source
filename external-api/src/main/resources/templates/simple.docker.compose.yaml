@@ -1,0 +1,51 @@
+version: "3.8"
+
+services:
+  ${PROJECT}:
+    image: ${IMAGE}
+    container_name: ${PROJECT}
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "${CPU_LIMIT}"
+          memory: "${MEMORY_LIMIT}"
+        reservations:
+          cpus: "${CPU_RESERVE}"
+          memory: "${MEMORY_RESERVE}"
+    environment:
+      ORG_ID: ${ORG}
+      PROJECT_ID: ${PROJECT}
+      MACHINE_TYPE: ${MACHINE_TYPE}
+      PERSISTENT_VOLUME_ID: ${PERSISTENT_VOLUME_ID}
+      ROOT_SERVER_URL: ${ROOT_SERVER_URL}
+      SERVER_DOMAIN: ${SERVER_DOMAIN}
+      OIDC_URL: ${OIDC_URL}
+      CLIENT_ID: ${OIDC_CLIENT}
+      CLIENT_SECRET: ${OIDC_SECRET}
+      CLIENT_SCOPES: ${OIDC_SCOPES}
+      OIDC_ISSUER: ${OIDC_ISSUER}
+      OIDC_CLIENT: ${OIDC_CLIENT}
+      OIDC_SECRET: ${OIDC_SECRET}
+      OIDC_SCOPES: "${OIDC_SCOPES}"
+      workload: "deployment"
+      BABEL_DISABLE_CACHE: 1
+    labels:
+      namespace: "${PROJECT}"
+      org_id: "${ORG}"
+      project: "${PROJECT}"
+      project_id: "${PROJECT}"
+      type: "TENANT"
+      machine_type: "${MACHINE_TYPE}"
+      workload: "custom"
+    networks:
+      - ingress
+      - ${ORG}
+    dns:
+      - ${DNS_HOST}
+
+networks:
+  ingress:
+    external: true
+  ${ORG}:
+    external: true

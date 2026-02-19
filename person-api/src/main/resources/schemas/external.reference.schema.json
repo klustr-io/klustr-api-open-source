@@ -1,0 +1,30 @@
+{
+  "title": "ExternalReference",
+  "description": "Linkage information to other systems or references related to the person.",
+  "type": "object",
+  "properties": {
+    "external_id": {
+      "description": "The unique ID within this system.",
+      "type": "string"
+    },
+    "source": {
+      "description": "The source of this external reference if applicable.",
+      "type": "string"
+    },
+    "creation_date": {
+      "description": "The date of birth for this person",
+      "type": "string",
+      "format": "date-time"
+    },
+    "expiration_date": {
+      "description": "The date this client was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "update_date": {
+      "description": "The date this external reference was last updated.",
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

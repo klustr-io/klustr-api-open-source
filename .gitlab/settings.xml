@@ -1,0 +1,10 @@
+<settings>
+  <mirrors>
+    <mirror>
+      <id>gitlab-maven</id>
+      <name>GitLab Maven Registry</name>
+      <url>https://gitlab.example.com/api/v4/projects/console-api/packages/maven</url>
+      <mirrorOf>*</mirrorOf>
+    </mirror>
+  </mirrors>
+</settings>

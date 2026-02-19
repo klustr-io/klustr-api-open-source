@@ -1,0 +1,12 @@
+{
+  "SERVICE_PROVIDER": "Entities that provide services directly related to the primary data controller's business activities.",
+  "ANALYTICS_PARTNER": "Entities that analyze data to provide insights and metrics.",
+  "ADVERTISER": "Entities that use data to target and deliver advertising content.",
+  "RESEARCH_ORGANIZATION": "Entities that use data for scientific, medical, or market research purposes.",
+  "AFFILIATE": "Related entities or subsidiaries of the primary data controller.",
+  "PAYMENT_PROCESSOR": "Entities that handle payment transactions.",
+  "LEGAL_AUTHORITY": "Government bodies and regulatory agencies.",
+  "TECHNICAL_SUPPORT_PROVIDER": "Entities that provide technical support and maintenance services.",
+  "CLOUD_SERVICE_PROVIDER": "Entities that provide cloud storage and computing services.",
+  "BUSINESS_PARTNER": "Entities that collaborate with the primary data controller for business ventures."
+}

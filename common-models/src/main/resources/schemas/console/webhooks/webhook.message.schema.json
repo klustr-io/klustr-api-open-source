@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "WebhookMessage",
+  "description": "A particular message broadcast to various apps and services.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique id of the message."
+    },
+    "event_type": {
+      "type": "string",
+      "description": "The event type that is used to filter and also verify json schema against."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The unique timestamp of this message"
+    },
+    "channels": {
+      "description": "List of free-form identifiers that endpoints can filter by",
+      "type": "array",
+      "existingJavaType": "java.util.Set<String>",
+      "items": {
+        "type": "string"
+      }
+    },
+    "event_id": {
+      "type": "string",
+      "description": "The unique identifier for this message"
+    },
+    "payload": {
+      "example": {
+        "email": "test@example.com",
+        "username": "test_user"
+      },
+      "type": "object",
+      "properties": {
+        "event_type": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "existingJavaType": "java.lang.Object"
+        }
+      }
+    },
+    "payload_retention_period": {
+      "type": "integer",
+      "description": "The number of days that this payload should be retained."
+    }
+  }
+}

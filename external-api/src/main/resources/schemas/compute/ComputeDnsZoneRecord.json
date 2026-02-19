@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "title": "ComputeDnsZoneRequest",
+  "properties": {
+    "records": {
+      "type": "array",
+      "items": {
+        "title": "ComputeDnsZoneRecord",
+        "properties": {
+          "content": {"type": "string"},
+          "disabled": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "name": {
+      "type": "string"
+    },
+    "changetype": {
+      "type": "string",
+      "default": "REPLACE"
+    },
+    "ttl": {
+      "type": "integer"
+    },
+    "type": {
+      "type": "string"
+    }
+  }
+}

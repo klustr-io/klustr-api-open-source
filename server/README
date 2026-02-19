@@ -1,0 +1,32 @@
+To build and compile this;
+
+Package and update the service;
+
+cd ../
+mvn clean package install -DskipTests
+
+cd server/
+
+# run server in background for generation of open api specs
+mvn spring-boot:run -DskipTests &&
+
+# update open api specs from code
+mvn clean verify -DskipTests
+
+# install
+mvn clean install -DskipTests
+
+## Documentation
+
+pip install plantuml graphviz
+
+## TODO
+
+Identity and Person information needs to decouple. Have everything inside the person object. And yes its cloned but that's ok.
+
+Tenent and address information is relevent to the city.
+
+Visitor, Resident, and Worker all are all verified status for people with effective and expiration dates.
+
+Visitor status is applied to a person when they are not a resident.
+Visitor status COULD be applied to a worker invited.

@@ -1,0 +1,26 @@
+{
+  "title": "ProjectDatabaseFeature",
+  "type": "object",
+  "description": "Base catalog definition for database features.",
+  "javaType": "io.klustr.schemas.console.features.database.ProjectDatabaseFeature",
+  "extends": {
+    "$ref": "project.feature.schema.json"
+  },
+  "properties": {
+    "database": {
+      "$ref": "project.feature.database.spec.schema.json"
+    },
+    "provisioning": {
+      "$ref": "project.feature.provisioning.spec.schema.json"
+    },
+    "networking": {
+      "$ref": "project.feature.networking.spec.schema.json"
+    },
+    "observability": {
+      "$ref": "project.feature.observability.spec.schema.json"
+    }
+  },
+  "required": [
+    "database"
+  ]
+}

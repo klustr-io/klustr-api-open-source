@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ConsentAttribute",
+  "description": "The scope of consent that is used to manage consent for users.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique ID of this consent scope.",
+      "type": "string"
+    },
+    "category": {
+      "description": "The top level category used for organizing scopes.",
+      "type": "string"
+    },
+    "subcategory": {
+      "description": "The a secondary level category used for organizing scopes.",
+      "type": "string"
+    },
+    "label": {
+      "description": "The display label for this scope when rendered to a user.",
+      "type": "object",
+      "$ref": "../text.schema.json"
+    },
+    "org_id": {
+      "description": "If this attribute is custom to a specific organization.",
+      "type": "string"
+    },
+    "status": {
+      "description": "The status of this consent attribute.",
+      "type": "string",
+      "enum": ["test", "stage", "ga", "deprecated"]
+    },
+    "description": {
+      "description": "The description for this scope.",
+      "type": "object",
+      "$ref": "../text.schema.json"
+    },
+    "sensitivity": {
+      "description": "The level of sensitivity for this scope.",
+      "type": "string",
+      "enum": [
+        "High",
+        "Medium",
+        "Low"
+      ]
+    },
+    "visible": {
+      "description": "If the scope should be visible to users when granting consent.",
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "namespace"
+  ]
+}

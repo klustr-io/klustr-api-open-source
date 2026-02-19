@@ -1,0 +1,27 @@
+{
+  "title": "VeriffDocument",
+  "type": "object",
+  "description": "The document that was verified",
+  "properties": {
+    "type": {
+      "type": "object",
+      "existingJavaType": "io.klustr.schemas.persons.veriff.VeriffValue"
+    },
+    "number": {
+      "type": "object",
+      "existingJavaType": "io.klustr.schemas.persons.veriff.VeriffValue"
+    },
+    "country": {
+      "type": "object",
+      "existingJavaType": "io.klustr.schemas.persons.veriff.VeriffValue"
+    },
+    "validFrom": {
+      "type": "object",
+      "existingJavaType": "io.klustr.schemas.persons.veriff.VeriffValue"
+    },
+    "validUntil": {
+      "type": "object",
+      "existingJavaType": "io.klustr.schemas.persons.veriff.VeriffValue"
+    }
+  }
+}

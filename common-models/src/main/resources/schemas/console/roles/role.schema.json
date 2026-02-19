@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Role",
+  "description": "An role within an organization.",
+  "type": "object",
+  "$id": "role.schema.json",
+  "properties": {
+    "id": {
+      "description": "The unique ID of this organization",
+      "type": "string"
+    },
+    "name": {
+      "description": "Name of the role.",
+      "type": "string"
+    },
+    "namespace": {
+      "description": "The namespace for this role which could be a product or service. For example AI Platform, API Gateway, etc.",
+      "type": "string"
+    },
+    "description": {
+      "description": "A short description of the role.",
+      "type": "string"
+    },
+    "stage": {
+      "description": "A short description of the role.",
+      "type": "string",
+      "enum": [
+        "alpha",
+        "beta",
+        "ga",
+        "disabled",
+        "deprecated"
+      ]
+    },
+    "permissions": {
+      "description": "The permissions assigned to this particular role.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "title": "RolePermission",
+        "description": "The permission attributes",
+        "properties": {
+          "scope": {
+            "type": "string",
+            "description": "The permission such as apikeys.keys.create, apikeys.keys.delete, apikeys.keys.list."
+          }
+        }
+      }
+    }
+  },
+  "required": []
+}

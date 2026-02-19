@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Address",
+  "description": "A physical address for any office, residence, or other type..",
+  "type": "object",
+  "properties": {
+    "address_line_1": {
+      "type": "string",
+      "description": "The first line of the address which typically contains the street number."
+    },
+    "address_line_2": {
+      "type": "string",
+      "description": "The second line of the address which typically contains the apartment number."
+    },
+    "postal_code": {
+      "type": "string",
+      "description": "The postal code or zip code to use for this address"
+    },
+    "city_ward": {
+      "type": "string",
+      "description": "The city or ward information for this address"
+    },
+    "floor": {
+      "type": "string",
+      "description": "The floor information should this be an office or other related sub location."
+    },
+    "usage": {
+      "type": "string",
+      "description": "The optional type information for this address",
+      "enum": [
+        "residence",
+        "business"
+      ]
+    },
+    "building_name": {
+      "type": "string",
+      "description": "The name of the building in relation to the address."
+    },
+    "state_prefecture": {
+      "type": "string",
+      "description": "The state or prefecture to use for this address"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata related to the address",
+      "existingJavaType": "java.util.Map<String,String>"
+    },
+    "country_code": {
+      "type": "string",
+      "description": "The country code (2) for this address.",
+      "enum": [
+        "US",
+        "JP",
+        "FR",
+        "UK",
+        "IT"
+      ]
+    }
+  },
+  "required": []
+}

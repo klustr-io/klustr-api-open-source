@@ -1,0 +1,13 @@
+{
+  "PERSONAL_DATA": "Data that can be used to directly or indirectly identify a specific individual.",
+  "USAGE_DATA": "Data related to how the application is being used, such as frequency of use or features accessed.",
+  "ANONYMIZED_DATA": "Data that has been stripped of identifying information, making it impossible to link to a specific individual.",
+  "FINANCIAL_DATA": "Data related to financial transactions or accounts.",
+  "HEALTH_DATA": "Data related to an individual's health status, medical history, or healthcare services received.",
+  "BIOMETRIC_DATA": "Data based on unique physical characteristics, such as fingerprints or facial recognition patterns.",
+  "LOCATION_DATA": "Data that indicates the geographical position of an individual or device.",
+  "CONTACTS_DATA": "Data related to an individual's contact information, such as phone numbers or email addresses.",
+  "COMMUNICATION_DATA": "Data exchanged during communication activities, such as emails, messages, or call logs.",
+  "PREFERENCES_DATA": "Data reflecting user preferences or settings within the application.",
+  "SOCIAL_MEDIA_DATA": "Data obtained from social media platforms, such as profile information or social interactions."
+}
